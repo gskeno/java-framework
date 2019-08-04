@@ -10,6 +10,7 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>java-junit</module>
+    <module>java-spring</module>
   </modules>
 
   <name>java-framework</name>
