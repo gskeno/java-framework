@@ -11,6 +11,7 @@
   <modules>
     <module>java-junit</module>
     <module>java-spring</module>
+      <module>java-generic</module>
   </modules>
 
   <name>java-framework</name>
