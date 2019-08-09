@@ -14,7 +14,5 @@ public class Test {
         Traffic<Bicycle> bicycleTraffic = new LandTraffic<>();
         bicycleTraffic.travel(bicycle);
 
-        List<String> list = new ArrayList<>();
-        list.add("1");
     }
 }
