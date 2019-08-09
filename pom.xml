@@ -12,6 +12,7 @@
     <module>java-junit</module>
     <module>java-spring</module>
       <module>java-generic</module>
+    <module>java-jackson</module>
   </modules>
 
   <name>java-framework</name>
