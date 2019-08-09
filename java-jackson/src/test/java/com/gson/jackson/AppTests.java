@@ -30,8 +30,8 @@ public class AppTests {
 
         School school = om.treeToValue(jsonNode, School.class);
         System.out.println(school);
-
         System.out.println("----------------------------");
+
         Teacher teacher = new Teacher();
         teacher.setName("yangsheng");
         school.setTeachers(Arrays.asList(teacher));
