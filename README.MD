@@ -7,3 +7,9 @@ spring基础使用
 
 ## java-generic
 java 范型使用
+
+## java-jackson
+jackson包基本使用
+
+## java-lang
+java.lang包中的关键类、关键方法使用

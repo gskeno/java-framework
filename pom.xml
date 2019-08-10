@@ -13,6 +13,7 @@
     <module>java-spring</module>
       <module>java-generic</module>
     <module>java-jackson</module>
+    <module>java-lang</module>
   </modules>
 
   <name>java-framework</name>
