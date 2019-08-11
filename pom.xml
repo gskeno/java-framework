@@ -14,6 +14,7 @@
       <module>java-generic</module>
     <module>java-jackson</module>
     <module>java-lang</module>
+      <module>java-reflections</module>
   </modules>
 
   <name>java-framework</name>
