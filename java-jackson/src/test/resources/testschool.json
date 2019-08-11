@@ -1,0 +1,16 @@
+{
+  "headMaster":{
+    "name": "lixinsheng"
+  },
+  "headMaster":{
+    "name": "xuzhang"
+  },
+  "teachers":[
+    {"name": "lijian"},
+    {"name": "zhangxue"}
+  ],
+  "students": [
+    {"name": "xiaoming"},
+    {"name": "zhangjian"}
+  ]
+}
