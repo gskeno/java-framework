@@ -5,5 +5,4 @@ public class Product {
     public static String get(Integer i){
         return  i + "——";
     }
-
 }
