@@ -2,12 +2,10 @@ package com.gson.java8.stream;
 
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StreamTests {
-
     /**
      * 一种Map<K1,V1>转化为另一种Map<K2,V2>
      */
@@ -25,5 +23,27 @@ public class StreamTests {
                 collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         System.out.println(collect);
+    }
+
+    /**
+     * findFirst.orElse
+     */
+    @Test
+    public void testFindFirstOrElse(){
+        List<Integer> list = Arrays.asList(1,2,3,4,5);
+        // 获取大于5的第一个数，拿到了就返回；如果没有，返回0
+        Integer integer = list.stream().filter(o -> o>5).findFirst().orElse(0);
+        System.out.println(integer);
+    }
+
+    /**
+     * Optional.ofNullable().orElse()
+     */
+    @Test
+    public void testOptionalOrElse(){
+        List<String> list = null;
+        // 如果list为空，返回一个空集合
+        List<String> list1 = Optional.ofNullable(list).orElse(new ArrayList<>());
+        System.out.println(list1);
     }
 }
