@@ -4,6 +4,8 @@
 
 ## java-8
 java8语法
+- 方法引用
+> 方法引用是完全可以转化为 lamda表达式的
 
 ## java-spring
 spring基础使用
