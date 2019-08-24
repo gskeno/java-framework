@@ -9,7 +9,7 @@ java8语法
 
 ## java-spring
 - [入口](java-spring)
-spring基础使用
+- spring基础使用
 
 
 ## java-generic
