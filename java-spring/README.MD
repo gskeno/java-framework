@@ -1,12 +1,5 @@
-package com.gson.spring.olympic;
-
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
+- 1.spring测试用例使用方式
+```java
 /**
  * 引入spring-test包
  * 利用Runwith
@@ -24,3 +17,4 @@ public class OlympicTests {
         basketBall.description();
     }
 }
+```

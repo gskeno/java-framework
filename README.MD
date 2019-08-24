@@ -8,7 +8,9 @@ java8语法
 > 方法引用是完全可以转化为 lamda表达式的
 
 ## java-spring
+- [入口](java-spring)
 spring基础使用
+
 
 ## java-generic
 java 范型使用
