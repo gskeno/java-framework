@@ -13,6 +13,21 @@ import java.util.Arrays;
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_READING_DUP_TREE_KEY;
 
 public class AppTests {
+
+    public static void main(String[] args) {
+        URL resource = AppTests.class.getResource("/school.json");
+        System.out.println(resource);
+
+        resource = AppTests.class.getResource("/testschool.json");
+        System.out.println(resource);
+
+        resource = AppTests.class.getClassLoader().getResource("school.json");
+        System.out.println(resource);
+
+        resource = AppTests.class.getClassLoader().getResource("testschool.json");
+        System.out.println(resource);
+
+    }
     @Test
     public void test() throws IOException {
         // 获取资源方式1
@@ -49,12 +64,13 @@ public class AppTests {
 
         ObjectMapper om = new ObjectMapper();
 
-        // 字符串转化为Tree Json时，允许有相同的key
-        om.enable(FAIL_ON_READING_DUP_TREE_KEY);
-        // 字符串转化为Tree Json时，不允许有相同的key，与上面相反
-        om.configure(FAIL_ON_READING_DUP_TREE_KEY,true);
+        // 字符串转化为Tree Json时,即反序列化时，支持 遇到相同key时失败
+        // om.enable(FAIL_ON_READING_DUP_TREE_KEY);
+        // JsonNode jsonNode = om.readTree(content);
 
-        JsonNode jsonNode = om.readTree(content);
+        // 字符串转化为Tree Json时，即反序列化时，支持 遇到相同key时失败
+         om.configure(FAIL_ON_READING_DUP_TREE_KEY,true);
+         JsonNode jsonNode = om.readTree(content);
 
     }
 }
