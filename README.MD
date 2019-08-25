@@ -13,7 +13,8 @@ java8语法
 
 
 ## java-generic
-java 范型使用
+- [入口](java-generic)
+- java 范型使用
 
 ## java-jackson
 - [入口](java-jackson)
