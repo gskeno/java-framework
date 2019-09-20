@@ -6,6 +6,7 @@ public enum Planet {
 
     public static void main(String[] args) {
         System.out.println(Planet.EARTH.name());
+        System.out.println(Planet.EARTH.toString());
     }
 }
 
