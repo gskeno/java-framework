@@ -21,7 +21,7 @@ public class EnumUtils {
         Operation plus = getEnumFormString(Operation.class, "PLUS");
         System.out.println(plus);
 
-        Planet planet = getEnumFormString(Planet.class, "MARS");
+        Planet planet = getEnumFormString(Planet.class, "mars");
         System.out.println(planet);
     }
 }
