@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Product {
 
-    private int price;
+    public int price;
 
     public Product() {
         this.price = new Random().nextInt();
