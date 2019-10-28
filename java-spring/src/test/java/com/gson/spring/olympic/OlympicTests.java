@@ -1,6 +1,7 @@
 package com.gson.spring.olympic;
 
 
+import com.gson.spring.bean.House;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,13 @@ public class OlympicTests {
     @Autowired
     private BasketBall basketBall;
 
+    @Autowired
+    private House house;
+
     @Test
     public void test1(){
         basketBall.description();
+
+        System.out.println(house.getChair());
     }
 }

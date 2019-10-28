@@ -6,4 +6,9 @@
 
     <bean id="basketBall" class="com.gson.spring.olympic.BasketBall">
     </bean>
+
+    <bean id="chair" class="com.gson.spring.bean.Chair">
+    </bean>
+    <bean id="house" class="com.gson.spring.bean.House">
+    </bean>
 </beans>
