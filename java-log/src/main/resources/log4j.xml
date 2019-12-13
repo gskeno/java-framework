@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p [%C.%M(%L)] - &lt;%m&gt;%n" />
+        </layout>
+    </appender>
+
+    <appender name="ROOT" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="root.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="threshold" value="WARN"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p (%C{2},%L) %X{traceId} - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- 日志在满足对应的logger的level基础之上，还要满足appender的threshold限制，才能正常输出
+    -->
+    <appender name="java_log_appender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="java-log.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="threshold" value="info"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p (%C{2},%L) %X{traceId} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="dto_appender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="dto.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="threshold" value="info"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p (%C{2},%L) %X{traceId} - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- logger和root都是logger模型，但代码中的logger在log4j.xml中找不到一个具体的logger
+    配置时，则使用rootLogger。additivity默认为true，
+    默认情况下子Logger会继承父Logger的appender，也就是说子Logger会在父Logger的appender里输出。
+    若是additivity设为false，则子Logger只会在自己的appender里输出，而不会在父Logger的appender里输出-->
+    <logger name="javalog" additivity="false">
+        <level value="debug" />
+        <appender-ref ref="java_log_appender" />
+    </logger>
+
+    <!-- 该包名下的日志全部输出到dto_appender上-->
+    <logger name="com.gson.javalog.dto" additivity="false">
+        <level value="warn"/>
+        <appender-ref ref="dto_appender"/>
+    </logger>
+
+
+    <root>
+        <priority value="INFO" />
+        <appender-ref ref="ROOT" />
+    </root>
+</log4j:configuration>
