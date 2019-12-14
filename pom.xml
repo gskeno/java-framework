@@ -20,6 +20,7 @@
         <module>java-springmvcweb</module>
         <module>java-log4j</module>
         <module>java-fastjson</module>
+        <module>java-springaop</module>
     </modules>
 
     <name>java-framework</name>
@@ -33,6 +34,8 @@
         <fastjson.version>1.2.62</fastjson.version>
         <slf4j.log4j.version>1.7.21</slf4j.log4j.version>
         <junit.version>4.11</junit.version>
+        <spring.version>4.1.1.RELEASE</spring.version>
+
     </properties>
 
     <dependencies>
@@ -62,6 +65,48 @@
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${slf4j.log4j.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
         </dependencies>
 
 
