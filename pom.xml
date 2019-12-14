@@ -18,7 +18,7 @@
       <module>java-8</module>
       <module>java-maven</module>
       <module>java-springmvcweb</module>
-      <module>java-log</module>
+      <module>java-log4j</module>
       <module>java-fastjson</module>
   </modules>
 
@@ -41,12 +41,18 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
-      <version>${fastjson.version}</version>
-    </dependency>
+
 
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
 </project>
