@@ -24,3 +24,9 @@ Integer integer = list.stream().filter(o -> o>5).findFirst().orElse(0);
 // 如果list为空，返回一个空集合
 List<String> list1 = Optional.ofNullable(list).orElse(new ArrayList<>());
 ```
+- 4 判空时Optional类的正确使用方式
+```java
+String studentName = Optional.ofNullable(school).map(School::getClazz)
+                .map(Clazz::getStudent).map(Student::getName).orElse("没有学生");
+
+```
