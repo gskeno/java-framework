@@ -136,5 +136,12 @@ public class SearchResponse<T> {
         String s = "{\"status\":\"OK\",\"request_id\":\"157736198319535762540394\",\"result\":{\"searchtime\":0.697602,\"total\":4,\"num\":4,\"viewtotal\":4,\"compute_cost\":[{\"index_name\":\"op_user_entry_record\",\"value\":0.359}],\"items\":[{\"global_id\":\"4eleme1121\",\"membership_id\":\"11\",\"merchant_id\":\"199\",\"seller_id\":\"1999\",\"seller_site\":\"taobao\",\"site\":\"eleme\",\"user_id\":\"4\",\"entry_time\":\"21\",\"exit_time\":\"0\",\"index_name\":\"op_user_entry_record\"},{\"global_id\":\"1eleme719\",\"membership_id\":\"7\",\"merchant_id\":\"177\",\"seller_id\":\"1777\",\"seller_site\":\"taobao\",\"site\":\"eleme\",\"user_id\":\"1\",\"entry_time\":\"19\",\"exit_time\":\"0\",\"index_name\":\"op_user_entry_record\"},{\"global_id\":\"1taobao717\",\"membership_id\":\"7\",\"merchant_id\":\"177\",\"seller_id\":\"1777\",\"seller_site\":\"taobao\",\"site\":\"taobao\",\"user_id\":\"1\",\"entry_time\":\"17\",\"exit_time\":\"0\",\"index_name\":\"op_user_entry_record\"},{\"global_id\":\"2taobao917\",\"membership_id\":\"9\",\"merchant_id\":\"199\",\"seller_id\":\"1999\",\"seller_site\":\"taobao\",\"site\":\"taobao\",\"user_id\":\"2\",\"entry_time\":\"17\",\"exit_time\":\"0\",\"index_name\":\"op_user_entry_record\"}],\"facet\":[]},\"errors\":[],\"tracer\":\"\",\"ops_request_misc\":\"%7B%22request%5Fid%22%3A%22157736198319535762540394%22%2C%22scm%22%3A%221.100123400..%22%7D\"}\n";
         SearchResponse<Entry> execute = execute(s);
         System.out.println(execute);
+        Result<Entry> result = execute.getResult();
+        System.out.println(result.getItems());
+
+        List<Entry> items = result.getItems();
+        for(Entry entry : items){
+            System.out.println(entry);
+        }
     }
 }
