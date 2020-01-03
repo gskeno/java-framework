@@ -2,7 +2,7 @@ package com.gson.spring.bean;
 
 public class Tree {
 
-    private int height;
+    private String height;
 
     private String diameter;
 
@@ -14,11 +14,11 @@ public class Tree {
         this.diameter = diameter;
     }
 
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 

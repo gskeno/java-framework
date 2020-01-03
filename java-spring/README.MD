@@ -37,3 +37,13 @@ ref指向"tree"这个Bean，这个Bean一定需要是com.gson.spring.bean.Tree�
 可以是生产Tree的工厂类，如
 class TreeFactory implements FactoryBean<Tree>
 ```
+
+- 3.PropertyPlaceholderConfigurer的一个使用小技巧
+```
+一般情况下是一个properties文件作为资源文件，一个xml文件中使用占位符引用资源文件中定义的变量，运行期间
+替换占位符。
+
+当一个类继承PropertyPlaceholderConfigurer后，一些配置变量放置在配置中心上，对外提供一个服务jar包。
+外界不需要感知内部变量情况，开箱即用。配置中心中的变量发生变化后，使用者需要重启应用才能拿到最新的值。
+
+```

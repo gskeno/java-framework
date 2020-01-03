@@ -7,7 +7,7 @@ public class TreeFactory implements FactoryBean<Tree> {
     public Tree getObject() throws Exception {
         Tree tree = new Tree();
         tree.setDiameter("2.43");
-        tree.setHeight(9);
+        tree.setHeight("9");
         return tree;
     }
 
