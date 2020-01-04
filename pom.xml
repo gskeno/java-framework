@@ -21,6 +21,7 @@
         <module>java-log4j</module>
         <module>java-fastjson</module>
         <module>java-springaop</module>
+        <module>java-spring-inner</module>
     </modules>
 
     <name>java-framework</name>

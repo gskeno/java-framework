@@ -36,6 +36,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.gson</groupId>
+            <artifactId>java-spring-inner</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

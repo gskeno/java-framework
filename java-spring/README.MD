@@ -47,3 +47,10 @@ class TreeFactory implements FactoryBean<Tree>
 外界不需要感知内部变量情况，开箱即用。配置中心中的变量发生变化后，使用者需要重启应用才能拿到最新的值。
 
 ```
+
+-4. 使用Autowired注解需要注意的事项
+```
+如果bean都是用xml定义的，在一个bean类中使用@Autowired注解时，需要在xml中配置
+<context:annotation-config/>才能使之生效
+
+```

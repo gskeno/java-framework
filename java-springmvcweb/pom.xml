@@ -31,10 +31,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-core</artifactId>
-        <version>${spring.version}</version>
-    </dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -108,6 +108,12 @@
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.gson</groupId>
+            <artifactId>java-spring-inner</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -136,10 +142,10 @@
                             <logTimeZone>GMT+8:00</logTimeZone>
                         </requestLog>
                         <!--<systemProperties>-->
-                            <!--<systemProperty>-->
-                                <!--<name>productionMode</name>-->
-                                <!--<value>${productionMode}</value>-->
-                            <!--</systemProperty>-->
+                        <!--<systemProperty>-->
+                        <!--<name>productionMode</name>-->
+                        <!--<value>${productionMode}</value>-->
+                        <!--</systemProperty>-->
                         <!--</systemProperties>-->
                     </configuration>
                 </plugin>
