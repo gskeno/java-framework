@@ -1,6 +1,4 @@
 package com.gson.spring;
-
-import com.gson.spring.inner.BasicDao;
 import com.gson.spring.inner.DaoContext;
 import com.gson.spring.inner.UserDao;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
