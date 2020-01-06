@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - [%X{traceId}]%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    　
+    <appender name="ROOT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        　　　　　
+        <file>logback.log</file>
+        　　　　　
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            　　　　　　　　　
+            <fileNamePattern>logback.log.%d{yyyy-MM-dd}</fileNamePattern>
+            　　　　　　　　　
+            <maxHistory>7</maxHistory>
+            　　　　
+        </rollingPolicy>
+        　　　　　
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%msg%n</pattern>　　　　　　　　　　　
+        </encoder>
+        　
+    </appender>
+
+
+    <root level="debug">
+        <appender-ref ref="ROOT"/>
+    </root>
+</configuration>

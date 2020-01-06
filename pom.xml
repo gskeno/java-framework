@@ -23,6 +23,7 @@
         <module>java-springaop</module>
         <module>java-spring-inner</module>
         <module>java-mybatis</module>
+        <module>java-logback</module>
     </modules>
 
     <name>java-framework</name>
