@@ -14,6 +14,15 @@ public class App {
     public static void main( String[] args )
     {
         // logger.warn("Hello World");
-        logger1.info("Hello java log");
+        Integer a = null;
+        Integer b = null;
+        try{
+            a = null;
+            b = 10;
+            System.out.println(a/b);
+
+        }catch (Exception e){
+            logger1.error("divide exception a= {}, b= {} ", a, b, e);
+        }
     }
 }

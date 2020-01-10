@@ -20,6 +20,7 @@ public class SortTest {
         list.add(record1);
         list.add(record2);
 
+        //倒排
         list.sort(new Comparator<Record>() {
             @Override
             public int compare(Record o1, Record o2) {
