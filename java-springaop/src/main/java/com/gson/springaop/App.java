@@ -14,8 +14,8 @@ public class App
     {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("springaop.xml");
 
-        WriteService writeService = context.getBean(WriteService.class);
-        writeService.write("写书");
+//        WriteService writeService = context.getBean(WriteService.class);
+//        writeService.write("写书");
 
         ReadService readService = context.getBean(ReadService.class);
         readService.read("读书");

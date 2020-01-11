@@ -11,7 +11,7 @@
     <!--可以实施切面增强-->
     <aop:aspectj-autoproxy expose-proxy="true"></aop:aspectj-autoproxy>
     <!-- component-scan要配合@Component注解 -->
-    <context:component-scan base-package="com.gson.springaop.services"/>
+    <context:component-scan base-package="com.gson.springaop"/>
 
     <aop:config>
         <!--定义切入点-->
@@ -19,7 +19,19 @@
 
         <!--定义切入点的拦截器,serviceMethodInteceptor必须实现Advice接口 -->
         <aop:advisor pointcut-ref="servicesPoint" advice-ref="serviceMethodInteceptor"/>
+
     </aop:config>
 
+    <aop:config>
+        <aop:pointcut id="logTagPoint" expression="@annotation(com.gson.springaop.annotation.LogTag)"/>
+        <aop:aspect ref="logAspect">
+            <aop:after-returning method="afterReturning" returning="result" pointcut-ref="logTagPoint"/>
+        </aop:aspect>
+    </aop:config>
+
+
+
     <bean id="serviceMethodInteceptor" class="com.gson.springaop.ServiceMethodInteceptor"/>
+    <bean id="logAspect" class="com.gson.springaop.LogAspect"/>
+    <bean id="logService" class="com.gson.springaop.LogService"/>
 </beans>
