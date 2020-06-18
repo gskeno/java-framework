@@ -6,13 +6,17 @@ public class Item {
 
     private static int position = 1;
 
-    private Integer years;
+    public Integer years;
 
     private Long id;
 
     private String name;
 
     private String desc;
+
+    private long height;
+
+    private long weight;
 
     public Item(Long id, String name, String desc) {
         this.id = id;
@@ -42,6 +46,14 @@ public class Item {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public long getHeight() {
+        return height;
+    }
+
+    public void setWeight(long weight) {
+        this.weight = weight;
     }
 
     @Override
