@@ -24,6 +24,7 @@
         <module>java-spring-inner</module>
         <module>java-mybatis</module>
         <module>java-logback</module>
+        <module>java-serialize</module>
     </modules>
 
     <name>java-framework</name>
