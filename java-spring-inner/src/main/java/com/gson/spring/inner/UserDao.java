@@ -15,6 +15,9 @@ public class UserDao extends BasicDao implements Serializable {
         this.tableName = tableName;
     }
 
+    public void init(){
+        System.out.println("----init-----");
+    }
     @Override
     public String toString() {
         return "UserDao{" +

@@ -12,7 +12,7 @@
         <property name="sqlSession" value="mySqlSession"/>
     </bean>
 
-    <bean id="userDao" class="com.gson.spring.inner.UserDao" parent="basicDao">
+    <bean id="userDao" class="com.gson.spring.inner.UserDao" parent="basicDao" init-method="init">
         <property name="tableName" value="user"/>
     </bean>
 </beans>

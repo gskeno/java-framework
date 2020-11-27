@@ -16,6 +16,6 @@ public class App
         String info = "高嵩";
         byte[] bytes = info.getBytes("UTF-8");
         String s = new String(bytes);
-        logger.debug(s);
+        logger.info(s);
     }
 }
