@@ -29,6 +29,26 @@
         　
     </appender>
 
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <!-- MDC使用 -->
+            <pattern>%X{first} %X{last} - %m%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="CONSOLE_LOGGER" level="debug">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <appender name="CONSOLE1" class="ch.qos.logback.core.ConsoleAppender">
+        <layout>
+            <Pattern>%-4r [%thread] %-5level C:%X{client} N:%X{number} - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <logger name="CONSOLE_LOGGER1" level="debug">
+        <appender-ref ref="CONSOLE1"/>
+    </logger>
 
     <root level="debug">
         <appender-ref ref="ROOT"/>
