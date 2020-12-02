@@ -1,5 +1,8 @@
 package com.gson.logback.mdc;
 
+import ch.qos.logback.core.Context;
+import ch.qos.logback.core.util.StatusPrinter;
+import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -24,6 +27,10 @@ public class MDCUse {
         MDC.put("last","baidu");
 
         logger.info("see what is before me again");
+
+        Context logContext = (Context)LoggerFactory.getILoggerFactory();
+        System.out.println("-----begin print log context----");
+        StatusPrinter.print(logContext);
 
     }
 }
