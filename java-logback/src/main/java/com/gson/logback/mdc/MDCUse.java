@@ -18,6 +18,16 @@ public class MDCUse {
      * @param args
      */
     public static void main(String[] args) {
+        System.out.println("logback.debug=" + System.getProperty("logback.debug"));
+        System.out.println("-----begin print log context----\n");
+
+//        Context logContext = (Context)LoggerFactory.getILoggerFactory();
+//        StatusPrinter.print(logContext);
+
+        System.out.println("-----finish print log context----\n");
+
+
+
         MDC.put("first", "gson");
         MDC.put("last", "keno");
 
@@ -28,9 +38,7 @@ public class MDCUse {
 
         logger.info("see what is before me again");
 
-        Context logContext = (Context)LoggerFactory.getILoggerFactory();
-        System.out.println("-----begin print log context----");
-        StatusPrinter.print(logContext);
+
 
     }
 }

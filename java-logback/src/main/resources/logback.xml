@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<configuration>
+<configuration debug="true">
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <charset>UTF-8</charset>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - [%X{traceId}]%msg%n</pattern>
-        </encoder>
-    </appender>
+    <property name="log.file.name" value="logback.log" />
+
+    <!--    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--        <encoder>-->
+<!--            <charset>UTF-8</charset>-->
+<!--            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - [%X{traceId}]%msg%n</pattern>-->
+<!--        </encoder>-->
+<!--    </appender>-->
 
     　
     <appender name="ROOT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         　　　　　
-        <file>logback.log</file>
+        <file>${log.file.name}</file>
         　　　　　
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -36,15 +38,19 @@
             <pattern>%X{first} %X{last} - %m%n</pattern>
         </encoder>
     </appender>
+
+    <appender name="CONSOLE1" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%msg%n</pattern>　　　　　　　　　　　
+        </encoder>
+    </appender>
+
     <logger name="CONSOLE_LOGGER" level="debug">
         <appender-ref ref="CONSOLE"/>
     </logger>
 
-    <appender name="CONSOLE1" class="ch.qos.logback.core.ConsoleAppender">
-        <layout>
-            <Pattern>%-4r [%thread] %-5level C:%X{client} N:%X{number} - %msg%n</Pattern>
-        </layout>
-    </appender>
+
 
     <logger name="CONSOLE_LOGGER1" level="debug">
         <appender-ref ref="CONSOLE1"/>
