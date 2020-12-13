@@ -1,0 +1,15 @@
+<configuration>
+
+    <conversionRule conversionWord="nanos"
+                    converterClass="com.gson.logback.convert.MySampleConverter"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-6nanos [%thread] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
