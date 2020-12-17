@@ -1,6 +1,7 @@
 package com.gson.guava.retry;
 
 import com.github.rholder.retry.*;
+import com.google.common.base.Predicates;
 import org.junit.Test;
 
 import java.time.LocalTime;
@@ -8,6 +9,9 @@ import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+/**
+ *
+ */
 public class RetryUse {
     // 需要重试执行的操作
     private Boolean testCode() {
@@ -62,5 +66,9 @@ public class RetryUse {
         Integer call = retryer1.call(() -> {
             return testDigit();
         });
+    }
+
+    @Test
+    public void test(){
     }
 }
