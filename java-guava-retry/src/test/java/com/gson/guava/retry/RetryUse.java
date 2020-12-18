@@ -1,7 +1,6 @@
 package com.gson.guava.retry;
 
 import com.github.rholder.retry.*;
-import com.google.common.base.Predicates;
 import org.junit.Test;
 
 import java.time.LocalTime;
@@ -25,11 +24,11 @@ public class RetryUse {
         }
     }
 
-    private int testDigit(){
+    private int testDigit() {
         System.out.println(LocalTime.now());
 
         int next = new Random().nextInt(100);
-        if (next >50){
+        if (next > 50) {
             throw new RuntimeException("next > 50");
         }
 
@@ -44,6 +43,7 @@ public class RetryUse {
                 .retryIfException()
                 // 失败后，隔2秒后重试
                 .withWaitStrategy(WaitStrategies.fixedWait(2, TimeUnit.SECONDS))
+                .withAttemptTimeLimiter(AttemptTimeLimiters.fixedTimeLimit(10, TimeUnit.SECONDS))
                 // 重试3次后，仍未成功，就不再重试
                 .withStopStrategy(StopStrategies.stopAfterAttempt(3))
                 .build();
@@ -57,6 +57,7 @@ public class RetryUse {
                 // 出现异常时，会重试
                 .retryIfException()
                 // 失败后，隔2秒后重试
+                .withAttemptTimeLimiter(AttemptTimeLimiters.fixedTimeLimit(10, TimeUnit.SECONDS))
                 .withWaitStrategy(WaitStrategies.fixedWait(2, TimeUnit.SECONDS))
                 // 重试3次后，仍未成功，就不再重试
                 .withStopStrategy(StopStrategies.stopAfterAttempt(3))
@@ -69,6 +70,7 @@ public class RetryUse {
     }
 
     @Test
-    public void test(){
+    public void test() {
+
     }
 }
