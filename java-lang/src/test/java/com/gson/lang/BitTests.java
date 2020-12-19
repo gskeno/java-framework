@@ -1,9 +1,26 @@
 package com.gson.lang;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 public class BitTests {
 
-    public static void main(String[] args) {
-        long a = 0b1111111_1111111;
-        System.out.println(a);
+    @Test
+    public void testConvertDecimal2Binary(){
+        int minIntDecimalFormat = Integer.MIN_VALUE;
+        //人为规定1000000000000000这个补码编码为-32768
+        int minIntBinaryFormat = 0b1000_0000_0000_0000_0000_0000_0000_0000;
+        Assert.assertEquals(minIntBinaryFormat, minIntDecimalFormat);
+
+        //最小int 异或 最大int
+        //补码 1000_0000_0000_0000  最小值
+        //    0111_1111_1111_1111  最大值
+        //    0000_0000_0000_0000  &操作结果
+        int result = Integer.MIN_VALUE & Integer.MAX_VALUE;
+        Assert.assertEquals(result, 0);
+
+        int m = -9;
+        int n = 2;
+        Assert.assertEquals(-1, m%n);
     }
 }
