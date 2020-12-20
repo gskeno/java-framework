@@ -29,6 +29,7 @@
         <module>java-commons-digester</module>
         <module>java-guava-retry</module>
         <module>java-guava</module>
+        <module>java-jdk</module>
     </modules>
 
     <name>java-framework</name>
