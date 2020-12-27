@@ -9,6 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class LockTest extends Assert {
     public static final Lock lock = new ReentrantLock();
+    private static final MutexLock mutexLock = new MutexLock();
 
     @Test
     public void test() throws InterruptedException {
@@ -61,5 +62,42 @@ public class LockTest extends Assert {
             e.printStackTrace();
             assertTrue(e instanceof IllegalMonitorStateException);
         }
+    }
+
+    @Test
+    public void testMutexLock() throws InterruptedException {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mutexLock.lock();
+                System.out.println(Thread.currentThread().getName() + "获取mutexLock成功," + TestUtils.getTime());
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                }
+                mutexLock.unlock();
+                System.out.println(Thread.currentThread().getName() + "释放mutexLock成功," + TestUtils.getTime());
+
+            }
+        },"Thread1").start();
+
+        Thread.sleep(2000);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mutexLock.lock();
+                System.out.println(Thread.currentThread().getName() + "获取mutexLock成功," + TestUtils.getTime());
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                }
+                System.out.println(Thread.currentThread().getName() + "释放mutexLock成功," + TestUtils.getTime());
+            }
+        },"thread2").start();
+
+        while (true){
+        }
+
     }
 }
