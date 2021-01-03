@@ -23,4 +23,19 @@ public class BitTests {
         int n = 2;
         Assert.assertEquals(-1, m%n);
     }
+
+    @Test
+    public void test(){
+        int a = (1 << 16) -1;
+        System.out.println(Long.toBinaryString(a));
+        int b = (0 >>>16);
+        System.out.println(Long.toBinaryString(b));
+
+        int c = 327680 >>> 16;
+        System.out.println(Long.toBinaryString(c));
+
+        System.out.println(0 >>> 16);
+
+        System.out.println(Long.toBinaryString(-20));
+    }
 }
