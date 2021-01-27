@@ -1,4 +1,4 @@
-package com.gson.lang;
+package com.gson.javajdk.lang;
 
 import com.sun.istack.internal.FinalArrayList;
 import org.junit.Assert;

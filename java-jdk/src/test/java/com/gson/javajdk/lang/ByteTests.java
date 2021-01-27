@@ -1,4 +1,4 @@
-package com.gson.lang;
+package com.gson.javajdk.lang;
 
 import org.junit.Assert;
 import org.junit.Test;

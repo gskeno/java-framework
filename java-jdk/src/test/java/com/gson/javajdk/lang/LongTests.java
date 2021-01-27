@@ -1,4 +1,4 @@
-package com.gson.lang;
+package com.gson.javajdk.lang;
 
 import java.util.Objects;
 

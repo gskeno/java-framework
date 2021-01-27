@@ -1,6 +1,6 @@
 package com.gson.beans;
 
-import com.gson.lang.Item;
+import com.gson.javajdk.lang.Item;
 import org.junit.Assert;
 import org.junit.Test;
 

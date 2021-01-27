@@ -1,4 +1,4 @@
-package com.gson.lang;
+package com.gson.javajdk.lang;
 
 public abstract class Animal {
     public String name;

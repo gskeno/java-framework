@@ -1,6 +1,5 @@
-package com.gson.lang;
+package com.gson.javajdk.lang;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,15 +13,15 @@ public class StringTests {
                 "UTF-8");
         System.out.println(chinaWords);
     }
-
-    /**
-     * 向左填充
-     */
-    @Test
-    public void testLeftPad(){
-        String abc = StringUtils.leftPad("abc", 10, "*");
-        System.out.println(abc);
-    }
+//
+//    /**
+//     * 向左填充
+//     */
+//    @Test
+//    public void testLeftPad(){
+//        String abc = StringUtils.leftPad("abc", 10, "*");
+//        System.out.println(abc);
+//    }
 
     @Test
     public void testDot(){

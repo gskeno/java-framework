@@ -1,4 +1,4 @@
-package com.gson.lang;
+package com.gson.javajdk.lang;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,5 +37,25 @@ public class BitTests {
         System.out.println(0 >>> 16);
 
         System.out.println(Long.toBinaryString(-20));
+    }
+
+    /**
+     * 前导0的个数
+     */
+    @Test
+    public void testNumberOfLeadingZeros(){
+        int a = 0b11;
+        System.out.println(a);
+        System.out.println(Integer.toBinaryString(a));
+
+        a <<= 16;
+        a <<= 8;
+        a <<= 4;
+        a <<= 2;
+        System.out.println(Integer.toBinaryString(a));
+        System.out.println(a);
+
+        System.out.println(Integer.toBinaryString(a >>>31));
+
     }
 }

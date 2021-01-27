@@ -1,4 +1,4 @@
-package com.gson.lang;
+package com.gson.javajdk.lang;
 
 public class Cat extends Animal {
     //子类的name就是子类的，父类的name就是父类的
