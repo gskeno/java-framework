@@ -57,5 +57,7 @@ public class BitTests {
 
         System.out.println(Integer.toBinaryString(a >>>31));
 
+        int numberOfLeadingZeros = Integer.numberOfLeadingZeros(0b11111111_11111111);
+        System.out.println(numberOfLeadingZeros);
     }
 }
