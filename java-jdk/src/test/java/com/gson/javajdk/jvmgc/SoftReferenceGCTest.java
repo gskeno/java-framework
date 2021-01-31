@@ -10,8 +10,8 @@ import java.lang.ref.SoftReference;
  */
 public class SoftReferenceGCTest {
     public static void main(String[] args) {
-        //test1();
-        test2();
+        test1();
+        //test2();
     }
 
     private static void test1(){
@@ -24,6 +24,9 @@ public class SoftReferenceGCTest {
 
         //因为内存空间不足，Allocation Failure，触发软引用失效,第一个5m的数组被回收
         byte[] b = new byte[6*1024*1024];
+
+        //另外一点需要注意
+        //PSYoungGen = eden + from, 不加to, 因为只有一个eden + 一个survivor会被使用到
     }
 
     private static void test2(){
