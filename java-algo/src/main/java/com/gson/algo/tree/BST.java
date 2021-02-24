@@ -1,5 +1,7 @@
 package com.gson.algo.tree;
 
+import java.util.Stack;
+
 /**
  *
  * 二叉查找树（左孩子小于当前节点，右孩子大于当前节点)
@@ -62,15 +64,103 @@ public class BST<Key extends Comparable<Key>, Value> {
     /**
      * 先序遍历(递归)
      */
-    public  void preOrderTravel(){
+    public void preOrderTravel(){
         preOrderTravel(root);
     }
 
-    private   void preOrderTravel(Node x){
+    private  void preOrderTravel(Node x){
         if (x != null){
             System.out.println(x.key + ":" + x.value);
             preOrderTravel(x.left);
             preOrderTravel(x.right);
+        }
+    }
+
+    /**
+     * 先序遍历(栈)
+     */
+    public void preTravelStack(){
+        preTravelStack(root);
+    }
+
+    private void preTravelStack(Node x){
+        Stack<Node> stack = new Stack<>();
+        Node node = x;
+        while (node != null || stack.size() > 0){
+            if (node != null){
+                System.out.println(node.key + ":" + node.value);
+                stack.push(node);
+                node = node.left;
+            }else {
+                //场景1：此时栈顶节点是叶子节点, node为叶子节点的左孩子
+                //      则此时node == null, node=stack.pop()后,node为叶子节点
+                //      node = node.right后，node为叶子节点的右孩子
+                //      node仍然为null，下一次循环后，依然进入else分支
+                //      ....node变为叶子节点的右兄弟节点
+                //      再循环进入if分支
+                node = stack.pop();
+                node = node.right;
+            }
+        }
+    }
+
+
+
+    /**
+     * 中序遍历(递归)
+     */
+    public void midOrderTravel(){
+        midOrderTravel(root);
+    }
+
+    private void midOrderTravel(Node x){
+        if (x != null){
+            midOrderTravel(x.left);
+            System.out.println(x.key + ":" + x.value);
+            midOrderTravel(x.right);
+        }
+    }
+
+    /**
+     * 中序遍历(栈)
+     */
+    public void midTravelStack(){
+        midTravelStack(root);
+    }
+
+    private void midTravelStack(Node x){
+        Stack<Node> stack = new Stack<>();
+        Node node = x;
+        //注意要点
+        //1.弹出栈时sout
+        while (node != null || stack.size() > 0){
+            if (node != null){
+                stack.push(node);
+                node = node.left;
+            }else {
+                //场景1：此时栈顶节点是叶子节点, node为叶子节点的左孩子
+                //      则此时node == null, node=stack.pop()后,node为叶子节点
+                //      node = node.right后，node为叶子节点的右孩子
+                //      node仍然为null，下一次循环后，依然进入else分支
+                //      ....node变为叶子节点的右兄弟节点
+                //      再循环进入if分支
+                node = stack.pop();
+                System.out.println(node.key + ":" + node.value);
+                node = node.right;
+            }
+        }
+
+    }
+
+    public void postOrderTravel(){
+        postOrderTravel(root);
+    }
+
+    private void postOrderTravel(Node x){
+        if (x != null){
+            postOrderTravel(x.left);
+            postOrderTravel(x.right);
+            System.out.println(x.key + ":" + x.value);
         }
     }
 

@@ -13,7 +13,7 @@ public class BSTTest {
 
     @Before
     public void init(){
-        tree = new BST<>();
+        tree = new BST<Integer, String>();
         tree.put(4,"A");
         tree.put(2,"B");
         tree.put(6,"C");
@@ -26,5 +26,24 @@ public class BSTTest {
     @Test
     public void testPreTravel(){
         tree.preOrderTravel();
+    }
+
+    @Test
+    public void testPreTravelStack(){
+        tree.preTravelStack();
+    }
+    @Test
+    public void testMidTravel(){
+        tree.midOrderTravel();
+    }
+
+    @Test
+    public void testMidTravelStack(){
+        tree.midTravelStack();
+    }
+
+    @Test
+    public void testPostTravel(){
+        tree.postOrderTravel();
     }
 }
