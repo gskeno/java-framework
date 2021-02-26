@@ -18,11 +18,11 @@ public class MaxSumSubArray {
             return 0;
         }
 
-        int ret = 0;
-        int[] dp = new int[array.length];
+        int ret = array[0];
+        int[] dp = new int[array.length + 1];
         dp[0] = 0;
-        for (int i = 1; i < array.length; i++) {
-            //第i个元素为末尾元素的子数组的最大和
+        for (int i = 1; i <= array.length; i++) {
+            //dp[i]表示第i个元素为末尾元素的子数组的最大和
             //要么为第i-1个元素为末尾元素的子数组的最大和 + 第i个元素的值
             //要么为第i个元素的值（当第i-1个元素为末尾元素的子数组的最大和为负数）
 
