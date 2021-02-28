@@ -164,4 +164,43 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
+    /**
+     * 后序遍历（递归)
+     */
+    public void  posOrderTravel(){
+        posOrderTravel(root);
+    }
+    private  void posOrderTravel(Node x){
+        if (x != null){
+            posOrderTravel(x.left);
+            posOrderTravel(x.right);
+            System.out.println(x.key + ":" + x.value );
+        }
+    }
+
+    /**
+     * 后序遍历(栈)
+     * @param x
+     */
+    private   void posOrderTravelByStack(Node x){
+        Stack<Node> stack = new Stack<>();
+        Stack<Node> temp = new Stack<>();
+        Node node = x;
+        while (node != null || stack.size()>0){
+            if (node != null){
+                stack.push(node);
+                temp.push(node);
+                node = node.right;
+            }else {
+                node = stack.pop();
+                node = node.left;
+            }
+        }
+
+        while (temp.size()>0){
+            Node popNode = temp.pop();
+            System.out.println(popNode.key + ":" + popNode.value);
+        }
+    }
+
 }
