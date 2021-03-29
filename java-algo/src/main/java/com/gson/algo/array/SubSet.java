@@ -61,7 +61,7 @@ public class SubSet {
         SubSet subSet = new SubSet();
         List<List<Integer>> subsets = subSet.subsets(new int[]{1, 2, 3});
         //System.out.println(subsets);
-        List<List<Integer>> lists = SubSet.subsets2(new int[]{0, 1, 2});
+        List<List<Integer>> lists = SubSet.subsets2(new int[]{0, 1, 2,3,4,5});
         System.out.println(lists);
     }
 }
