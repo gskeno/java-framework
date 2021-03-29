@@ -28,9 +28,40 @@ public class SubSet {
         return res;
     }
 
+
+    /**
+     * 方法2
+     * @param nums
+     * @return
+     */
+    public static List<List<Integer>> subsets2(int[] nums) {
+        //结果集
+        List<List<Integer>> result = new ArrayList();
+        //临时存放的集合
+        List<Integer> temp = new ArrayList();
+
+        dfs(result,temp,nums,0);
+
+        return result;
+    }
+
+    public static void dfs(List<List<Integer>> result, List<Integer> temp, int nums[], int j) {
+        result.add(new ArrayList<Integer>(temp));//添加到结果集中
+
+        for (int i = j; i < nums.length; i++) {
+            temp.add(nums[i]);//添加第i个数进入temp中
+            dfs(result, temp, nums, i + 1);//将temp添加到结果集中并添加下一个数
+            temp.remove(temp.size() - 1);//把最新添加的一个数删掉继续循环
+        }//循环完返回上一层递归
+    }
+
+
+
     public static void main(String[] args) {
         SubSet subSet = new SubSet();
         List<List<Integer>> subsets = subSet.subsets(new int[]{1, 2, 3});
-        System.out.println(subsets);
+        //System.out.println(subsets);
+        List<List<Integer>> lists = SubSet.subsets2(new int[]{0, 1, 2});
+        System.out.println(lists);
     }
 }
