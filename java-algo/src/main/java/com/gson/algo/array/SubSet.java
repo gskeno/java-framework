@@ -1,9 +1,12 @@
 package com.gson.algo.array;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SubSet {
+    private static AtomicInteger ai = new AtomicInteger(0);
 
     //假设, 如果已知 [1,2,3]的所有子数组，那么 [1,2,3,4]的所有子数组应该是什么呢？
     //应该是 [1,2,3]的所有子数组 + 遍历[1,2,3]的所有子数组(每个数组内增加元素4)
@@ -46,12 +49,25 @@ public class SubSet {
     }
 
     public static void dfs(List<List<Integer>> result, List<Integer> temp, int nums[], int j) {
-        result.add(new ArrayList<Integer>(temp));//添加到结果集中
-
+        //添加到结果集中
+        result.add(new ArrayList<Integer>(temp));
+        // for 选择 in 选择列表:
+        //     做选择
+        // backtrack(路径, 选择列表)
+        // 撤销选择
         for (int i = j; i < nums.length; i++) {
-            temp.add(nums[i]);//添加第i个数进入temp中
-            dfs(result, temp, nums, i + 1);//将temp添加到结果集中并添加下一个数
-            temp.remove(temp.size() - 1);//把最新添加的一个数删掉继续循环
+            //添加第i个数进入temp中
+            temp.add(nums[i]);
+            //将temp添加到结果集中并添加下一个数
+            dfs(result, temp, nums, i + 1);
+            Integer lastElement = temp.get(temp.size() - 1);
+            if (nums[i] == lastElement){
+                System.out.println("进入dfs之前和退出dfs之后相等" + nums[i]);
+            }
+            //把最新添加的一个数删掉继续循环
+            temp.remove(lastElement);
+
+
         }//循环完返回上一层递归
     }
 
@@ -61,7 +77,7 @@ public class SubSet {
         SubSet subSet = new SubSet();
         List<List<Integer>> subsets = subSet.subsets(new int[]{1, 2, 3});
         //System.out.println(subsets);
-        List<List<Integer>> lists = SubSet.subsets2(new int[]{0, 1, 2,3,4,5});
+        List<List<Integer>> lists = SubSet.subsets2(new int[]{0, 1, 2,3});
         System.out.println(lists);
     }
 }
