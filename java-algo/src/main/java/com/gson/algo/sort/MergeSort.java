@@ -31,11 +31,11 @@ public class MergeSort {
                 c[index] = a[ai];
                 index++;
                 ai++;
-            }else if (ai < a.length &&  bi < b.length && a[ai] < b[bi] ) {
+            } else if (ai < a.length && bi < b.length && a[ai] < b[bi]) {
                 c[index] = a[ai];
                 index++;
                 ai++;
-            } else if (bi < b.length &&  ai < a.length && a[ai] >= b[bi]) {
+            } else if (bi < b.length && ai < a.length && a[ai] >= b[bi]) {
                 c[index] = b[bi];
                 index++;
                 bi++;
@@ -45,9 +45,8 @@ public class MergeSort {
     }
 
 
-
     public static int[] sort(int[] array) {
-        if (array.length == 1){
+        if (array.length == 1) {
             return array;
         }
         int half = array.length / 2;
@@ -59,13 +58,11 @@ public class MergeSort {
     }
 
     public static void main(String[] args) {
-        int[] c = {7,1,8,6};
+        int[] c = {7, 1, 8, 6};
         int[] a = {1, 7, 8};
         int[] b = {2, 6, 10};
         //int[] merge = merge(a, b);
         int[] sort = sort(c);
         System.out.println(Arrays.toString(sort));
     }
-
-
 }
