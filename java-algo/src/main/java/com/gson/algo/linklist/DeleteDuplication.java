@@ -18,7 +18,7 @@ public class DeleteDuplication {
     // 2 3 3 4 4 5
     // 2 3 3 4 4
     // 3 3 4 4 5
-    public ListNode deleteDuplication(ListNode pHead) {
+    public ListNode deleteDuplication2(ListNode pHead) {
         if (pHead == null || pHead.next == null) {
             return pHead;
         }
@@ -50,6 +50,40 @@ public class DeleteDuplication {
                 exitSame = false;
             }else{
                 cur = cur.next;
+            }
+        }
+
+        return before.next;
+    }
+
+    public ListNode deleteDuplication(ListNode pHead) {
+        if (pHead == null || pHead.next == null) {
+            return pHead;
+        }
+
+        ListNode before = new ListNode(pHead.val-1);
+        before.next = pHead;
+        ListNode pre = before;
+        ListNode cur = pHead;
+
+        while (true) {
+            //cur与后面的节点相同
+            if (cur.next != null && cur.next.val == cur.val){
+                while (cur.next != null && cur.next.val == cur.val){
+                    cur = cur.next;
+                }
+                cur = cur.next;
+                pre.next = cur;
+
+            }
+            //cur与随后的节点不相同
+            else {
+                pre = cur;
+                cur = cur.next;
+            }
+            // 该条件可以放到while条件里
+            if (cur == null){
+                break;
             }
         }
 
