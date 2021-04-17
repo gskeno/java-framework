@@ -31,6 +31,7 @@
         <module>java-guava</module>
         <module>java-jdk</module>
         <module>java-algo</module>
+        <module>java-lucene</module>
     </modules>
 
     <name>java-framework</name>
