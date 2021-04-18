@@ -75,6 +75,7 @@ public class TestDemo extends LuceneTestCase {
         Analyzer analyzer = new StandardAnalyzer();
 
         Path indexPath = Files.createTempDirectory("tempIndex");
+        System.out.println("indexPath=" + indexPath);
         Directory directory = FSDirectory.open(indexPath);
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         IndexWriter iwriter = new IndexWriter(directory, config);
@@ -94,6 +95,8 @@ public class TestDemo extends LuceneTestCase {
         assertEquals(1, hits.length);
         // Iterate through the results:
         for (int i = 0; i < hits.length; i++) {
+            //ScoreDoc.doc 表示文档id
+            //ScoreDoc.score 表示文档相关度
             Document hitDoc = isearcher.doc(hits[i].doc);
             assertEquals("This is the text to be indexed.", hitDoc.get("fieldname"));
         }
