@@ -25,7 +25,6 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
       <scope>test</scope>
     </dependency>
 
@@ -53,6 +52,14 @@
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-queries</artifactId>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-test-framework -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-test-framework</artifactId>
+      <scope>test</scope>
+    </dependency>
+
 
   </dependencies>
 
