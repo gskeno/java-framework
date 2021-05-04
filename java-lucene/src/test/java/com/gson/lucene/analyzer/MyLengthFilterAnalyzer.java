@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
+ * tokenStream 且过滤长度
  * https://lucene.apache.org/core/8_8_2/core/org/apache/lucene/analysis/package-summary.html#analysis-workflow
  * Adding a LengthFilter
  */
@@ -45,6 +46,8 @@ public class MyLengthFilterAnalyzer extends Analyzer {
             // print all tokens until stream is exhausted
             while (stream.incrementToken()) {
                 System.out.println(termAtt.toString());
+                System.out.println(stream.reflectAsString(true));
+                System.out.println("------");
             }
 
             stream.end();
