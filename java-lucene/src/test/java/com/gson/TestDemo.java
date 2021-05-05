@@ -30,6 +30,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TestDemo extends LuceneTestCase {
+
     private void testOneSearch(Path indexPath, String query, int expectedHitCount) throws Exception {
         PrintStream outSave = System.out;
         try {

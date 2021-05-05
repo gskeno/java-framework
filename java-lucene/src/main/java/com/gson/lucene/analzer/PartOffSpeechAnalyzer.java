@@ -34,7 +34,7 @@ public class PartOffSpeechAnalyzer extends Analyzer {
     public static void main(String[] args) throws IOException {
         // text to tokenize
         final String text = "This is a demo of the TokenStream API";
-        Version matchVersion = Version.LUCENE_8_8_2; // Substitute desired Lucene version for XY
+        Version matchVersion = Version.LUCENE_8_0_0; // Substitute desired Lucene version for XY
 
         PartOffSpeechAnalyzer analyzer = new PartOffSpeechAnalyzer(matchVersion);
         TokenStream stream = analyzer.tokenStream("field", new StringReader(text));

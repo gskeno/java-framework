@@ -48,6 +48,7 @@
         <!--        <slf4j.version>1.4.3</slf4j.version>-->
         <spring.version>4.1.1.RELEASE</spring.version>
         <junit.version>4.12</junit.version>
+        <lucene.version>8.0.0</lucene.version>
     </properties>
 
     <dependencies>
@@ -188,28 +189,28 @@
             <dependency>
                 <groupId>org.apache.lucene</groupId>
                 <artifactId>lucene-analyzers-common</artifactId>
-                <version>8.8.2</version>
+                <version>${lucene.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queryparser -->
             <dependency>
                 <groupId>org.apache.lucene</groupId>
                 <artifactId>lucene-queryparser</artifactId>
-                <version>8.8.2</version>
+                <version>${lucene.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queries -->
             <dependency>
                 <groupId>org.apache.lucene</groupId>
                 <artifactId>lucene-queries</artifactId>
-                <version>8.8.2</version>
+                <version>${lucene.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-test-framework -->
             <dependency>
                 <groupId>org.apache.lucene</groupId>
                 <artifactId>lucene-test-framework</artifactId>
-                <version>8.8.2</version>
+                <version>${lucene.version}</version>
                 <scope>test</scope>
             </dependency>
 
