@@ -90,8 +90,13 @@ public class IndexWriterTest {
         doc.add(new NumericDocValuesField("math", 250L));
         doc.add(new NumericDocValuesField("english", 320L));
         doc.add(new TextField("info", "school", Field.Store.YES));
+        writer.addDocument(doc);
 
-
+        doc = new Document();
+        doc.add(new NumericDocValuesField("chinese", 150L));
+        doc.add(new NumericDocValuesField("math", 250L));
+        doc.add(new NumericDocValuesField("english", 300L));
+        doc.add(new TextField("info", "school", Field.Store.YES));
         writer.addDocument(doc);
     }
 
