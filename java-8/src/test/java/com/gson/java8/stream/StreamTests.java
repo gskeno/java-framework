@@ -59,6 +59,5 @@ public class StreamTests {
                 reduce(26L, (aLong, aLong2) -> aLong + aLong2);
 
         Assert.assertTrue(reduce == 26 + 10 + 11);
-
     }
 }
