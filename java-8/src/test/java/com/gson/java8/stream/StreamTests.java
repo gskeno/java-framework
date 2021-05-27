@@ -1,8 +1,10 @@
 package com.gson.java8.stream;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
 public class StreamTests {
@@ -45,5 +47,18 @@ public class StreamTests {
         // 如果list为空，返回一个空集合
         List<String> list1 = Optional.ofNullable(list).orElse(new ArrayList<>());
         System.out.println(list1);
+    }
+
+    @Test
+    public void testMapReduce(){
+        List<Point> points = new ArrayList<>();
+        points.add(new Point(1L, 10L));
+        points.add(new Point(2L, 11L));
+
+        Long reduce = points.stream().map(o -> o.getValue()).
+                reduce(26L, (aLong, aLong2) -> aLong + aLong2);
+
+        Assert.assertTrue(reduce == 26 + 10 + 11);
+
     }
 }
