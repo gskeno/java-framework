@@ -49,6 +49,9 @@ public class StreamTests {
         System.out.println(list1);
     }
 
+    /**
+     * mapReduce
+     */
     @Test
     public void testMapReduce(){
         List<Point> points = new ArrayList<>();
