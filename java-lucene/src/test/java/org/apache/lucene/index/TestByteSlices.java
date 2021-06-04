@@ -38,12 +38,14 @@ public class TestByteSlices extends LuceneTestCase {
     for(int ti=0;ti<100;ti++) {
 
       for(int stream=0;stream<NUM_STREAM;stream++) {
+        //初始化数组元素
         starts[stream] = -1;
         counters[stream] = 0;
       }
       
       int num = atLeast(3000);
       for (int iter = 0; iter < num; iter++) {
+        //stream 3内随机或者NUM_STREAM内 随机
         int stream;
         if (random().nextBoolean()) {
           stream = random().nextInt(3);

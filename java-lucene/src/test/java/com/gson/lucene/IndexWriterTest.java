@@ -7,6 +7,7 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.store.NIOFSDirectory;
 import org.apache.lucene.util.PrintStreamInfoStream;
 import org.junit.Test;
 
@@ -70,6 +71,28 @@ public class IndexWriterTest {
     }
 
     /**
+     * 测试只增加倒排索引
+     */
+    @Test
+    public void testCreateInvertFieldDocIndex() throws IOException, URISyntaxException {
+        IndexWriter writer = getIndexWriter();
+        Document doc = new Document();
+        doc.add(new TextField("info", "study play football ! hi boys", Field.Store.YES));
+        writer.addDocument(doc);
+
+        doc = new Document();
+        doc.add(new TextField("info", "hi, every one, good play", Field.Store.YES));
+        writer.addDocument(doc);
+
+        doc = new Document();
+        doc.add(new TextField("info", "play basketball is one good interest", Field.Store.YES));
+        writer.addDocument(doc);
+
+
+        writer.commit();
+        writer.close();
+    }
+    /**
      * 测试生成DocValues, 用于排序、聚合等场景
      * @throws URISyntaxException
      * @throws IOException
@@ -88,7 +111,9 @@ public class IndexWriterTest {
         doc.add(new NumericDocValuesField("chinese", 100L));
         doc.add(new NumericDocValuesField("math", 200L));
         doc.add(new NumericDocValuesField("english", 250L));
+        //等价于 doc.add(new TextField("info", "study play", Field.Store.YES));
         doc.add(new TextField("info", "study", Field.Store.YES));
+        doc.add(new TextField("info", "play", Field.Store.YES));
 
         writer.addDocument(doc);
 
@@ -127,5 +152,26 @@ public class IndexWriterTest {
         docs.add(doc);
 
         writer.addDocuments(docs);
+    }
+
+    /**
+     * 简易版的add and commit
+     * @throws IOException
+     */
+    @Test
+    public void testAddAndCommit() throws IOException, URISyntaxException {
+        //在test-classes目录下找索引文件
+        String indexDir = Paths.get(this.getClass().getResource("").toURI()) + "/index";
+        Directory directory =   FSDirectory.open(Paths.get(indexDir));
+
+        IndexWriterConfig config = new IndexWriterConfig();
+        IndexWriter writer = new IndexWriter(directory, config);
+
+        Document doc = new Document();
+        doc.add(new TextField("title", "Lucene - IndexWriter", Field.Store.YES));
+        doc.add(new StringField("author", "you ning", Field.Store.YES));
+
+        writer.addDocument(doc);
+        writer.commit();
     }
 }
