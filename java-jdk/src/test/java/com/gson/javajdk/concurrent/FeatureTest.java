@@ -14,10 +14,11 @@ public class FeatureTest extends Assert {
         Future<Integer> future4 = service.submit(new IntCallable<>(4));
 
         Thread.sleep(500);
-        future3.cancel(true);
-        future4.get();
+        boolean cancel = future3.cancel(true);
         assertTrue(future3.isCancelled());
         assertTrue(future3.isDone());
+        System.out.println(System.currentTimeMillis() +" cancel result=" + cancel);
+        future4.get();
         assertFalse(future4.isCancelled());
         assertTrue(future4.isDone());
     }
@@ -83,12 +84,12 @@ public class FeatureTest extends Assert {
         }
         @Override
         public Integer call() throws Exception {
-            System.out.println("开始执行,element=" + element);
+            System.out.println(System.currentTimeMillis() +" 开始执行,element=" + element);
             long begin = System.currentTimeMillis();
             while (System.currentTimeMillis() - begin < 3000){
 
             }
-            System.out.println("结束执行,element=" + element);
+            System.out.println(System.currentTimeMillis() +" 结束执行,element=" + element);
             return element;
         }
     }
