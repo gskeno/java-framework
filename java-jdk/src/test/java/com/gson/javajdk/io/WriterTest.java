@@ -1,5 +1,6 @@
 package com.gson.javajdk.io;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -11,8 +12,11 @@ public class WriterTest {
     public void test() throws IOException {
         String fileName = "write.txt";
         FileOutputStream os = new FileOutputStream(fileName, true);
-        os.write(30);
-        os.write(20);
+        final byte[] READ_TEST_BYTES = new byte[] {
+                (byte) 0x80, 0x01,
+                (byte) 0xFF, 0x7F};
+
+        os.write(READ_TEST_BYTES);
         os.flush();
         os.close();
 
