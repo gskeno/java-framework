@@ -86,4 +86,19 @@ public class MathTest {
         byte c = (byte)(a*b);
         System.out.println(c);
     }
+
+    @Test
+    public void testSub(){
+        //  1111 1111 1110 1000
+        // -0000 0000 0001 0111
+        // -0000 0000 0001 1000 = -(16+8) = 24;
+        short a = (short) 0xFFE8;
+        System.out.println(a);
+
+        short b = (short)0x7FE6;
+        System.out.println(b);
+
+        System.out.println(a-b);
+        System.out.println(Short.MIN_VALUE);
+    }
 }
