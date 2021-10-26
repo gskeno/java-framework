@@ -1,5 +1,6 @@
 package com.gson.java8.stream;
 
+import com.gson.java8.model.Student;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,6 +26,24 @@ public class StreamTests {
                 collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         System.out.println(collect);
+    }
+
+    @Test
+    public void listToMap(){
+        Student gs = new Student("1", "gs");
+        Student lj = new Student("1", "lj");
+
+        List<Student> students = new ArrayList<>();
+        students.add(gs);
+        students.add(lj);
+
+        Map<String, Student> studentMap = students.stream().collect(Collectors.toMap(Student::getId, Student -> Student, new BinaryOperator<Student>() {
+            @Override
+            public Student apply(Student a, Student b) {
+                return b;
+            }
+        }));
+        System.out.println(studentMap);
     }
 
     /**
