@@ -39,6 +39,7 @@ public class StreamTests {
 
         Map<String, Student> studentMap = students.stream().collect(Collectors.toMap(Student::getId, Student -> Student, new BinaryOperator<Student>() {
             @Override
+            // key相同，value不同的两个value, Student a, Student b， 选择第二个
             public Student apply(Student a, Student b) {
                 return b;
             }

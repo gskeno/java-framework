@@ -101,4 +101,22 @@ public class MathTest {
         System.out.println(a-b);
         System.out.println(Short.MIN_VALUE);
     }
+
+    @Test
+    public void testDouble(){
+        Double d = 1.0d;
+        System.out.println(Double.toHexString(d));
+
+        d = 2.0d;
+        System.out.println(Double.toHexString(d));
+
+        d = 4.0d;
+        System.out.println(Double.toHexString(d));
+
+        d = 8.0d;
+        System.out.println(Double.toHexString(d));
+
+        Float f = 1.0f;
+        System.out.println(Float.toHexString(f));
+    }
 }
