@@ -32,6 +32,7 @@
         <module>java-jdk</module>
         <module>java-algo</module>
         <module>java-lucene</module>
+        <module>java-roaring-bitmap</module>
     </modules>
 
     <name>java-framework</name>
