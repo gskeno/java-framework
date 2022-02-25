@@ -4,7 +4,7 @@ import org.roaringbitmap.RoaringBitmap;
 
 public class Basic {
     public static void main(String[] args) {
-        RoaringBitmap rr = RoaringBitmap.bitmapOf(1,2,3,1000);
+        RoaringBitmap rr = RoaringBitmap.bitmapOf(1,2,3,1000, Integer.MAX_VALUE-1);
         RoaringBitmap rr2 = new RoaringBitmap();
         rr2.add(4000L,4255L);
         rr.select(3); // would return the third value or 1000
