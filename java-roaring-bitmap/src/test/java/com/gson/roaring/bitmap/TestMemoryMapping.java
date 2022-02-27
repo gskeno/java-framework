@@ -137,16 +137,21 @@ public class TestMemoryMapping {
     System.out.println("[TestMemoryMapping] Setting up memory-mapped file. (Can take some time.)");
     final ArrayList<Long> offsets = new ArrayList<Long>();
     tmpfile = File.createTempFile("roaring", "bin");
+    System.out.println("tmpFile: " + tmpfile.getAbsolutePath());
+    // jvm 退出时删除文件
     tmpfile.deleteOnExit();
     final FileOutputStream fos = new FileOutputStream(tmpfile);
     final DataOutputStream dos = new DataOutputStream(fos);
+    // 65536 = 64 * 2^10 = 2^16 正好等于2个字节,等价short类型或者char类型
     for (int N = 65536 * 16; N <= 65536 * 128; N *= 8) {
       for (int gap = 1; gap <= 65536; gap *= 4) {
         final MutableRoaringBitmap rb1 = new MutableRoaringBitmap();
         for (int x = 0; x < N; x += gap) {
+          // Container_16和Container_128两个容器会写进数据
           rb1.add(x);
         }
         // make containers 8 and 10 be run encoded
+        // container跟key是一一对应的, 高16位为8（或者10）对应着Container_8(或者Container_10)
         for (int x = 8 * 65536; x < 8 * 65536 + 1000; ++x) {
           rb1.add(x);
         }
@@ -279,8 +284,9 @@ public class TestMemoryMapping {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    //
+    // Buffer有两种模式，在写模式下调用flip后，会变为读模式
     outbb.flip();
+    // 设置字节序
     outbb.order(ByteOrder.LITTLE_ENDIAN);
     return outbb;
   }
