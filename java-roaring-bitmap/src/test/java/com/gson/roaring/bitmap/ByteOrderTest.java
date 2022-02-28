@@ -8,5 +8,6 @@ public class ByteOrderTest {
         ByteOrder byteOrder = ByteOrder.nativeOrder();
         // 小端序
         System.out.println(byteOrder);
+
     }
 }

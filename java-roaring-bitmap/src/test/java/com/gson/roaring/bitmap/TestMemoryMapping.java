@@ -165,16 +165,20 @@ public class TestMemoryMapping {
           if (!equals(toByteBuffer(rr), bb)) {
             throw new RuntimeException("serialized output not identical.");
           }
+          // 倒带, position重设为0
           bb.rewind();
+          // byteBuffer 反序列化为 RaringBitmap
           RoaringBitmap rr2 = toRoaringBitmap(bb);
           if (!rr2.equals(rr)) {
             throw new RuntimeException("Can't recover RoaringBitmap");
           }
+          // 因为ByteBuffer反序列化了，所以bb的position不再是0了，需要再次倒带
           bb.rewind();
           MutableRoaringBitmap rb2 = toMutableRoaringBitmap(bb);
           if (!rb1.equals(rb2)) {
             throw new RuntimeException("Can't recover MutableRoaringBitmap");
           }
+          // 因为ByteBuffer反序列化了，所以bb的position不再是0了，需要再次倒带
           bb.rewind();
           ImmutableRoaringBitmap irb = new ImmutableRoaringBitmap(bb);
           if (!irb.equals(rb1)) {
@@ -315,6 +319,11 @@ public class TestMemoryMapping {
     return rb;
   }
 
+  /**
+   * 反序列化
+   * @param bb
+   * @return
+   */
   public static RoaringBitmap toRoaringBitmap(ByteBuffer bb) {
     RoaringBitmap rb = new RoaringBitmap();
     try {
