@@ -234,9 +234,10 @@ public class TestMemoryMapping {
           dos.flush();
           rambitmaps.add(rb2);
           // we add tests
+          // MutableRoaringBitmap ---> ByteBuffer
           ByteBuffer outbb = ByteBuffer.allocate(rb2.serializedSizeInBytes());
           rb2.serialize(new DataOutputStream(new ByteBufferBackedOutputStream(outbb)));
-          //
+          // 切换成读模式
           outbb.flip();
           ImmutableRoaringBitmap irb = new ImmutableRoaringBitmap(outbb);
           if (!irb.equals(rb2)) {
@@ -254,6 +255,7 @@ public class TestMemoryMapping {
       out = memoryMappedFile.getChannel().map(FileChannel.MapMode.READ_ONLY, 0, totalcount);
       final long bef = System.currentTimeMillis();
       for (int k = 0; k < offsets.size() - 1; ++k) {
+        // 做数据分隔，分隔后返回一个新的ByteBuffer,它是从旧的ByteBuffer的position位置开始的
         final ByteBuffer bb = out.slice();
         // Next commented line is not required nor recommended
         // bb.limit((int) (offsets.get(k+1)-offsets.get(k)));
