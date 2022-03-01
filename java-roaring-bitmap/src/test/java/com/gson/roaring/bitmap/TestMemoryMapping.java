@@ -252,10 +252,11 @@ public class TestMemoryMapping {
     dos.close();
     final RandomAccessFile memoryMappedFile = new RandomAccessFile(tmpfile, "r");
     try {
+      // 文件映射进虚拟内存
       out = memoryMappedFile.getChannel().map(FileChannel.MapMode.READ_ONLY, 0, totalcount);
       final long bef = System.currentTimeMillis();
       for (int k = 0; k < offsets.size() - 1; ++k) {
-        // 做数据分隔，分隔后返回一个新的ByteBuffer,它是从旧的ByteBuffer的position位置开始的
+        // 做数据分隔，将out当前的position到limit的数据分隔出来
         final ByteBuffer bb = out.slice();
         // Next commented line is not required nor recommended
         // bb.limit((int) (offsets.get(k+1)-offsets.get(k)));
