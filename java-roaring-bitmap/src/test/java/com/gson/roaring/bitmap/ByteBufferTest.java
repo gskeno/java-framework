@@ -1,9 +1,13 @@
 package com.gson.roaring.bitmap;
 
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.roaringbitmap.RoaringBitmap;
 import org.roaringbitmap.buffer.ImmutableRoaringBitmap;
+import org.roaringbitmap.buffer.MutableRoaringBitmap;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class ByteBufferTest {
 
@@ -55,20 +59,30 @@ public class ByteBufferTest {
     @Test
     public void testRoaringBitmap(){
         int capacity = 200;
-        ByteBuffer buffer = ByteBuffer.allocateDirect(capacity);
+        MutableRoaringBitmap mutableRoaringBitmap = new MutableRoaringBitmap();
         for (int i = 0; i < capacity; i++) {
-            buffer.put((byte)i);
+            mutableRoaringBitmap.add(i);
         }
-        //切成读模式
-        buffer.flip();
-        assert buffer.position() == 0;
-        assert buffer.limit() == capacity;
-        assert buffer.capacity() == capacity;
+        int[] elements = mutableRoaringBitmap.toArray();
 
-        ImmutableRoaringBitmap ird = new ImmutableRoaringBitmap(buffer);
+        // roaringBitmap ---> byteBuffer
+        RoaringBitmap roaringBitmap = RoaringBitmap.bitmapOf(elements);
+        ByteBuffer byteBuffer = ByteBuffer.allocate(roaringBitmap.serializedSizeInBytes());
+        roaringBitmap.serialize(byteBuffer);
+        byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+        byteBuffer.flip();
 
-        System.out.println(buffer.position());
-        System.out.println(buffer.limit());
-        System.out.println(buffer.capacity());
+        ImmutableRoaringBitmap ird = new ImmutableRoaringBitmap(byteBuffer);
+        ImmutableRoaringBitmap immutableRoaringBitmap = mutableRoaringBitmap.toImmutableRoaringBitmap();
+
+
+        ByteBuffer bf1 = ByteBuffer.allocate(capacity);
+        for (int i = 0; i < capacity; i++) {
+            bf1.put((byte)i);
+        }
+        bf1.order(ByteOrder.LITTLE_ENDIAN);
+        bf1.flip();
+        ImmutableRoaringBitmap ird1 = new ImmutableRoaringBitmap(bf1);
+        System.out.println(ird1);
     }
 }
