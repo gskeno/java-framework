@@ -8,19 +8,21 @@ public class ByteBufferTest {
 
     @Test
     public void basic(){
+        int capacity = 20;
         int size = 10;
         // mark <= position <= limit <= capacity
-        ByteBuffer bf = ByteBuffer.allocate(size);
+        ByteBuffer bf = ByteBuffer.allocate(capacity);
         for (int i = 1; i <= size ; i++) {
             // 写数据, position自增
             bf.put((byte)i);
         }
         int position = bf.position();
         int limit = bf.limit();
-        int capacity = bf.capacity();
+        int bfcapacity = bf.capacity();
         assert position == 10;
-        assert limit == 10;
-        assert capacity == 10;
+        // 后10个元素被allocate自动初始化为0
+        assert limit == 20;
+        assert bfcapacity == 20;
 
         // limit 设置为当前position, position设置为0，mark设置为-1
         // 一般用在写模式切换到读模式时
