@@ -25,6 +25,7 @@ public class ByteBufferTest {
         assert bfcapacity == 20;
 
         // limit 设置为当前position, position设置为0，mark设置为-1
+        // 因为上面put了10个元素，所以现在flip后，可以读取10个元素
         // 一般用在写模式切换到读模式时
         bf.flip();
         for (int index = 0; index < size; index++) {
@@ -33,8 +34,15 @@ public class ByteBufferTest {
             // 因为元素值是1至10
             assert index + 1 == b;
         }
+        assert bf.capacity() == 20;
+        assert bf.position() == 0;
+        assert bf.limit() == 10;
+
+        // bf的position到limit之间的数据切割成目标片段，且slice.limit = slice.capacity
         ByteBuffer slice = bf.slice();
-        System.out.println(slice);
+        assert slice.position() == 0;
+        assert slice.limit() == 10;
+        assert slice.capacity() == 10;
 
     }
 }
