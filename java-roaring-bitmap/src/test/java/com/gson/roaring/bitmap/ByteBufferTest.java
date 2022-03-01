@@ -1,6 +1,7 @@
 package com.gson.roaring.bitmap;
 
 import org.junit.jupiter.api.Test;
+import org.roaringbitmap.buffer.ImmutableRoaringBitmap;
 
 import java.nio.ByteBuffer;
 
@@ -44,5 +45,30 @@ public class ByteBufferTest {
         assert slice.limit() == 10;
         assert slice.capacity() == 10;
 
+    }
+
+    @Test
+    public void testDirectByteBuffer(){
+        ByteBuffer directBf = ByteBuffer.allocateDirect(2000);
+    }
+
+    @Test
+    public void testRoaringBitmap(){
+        int capacity = 200;
+        ByteBuffer buffer = ByteBuffer.allocateDirect(capacity);
+        for (int i = 0; i < capacity; i++) {
+            buffer.put((byte)i);
+        }
+        //切成读模式
+        buffer.flip();
+        assert buffer.position() == 0;
+        assert buffer.limit() == capacity;
+        assert buffer.capacity() == capacity;
+
+        ImmutableRoaringBitmap ird = new ImmutableRoaringBitmap(buffer);
+
+        System.out.println(buffer.position());
+        System.out.println(buffer.limit());
+        System.out.println(buffer.capacity());
     }
 }
