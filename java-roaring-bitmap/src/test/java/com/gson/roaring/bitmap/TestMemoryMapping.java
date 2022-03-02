@@ -143,11 +143,13 @@ public class TestMemoryMapping {
     final FileOutputStream fos = new FileOutputStream(tmpfile);
     final DataOutputStream dos = new DataOutputStream(fos);
     // 65536 = 64 * 2^10 = 2^16 正好等于2个字节,等价short类型或者char类型
+    // 65536是16Bit所能表示的数字的个数
     for (int N = 65536 * 16; N <= 65536 * 128; N *= 8) {
       for (int gap = 1; gap <= 65536; gap *= 4) {
+        // 4^8 == 65536，所以rb1一定new了8+1=9次
         final MutableRoaringBitmap rb1 = new MutableRoaringBitmap();
         for (int x = 0; x < N; x += gap) {
-          // Container_16和Container_128两个容器会写进数据
+          // 所add元素的间距为gap
           rb1.add(x);
         }
         // make containers 8 and 10 be run encoded
@@ -162,6 +164,7 @@ public class TestMemoryMapping {
         {
           RoaringBitmap rr = RoaringBitmap.bitmapOf(rb1.toArray());
           ByteBuffer bb = toByteBuffer(rb1);
+          // MutableRoaringBitmap--->ByteBuffer与 MutableRoaringBitmap--->int[]--->RoaringBitmap--->ByteBuffer相比
           if (!equals(toByteBuffer(rr), bb)) {
             throw new RuntimeException("serialized output not identical.");
           }
@@ -181,6 +184,7 @@ public class TestMemoryMapping {
           // 因为ByteBuffer反序列化了，所以bb的position不再是0了，需要再次倒带
           bb.rewind();
           ImmutableRoaringBitmap irb = new ImmutableRoaringBitmap(bb);
+          // 这里的equals有重写，因为rb1是MutableRoaringBitmap类型，是ImmutableRoaringBitmap的子类，这里重写比较后认为相等
           if (!irb.equals(rb1)) {
             throw new RuntimeException("serialized output cannot be mapped.");
           }
@@ -213,6 +217,7 @@ public class TestMemoryMapping {
         }
 
         rambitmaps.add(rb1);
+        // 第一次执行时fos.getChannel().position()==0， 随后的serialize会将字节写入到dos中，position会自动变化
         offsets.add(fos.getChannel().position());
         rb1.serialize(dos);
         dos.flush();
@@ -248,7 +253,7 @@ public class TestMemoryMapping {
     }
     final long totalcount = fos.getChannel().position();
     System.out.println("[TestMemoryMapping] Wrote " + totalcount / 1024 + " KB");
-    offsets.add(totalcount);
+    offsets.add(totalcount); // offsets 比 rambitmaps 多一个元素
     dos.close();
     final RandomAccessFile memoryMappedFile = new RandomAccessFile(tmpfile, "r");
     try {
@@ -260,6 +265,8 @@ public class TestMemoryMapping {
         final ByteBuffer bb = out.slice();
         // Next commented line is not required nor recommended
         // bb.limit((int) (offsets.get(k+1)-offsets.get(k)));
+        // 最大的魅力就在这里，这里没有说明读取bb多少个字节，但是bb满足RoaringBitmapSpec结构，所以构造
+        // 函数内部能解析出来应该读取多少个字节
         ImmutableRoaringBitmap newbitmap = new ImmutableRoaringBitmap(bb);
         if (newbitmap.serializedSizeInBytes() != rambitmaps.get(k).serializedSizeInBytes()) {
           throw new RuntimeException(
