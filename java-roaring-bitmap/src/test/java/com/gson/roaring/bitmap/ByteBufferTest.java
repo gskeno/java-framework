@@ -45,6 +45,7 @@ public class ByteBufferTest {
         assert bf.limit() == 10;
 
         // bf的position到limit之间的数据切割成目标片段，且slice.limit = slice.capacity
+        // slice会同步影响新旧的ByteBuffer
         ByteBuffer slice = bf.slice();
         assert slice.position() == 0;
         assert slice.limit() == 10;
