@@ -6,6 +6,7 @@ import org.roaringbitmap.RoaringBitmap;
 import org.roaringbitmap.buffer.ImmutableRoaringBitmap;
 import org.roaringbitmap.buffer.MutableRoaringBitmap;
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -84,5 +85,19 @@ public class ByteBufferTest {
         bf1.flip();
         ImmutableRoaringBitmap ird1 = new ImmutableRoaringBitmap(bf1);
         System.out.println(ird1);
+    }
+
+    @Test
+    public void testSlice(){
+        ByteBuffer bf = ByteBuffer.allocate(20);
+        for (int i = 0; i < 20; i++) {
+            bf.put((byte)i);
+        }
+
+        bf.position(10);
+        ByteBuffer slice = bf.slice();
+        System.out.println(slice);
+        slice.put((byte)23);
+        System.out.println(slice);
     }
 }

@@ -4,8 +4,15 @@ import org.roaringbitmap.Container;
 import org.roaringbitmap.RoaringBitmap;
 import org.roaringbitmap.RunContainer;
 
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+
 public class ArrayContainer2Bitmap2Run {
     public static void main(String[] args) {
+        test2();
+    }
+
+    public static void test1(){
         RoaringBitmap bitmap = new RoaringBitmap();
         for (int i = 1; i <=4096 ; i++) {
             bitmap.add(i);
@@ -31,5 +38,30 @@ public class ArrayContainer2Bitmap2Run {
         System.out.println(container.getClass().getSimpleName());
         // 压缩后的元素为1,4096 表示1后面有4096个元素，分别是2,3,4,...,4097
         assert container.getClass().getSimpleName().equals(RunContainer.class.getSimpleName());
+        ByteBuffer buffer = ByteBuffer.allocateDirect(bitmap.serializedSizeInBytes());
+        // debug to find RoaringFormatSpec
+        bitmap.serialize(buffer);
+    }
+
+    public static void test2(){
+        RoaringBitmap bitmap = new RoaringBitmap();
+        int segment = (int)Math.pow(2,16) - 1;
+        // 高16位由1-7组成，故由7个key,7个Container
+        for (int i = 1; i <= 7 * segment ; i++) {
+            bitmap.add(i);
+        }
+
+        boolean b = bitmap.runOptimize();
+        System.out.println(b);
+        ByteBuffer buffer = ByteBuffer.allocateDirect(bitmap.serializedSizeInBytes());
+        // debug to find RoaringFormatSpec
+        bitmap.serialize(buffer);
+
+        System.out.println(buffer.get(0));
+        System.out.println(buffer.get(1));
+        System.out.println(buffer.get(2));
+        System.out.println(buffer.get(3));
+        System.out.println(buffer.get(4));
+
     }
 }
