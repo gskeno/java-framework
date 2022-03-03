@@ -103,10 +103,12 @@ class ByteBufferBackedOutputStream extends OutputStream {
 
 public class TestMemoryMapping {
 
+  // 序列化后，写到文件中；再从文件中读取出来，进行反序列化，构造出来的ImmutableRoaringBitmap
   static ArrayList<ImmutableRoaringBitmap> mappedbitmaps = new ArrayList<ImmutableRoaringBitmap>();
 
   static MappedByteBuffer out;
 
+  // 序列化前的MutableRoaringBitmap
   static ArrayList<MutableRoaringBitmap> rambitmaps = new ArrayList<MutableRoaringBitmap>();
 
   static File tmpfile;
@@ -348,11 +350,15 @@ public class TestMemoryMapping {
   public void basic() {
     System.out.println("[TestMemoryMapping] basic tests");
     for (int k = 0; k < mappedbitmaps.size(); ++k) {
+      // 序列化前的 == 反序列化后的
       assertTrue(mappedbitmaps.get(k).equals(rambitmaps.get(k)));
     }
   }
 
   @Test
+  /**
+   * 补充，与某某相匹配
+   */
   public void complements() {
     System.out.println("[TestMemoryMapping] testing complements");
     for (int k = 0; k < mappedbitmaps.size() - 1; k += 4) {
@@ -364,6 +370,9 @@ public class TestMemoryMapping {
     }
   }
 
+  /**
+   * 测试相交
+   */
   @Test
   public void intersections() {
     System.out.println("[TestMemoryMapping] testing intersections");
@@ -384,63 +393,7 @@ public class TestMemoryMapping {
     }
   }
 
-  @Test
-  public void multithreadingTest() throws InterruptedException, IOException {
-    System.out.println("[TestMemoryMapping] multithreading test");
-    final MutableRoaringBitmap rr1 = new MutableRoaringBitmap();
 
-    final int numThreads = Runtime.getRuntime().availableProcessors();
-    final Throwable[] errors = new Throwable[numThreads];
-
-    for (int i = 0; i < numThreads; i++) {
-      // each thread will check an integer from a different container
-      rr1.add(Short.MAX_VALUE * i);
-    }
-
-    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-    DataOutputStream dos = new DataOutputStream(bos);
-    rr1.serialize(dos);
-    dos.close();
-    ByteBuffer bb = ByteBuffer.wrap(bos.toByteArray());
-    final ImmutableRoaringBitmap rrback1 = new ImmutableRoaringBitmap(bb);
-
-    final CountDownLatch ready = new CountDownLatch(numThreads);
-    final CountDownLatch finished = new CountDownLatch(numThreads);
-
-    ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
-
-    for (int i = 0; i < numThreads; i++) {
-      final int ti = i;
-      executorService.execute(new Runnable() {
-
-        @Override
-        public void run() {
-          ready.countDown();
-          try {
-            ready.await();
-            final int elementToCheck = Short.MAX_VALUE * ti;
-            for (int j = 0; j < 10000000; j++) {
-              try {
-                assertTrue(rrback1.contains(elementToCheck));
-              } catch (Throwable t) {
-                errors[ti] = t;
-              }
-            }
-          } catch (Throwable e) {
-            errors[ti] = e;
-          }
-          finished.countDown();
-        }
-      });
-    }
-    finished.await(5, TimeUnit.SECONDS);
-    for (int i = 0; i < numThreads; i++) {
-      if (errors[i] != null) {
-        errors[i].printStackTrace();
-        fail("The contains() for the element " + Short.MAX_VALUE * i + " throw an exception");
-      }
-    }
-  }
   
 
   @Test

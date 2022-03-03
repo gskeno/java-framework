@@ -6,9 +6,19 @@ import org.roaringbitmap.RoaringBitmap;
 import org.roaringbitmap.buffer.ImmutableRoaringBitmap;
 import org.roaringbitmap.buffer.MutableRoaringBitmap;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ByteBufferTest {
 
@@ -88,6 +98,9 @@ public class ByteBufferTest {
         System.out.println(ird1);
     }
 
+    /**
+     * 共享底层数组
+     */
     @Test
     public void testSlice(){
         ByteBuffer bf = ByteBuffer.allocate(20);
@@ -100,5 +113,67 @@ public class ByteBufferTest {
         System.out.println(slice);
         slice.put((byte)23);
         System.out.println(slice);
+    }
+
+
+    @Test
+    public void multithreadingTest() throws InterruptedException, IOException {
+        System.out.println("[TestMemoryMapping] multithreading test");
+        final MutableRoaringBitmap rr1 = new MutableRoaringBitmap();
+
+        final int numThreads = Runtime.getRuntime().availableProcessors();
+        final Throwable[] errors = new Throwable[numThreads];
+
+        for (int i = 0; i < numThreads; i++) {
+            // each thread will check an integer from a different container
+            // i=0,1,2时，高16位为0，共用一个Container
+            rr1.add(Short.MAX_VALUE * i);
+        }
+
+        // 会产生4个Container
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(bos);
+        rr1.serialize(dos);
+        dos.close();
+        ByteBuffer bb = ByteBuffer.wrap(bos.toByteArray());
+        final ImmutableRoaringBitmap rrback1 = new ImmutableRoaringBitmap(bb);
+
+        final CountDownLatch ready = new CountDownLatch(numThreads);
+        final CountDownLatch finished = new CountDownLatch(numThreads);
+
+        ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
+
+        for (int i = 0; i < numThreads; i++) {
+            final int ti = i;
+            executorService.execute(new Runnable() {
+
+                @Override
+                public void run() {
+                    ready.countDown();
+                    try {
+                        ready.await();
+                        final int elementToCheck = Short.MAX_VALUE * ti;
+                        for (int j = 0; j < 10000000; j++) {
+                            try {
+                                assertTrue(rrback1.contains(elementToCheck));
+                            } catch (Throwable t) {
+                                errors[ti] = t;
+                            }
+                        }
+                    } catch (Throwable e) {
+                        errors[ti] = e;
+                    }
+                    finished.countDown();
+                }
+            });
+        }
+        finished.await(5, TimeUnit.SECONDS);
+        for (int i = 0; i < numThreads; i++) {
+            if (errors[i] != null) {
+                errors[i].printStackTrace();
+                fail("The contains() for the element " + Short.MAX_VALUE * i + " throw an exception");
+            }
+        }
     }
 }
