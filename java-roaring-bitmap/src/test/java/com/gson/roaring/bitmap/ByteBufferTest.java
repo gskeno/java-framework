@@ -17,8 +17,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ByteBufferTest {
 
@@ -175,5 +175,93 @@ public class ByteBufferTest {
                 fail("The contains() for the element " + Short.MAX_VALUE * i + " throw an exception");
             }
         }
+    }
+
+    @Test
+    public void containsTest() throws IOException  {
+        System.out.println("[containsTest]");
+        for(int z = 0; z < 100; ++z) {
+            final MutableRoaringBitmap rr1 = new MutableRoaringBitmap();
+            for(int k = 0; k < 100; k+=10){
+                rr1.add(k + z);
+            }
+            for(int k = 100000; k < 200000; k+=2){
+                rr1.add(k + z);
+            }
+            for(int k = 400000; k < 500000; k++){
+                rr1.add(k + z);
+            }
+            System.out.println("bef runOptimize " + rr1.serializedSizeInBytes() + "," + rr1.getLongSizeInBytes());
+            rr1.runOptimize();
+            System.out.println("aft runOptimize " + rr1.serializedSizeInBytes() + "," + rr1.getLongSizeInBytes());
+
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            DataOutputStream dos = new DataOutputStream(bos);
+            rr1.serialize(dos);
+            dos.close();
+            ByteBuffer bb = ByteBuffer.wrap(bos.toByteArray());
+            final ImmutableRoaringBitmap rrback1 = new ImmutableRoaringBitmap(bb);
+            assertEquals(rrback1.getLongSizeInBytes(), rr1.getLongSizeInBytes());
+            assertEquals(rrback1.serializedSizeInBytes(), rr1.serializedSizeInBytes());
+            for(int k = 0; k < 1000000; k += 100) {
+                assertEquals(rrback1.contains(k), rr1.contains(k));
+            }
+        }
+    }
+
+    @Test
+    public void standardTest() throws IOException {
+        // 将两个MutableRoaringBitmap连续写到同一个bos中
+        System.out.println("[TestMemoryMapping] standard test");
+        MutableRoaringBitmap rr1 = MutableRoaringBitmap.bitmapOf(1, 2, 3, 1000);
+        MutableRoaringBitmap rr2 = MutableRoaringBitmap.bitmapOf(2, 3, 1010);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(bos);
+        rr1.serialize(dos);
+        rr2.serialize(dos);
+        dos.close();
+        ByteBuffer bb = ByteBuffer.wrap(bos.toByteArray());
+        ImmutableRoaringBitmap rrback1 = new ImmutableRoaringBitmap(bb);
+        assertTrue(rr1.equals(rrback1));
+
+        // 分段读取出来
+        bb.position(bb.position() + rrback1.serializedSizeInBytes());
+        ImmutableRoaringBitmap rrback2 = new ImmutableRoaringBitmap(bb);
+        assertTrue(rr1.equals(rrback1));
+        assertTrue(rr2.equals(rrback2));
+    }
+
+    @Test
+    public void standardTest1() throws IOException {
+        System.out.println("[TestMemoryMapping] standard test 1");
+        // use some run containers
+        // 同上，两个MutableRoaringBitmap写到同一个bos中,第一个执行了runOptimize
+        // 读取时分段读取出来
+        MutableRoaringBitmap rr1 = MutableRoaringBitmap.bitmapOf(1, 2, 3, 4, 5, 6, 1000);
+        rr1.runOptimize();
+        MutableRoaringBitmap rr2 = MutableRoaringBitmap.bitmapOf(2, 3, 1010);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        DataOutputStream dos = new DataOutputStream(bos);
+        rr1.serialize(dos);
+        rr2.serialize(dos);
+        dos.close();
+        ByteBuffer bb = ByteBuffer.wrap(bos.toByteArray());
+        ImmutableRoaringBitmap rrback1 = new ImmutableRoaringBitmap(bb);
+        assertTrue(rr1.equals(rrback1));
+        bb.position(bb.position() + rrback1.serializedSizeInBytes());
+        ImmutableRoaringBitmap rrback2 = new ImmutableRoaringBitmap(bb);
+        assertTrue(rr1.equals(rrback1));
+        assertTrue(rr2.equals(rrback2));
+        ImmutableRoaringBitmap rrback1c = rrback1.clone();
+        ImmutableRoaringBitmap rrback2c = rrback2.clone();
+        assertTrue(rr1.equals(rrback1c));
+        assertTrue(rr2.equals(rrback2c));
+        assertTrue(rrback1.equals(rrback1c));
+        assertTrue(rrback2.equals(rrback2c));
+        assertEquals(rr1.hashCode(), rrback1.hashCode());
+        assertEquals(rr1.hashCode(), rrback1c.hashCode());
+        assertEquals(rr2.hashCode(), rrback2.hashCode());
+        assertEquals(rr2.hashCode(), rrback2c.hashCode());
+
     }
 }
