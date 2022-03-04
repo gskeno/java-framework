@@ -103,7 +103,7 @@ public class DivideEquivalentSubSet {
     }
 
     private boolean subSet3(int[] nums, int target){
-        boolean dp[] = new boolean[target + 1];
+        Boolean dp[] = new Boolean[target + 1];
         dp[0] = true;
         for (int i = 1; i <= nums.length ; i++) {
             // 在优化空间效率后，代码中f(i,j)和f(i-1,j) 都保存在dp[j]中。
@@ -111,13 +111,18 @@ public class DivideEquivalentSubSet {
             // 这是因为当不选择下标为i-1的数字时，f(i,j)等于f(i-1,j)。而f(i,j)和f(i-1,j)都保存在
             // dp[j]中，写成代码就是dp[j] = dp[j], 这一行代码被省略了
             for (int j = target; j >=1; j--) {
-               if (!dp[j] && (j - nums[i-1]) >= 0){
+               if (( dp[j] == null || !dp[j]) && (j - nums[i-1]) >= 0){
                    dp[j] = dp[j - nums[i-1]];
-                   System.out.println("dp[" + j + "]=" + dp[j]);
+                   System.out.println("dp[" + j + "] used dp[" + (j - nums[i-1] ) + "] when i=" + i );
                }
             }
+
+            for (int j = 0; j < dp.length; j++) {
+                System.out.println("d[" + i + "," + j + "]=" + dp[j]);
+            }
+            System.out.println("-------");
         }
-        return dp[target];
+        return dp[target] != null && dp[target];
     }
 
     public static void main(String[] args) {
