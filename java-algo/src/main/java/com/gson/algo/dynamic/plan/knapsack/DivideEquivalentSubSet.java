@@ -22,7 +22,7 @@ public class DivideEquivalentSubSet {
      *  第i个物品选择，能否装满容量为j的背包，就依赖前(n-1)个物品能否达到容量j-nums[i-1]
      *  这两个选择，有一个结果为true,则f(i,j)==true。
      */
-    public boolean canPartition(int[] nums){
+    public boolean canPartition(int[] nums, int way){
         int sum = 0;
         for(int num : nums){
             sum += num;
@@ -32,7 +32,15 @@ public class DivideEquivalentSubSet {
             return false;
         }
 
-        return subSet(nums, sum /2);
+        if (way == 1){
+            return subSet(nums, sum /2);
+        }
+
+        if (way == 2){
+            return subSet2(nums, sum/2);
+        }
+
+        return subSet3(nums, sum/2);
     }
 
     private boolean subSet(int[] nums, int target){
@@ -49,6 +57,7 @@ public class DivideEquivalentSubSet {
           }else if ( i == 0){
               dp[i][j] = false;
           }else {
+              // 这里是自上而下的处理方式，层层迭进，取到最深处结果后，再徐徐返回
               // 第i个物品没有选择
               dp[i][j] = helper(nums, dp, i-1, j);
 
@@ -63,9 +72,64 @@ public class DivideEquivalentSubSet {
         return dp[i][j];
     }
 
+    /**
+     * 自底而上处理
+     * @param nums
+     * @param target
+     * @return
+     */
+    private boolean subSet2(int[] nums, int target){
+        // 默认值false
+        boolean[][] dp = new boolean[nums.length + 1] [target +1];
+        // 初始化f(i,0) = true
+        for (int i = 0; i < dp.length; i++) {
+            dp[i][0] = true;
+        }
+
+        for (int i = 1; i < dp.length; i++) {
+            for (int j = 1; j <= target ; j++) {
+                // 从左向右处理，从上往下处理
+                // 第i个元素不被选择(i从1开始算起)
+                dp[i][j] = dp[i-1][j];
+                // 第i个元素被选择
+                if (!dp[i][j] && (j - nums[i-1]) >= 0){
+                    dp[i][j] = dp[i-1][j- nums[i-1]];
+                }
+            }
+        }
+
+        return dp[nums.length][target];
+
+    }
+
+    private boolean subSet3(int[] nums, int target){
+        boolean dp[] = new boolean[target + 1];
+        dp[0] = true;
+        for (int i = 1; i <= nums.length ; i++) {
+            // 在优化空间效率后，代码中f(i,j)和f(i-1,j) 都保存在dp[j]中。
+            // 下方代码看起来只考虑了当选择下标为i-1时的数字时f(i,j)等于f(i-1, j-nums[i-1])时的场景。
+            // 这是因为当不选择下标为i-1的数字时，f(i,j)等于f(i-1,j)。而f(i,j)和f(i-1,j)都保存在
+            // dp[j]中，写成代码就是dp[j] = dp[j], 这一行代码被省略了
+            for (int j = target; j >=1; j--) {
+               if (!dp[j] && (j - nums[i-1]) >= 0){
+                   dp[j] = dp[j - nums[i-1]];
+                   System.out.println("dp[" + j + "]=" + dp[j]);
+               }
+            }
+        }
+        return dp[target];
+    }
+
     public static void main(String[] args) {
         DivideEquivalentSubSet divideEquivalentSubSet = new DivideEquivalentSubSet();
-        boolean b = divideEquivalentSubSet.canPartition(new int[]{3, 4, 1});
+        int[] nums = new int[]{3, 4, 1};
+        boolean b = divideEquivalentSubSet.canPartition(nums, 1);
         System.out.println(b);
+
+        boolean b1 = divideEquivalentSubSet.canPartition(nums, 2);
+        System.out.println(b1);
+
+        boolean b2 = divideEquivalentSubSet.canPartition(nums, 3);
+        System.out.println(b2);
     }
 }
