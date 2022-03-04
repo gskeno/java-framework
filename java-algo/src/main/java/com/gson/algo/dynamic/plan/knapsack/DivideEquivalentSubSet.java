@@ -39,10 +39,33 @@ public class DivideEquivalentSubSet {
         // dp存储f(i,j)的结果，由于i为nums元素的个数, j为target。
         // f(i,j)是dp二维数组的元素，要能装载到二维数组中, 所以定义数组大小时都需要+1
         Boolean[][] dp = new Boolean[nums.length + 1][ target + 1];
-        return false;
+        return helper(nums, dp, nums.length, target);
+    }
+
+    private boolean helper(int[] nums, Boolean[][] dp, int i, int j){
+        if (dp[i][j] == null){
+          if (j == 0){
+              dp[i][j] = true;
+          }else if ( i == 0){
+              dp[i][j] = false;
+          }else {
+              // 第i个物品没有选择
+              dp[i][j] = helper(nums, dp, i-1, j);
+
+              // 第i个物品不选择的话，无法填满容量为j的背包
+              // 则尝试选择第i个物品，前i-1个物品则需要能达到容量 j - nums[i-1], 这个容量值还要大于等于0
+              if (!dp[i][j] && (j - nums[i-1]) >= 0){
+                  dp[i][j] = helper(nums, dp, i-1, j - nums[i-1]);
+              }
+          }
+        }
+
+        return dp[i][j];
     }
 
     public static void main(String[] args) {
-
+        DivideEquivalentSubSet divideEquivalentSubSet = new DivideEquivalentSubSet();
+        boolean b = divideEquivalentSubSet.canPartition(new int[]{3, 4, 1});
+        System.out.println(b);
     }
 }
