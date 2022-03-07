@@ -17,7 +17,8 @@ public class FirstAppearingOnce {
     public void Insert(char ch) {
         //至出线一次，该位置为1；
         //出现n次，该位置为n
-        if (charCnt[ch]++ == 0) //新来的单身字符，入队
+        //新来的单身字符，入队
+        if (charCnt[ch]++ == 0)
         {
             queue.add(ch);
         }
