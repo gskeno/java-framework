@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 public class QuickSort2 {
     /**
+     * 从A[mid] = a左边找一个比a大的，从A[mid]右边找一个比a小的，两者交换位置。继续再找
+     *
+     * 当两者的寻找指针交错后，停止，构建两个局部数组，再重复此过程
      * 快速排序， 递归  分治思想  由上到下
      * @param A
      * @param start
