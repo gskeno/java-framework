@@ -119,4 +119,13 @@ public class MathTest {
         Float f = 1.0f;
         System.out.println(Float.toHexString(f));
     }
+
+    @Test
+    public void testPriority(){
+        /**
+         * 乘法优先级高于取模优先级
+         */
+        int m = 3*7%4;
+        System.out.println(m);
+    }
 }
