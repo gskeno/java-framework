@@ -114,8 +114,9 @@ public class LongestRepeateSubStr {
 //        System.out.println(result);
         int mod1 = new Random().nextInt(Integer.MAX_VALUE - 1000000007 + 1) + 1000000007;
 
-        long pow = longestRepeateSubStr.pow(26, 3, mod1);
-        System.out.println(pow);
+        long pow = 0;
+//        pow = longestRepeateSubStr.pow(26, 3, mod1);
+//        System.out.println(pow);
         pow = longestRepeateSubStr.pow(3,5, mod1);
         System.out.println(pow);
     }
