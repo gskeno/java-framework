@@ -128,4 +128,13 @@ public class MathTest {
         int m = 3*7%4;
         System.out.println(m);
     }
+
+    @Test
+    public void testLongMultiply(){
+        long a = Long.MAX_VALUE;
+        long b = Long.MAX_VALUE;
+
+        long c = a * b;
+        System.out.println(c);
+    }
 }
