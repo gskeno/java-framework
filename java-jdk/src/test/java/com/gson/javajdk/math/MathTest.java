@@ -131,10 +131,19 @@ public class MathTest {
 
     @Test
     public void testLongMultiply(){
-        long a = Long.MAX_VALUE;
-        long b = Long.MAX_VALUE;
+        long a = Long.MAX_VALUE/2;
+        long b = Long.MAX_VALUE/2;
 
-        long c = a * b;
+        long c = a * b/10000001L;
+        System.out.println(c);
+    }
+
+    @Test
+    public void testShortMultiply(){
+        int a = Integer.MAX_VALUE-1;
+        int b = Integer.MAX_VALUE-4;
+
+        int c = a * b;
         System.out.println(c);
     }
 }
