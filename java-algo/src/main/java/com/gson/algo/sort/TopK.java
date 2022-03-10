@@ -1,6 +1,5 @@
 package com.gson.algo.sort;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class TopK {
@@ -20,19 +19,21 @@ public class TopK {
     }
 
     /**
+     *
+     * @param nums
+     * @param start 包含该值
+     * @param end   包含该值
+     * @return index
      * 对nums数组进行分区，假设返回值为index,则分区后,
      * 下标小于index的元素都比nums[index]小
      * 下标大于index的元素都比nums[index]大
-     * @param nums
-     * @param start
-     * @param end
-     * @return
      */
     private int partition(int[] nums, int start, int end){
         // 挑选的随机数下标位置为 start 到 end
         int randomIndex = new Random().nextInt(end - start + 1) + start;
 
         // 将选中的随机数与数组的最后一个元素互调位置
+        // 假设原始数组为 [4,1,5,3,6,2,7,8]，随机数randomIndex = 3
         // 调动后，数组变为 [4,1,5,8,6,2,7,3]
         swap(nums, randomIndex, end);
 
@@ -49,7 +50,8 @@ public class TopK {
         }
         // ++ 后, slowPointer指向已经遍历的数组元素中第一个大于nums[end]的数
         slowPointer++;
-        // swap后, nums[slowPointer]左边的数都小于当前值，右边的数都大于当前值
+        // swap后, nums[slowPointer]左边的数都小于当前值nums[slowPointer]，
+        // nums[slowPointer]右边的数都大于当前值nums[slowPointer]
         swap(nums, slowPointer, quickPointer);
 
         return slowPointer;
