@@ -1,30 +1,22 @@
 package com.gson.algo.tree;
 
+import com.gson.algo.TreeNode;
+
 /**
  * https://www.nowcoder.com/practice/cf7e25aa97c04cc1a68c8f040e71fb84?tpId=13&tqId=11214&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
  * 反序列化二叉树
  */
 public class SerializeAndDeserialize {
-
-
-    public static class TreeNode {
-        int val = 0;
-        TreeNode left = null;
-        TreeNode right = null;
-
-        public TreeNode(int val) {
-            this.val = val;
-
-        }
-
-    }
-
-
-    String Serialize(TreeNode root) {
-        if (root == null) {
+    /**
+     * 使用前序遍历进行序列化(递归)
+     * @param node
+     * @return
+     */
+    String Serialize(TreeNode node) {
+        if (node == null) {
             return "#";
         } else {
-            return root.val + "," + Serialize(root.left) + "," + Serialize(root.right);
+            return node.val + "," + Serialize(node.left) + "," + Serialize(node.right);
         }
     }
 
@@ -35,18 +27,23 @@ public class SerializeAndDeserialize {
      */
     int index = -1;
     TreeNode Deserialize(String str) {
-        String[] s = str.split(",");//将序列化之后的序列用，分隔符转化为数组
-        index++;//索引每次加一
+        //将序列化之后的序列用，分隔符转化为数组
+        String[] s = str.split(",");
+        //索引每次加一
+        index++;
         int len = s.length;
         if (index > len) {
             return null;
         }
-        TreeNode treeNode = null;
-        if (!s[index].equals("#")) {//不是叶子节点 继续走 是叶子节点出递归
-            treeNode = new TreeNode(Integer.parseInt(s[index]));
-            treeNode.left = Deserialize(str);
-            treeNode.right = Deserialize(str);
+        // 空节点则直接返回null,
+        if (s[index].equals("#")){
+            return null;
         }
+        //不是叶子节点 继续走。递归
+        TreeNode  treeNode = new TreeNode(Integer.parseInt(s[index]));
+        treeNode.left = Deserialize(str);
+        treeNode.right = Deserialize(str);
+
         return treeNode;
     }
 
