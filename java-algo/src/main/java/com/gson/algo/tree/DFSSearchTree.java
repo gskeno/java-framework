@@ -38,6 +38,7 @@ public class DFSSearchTree {
     }
 
     /**
+     * todo 烂熟于心
      * 前序遍历使用栈
      * @param node
      * @return
@@ -160,7 +161,7 @@ public class DFSSearchTree {
             }
             // 此时, cur为空, stack里栈顶元素是相对很靠下的节点了，且栈顶元素没有左孩子
             TreeNode peek = stack.peek();
-            // peek的右子树还没处理，要干它
+            // peek的右子树存在且还没处理， 要干它
             if (peek.right != null && peek.right != pre){
                 cur = peek.right;
             }
@@ -168,10 +169,10 @@ public class DFSSearchTree {
             // 即peek.right == null || peek.right == pre
             else {
                // 记住这里要弹出栈
-               stack.pop();
-               result.add(peek.val);
-               pre = peek;
-               cur = null;
+                TreeNode pop = stack.pop();
+                result.add(pop.val);
+                pre = pop;
+                cur = null;
             }
         }
 
