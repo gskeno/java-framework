@@ -1,5 +1,7 @@
 package com.gson.algo.tree;
 
+import com.gson.algo.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,17 +79,6 @@ public class IsSymmetrical {
         //left的左孩子 == right的右孩子 且
         //left的右孩子 == right的左孩子，则对称
         return isSame(left.left, right.right) && isSame(left.right, right.left);
-    }
-
-    public static class TreeNode {
-        int val = 0;
-        TreeNode left = null;
-        TreeNode right = null;
-
-        public TreeNode(int val) {
-            this.val = val;
-
-        }
     }
 
     public static void main(String[] args) {

@@ -1,5 +1,7 @@
 package com.gson.algo.tree;
 
+import com.gson.algo.TreeNode;
+
 import java.util.Arrays;
 
 /**
@@ -22,15 +24,6 @@ import java.util.Arrays;
  * 对子树分别使用同样的方法分解
  */
 public class ReConstructBinaryTree {
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 
 
     /**
@@ -44,7 +37,7 @@ public class ReConstructBinaryTree {
      * 定义reConstructBinaryTree函数的返回值为
      * 前序遍历结果数组pre和中序遍历结果数组in所能描述的树的跟结点
      */
-    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+    public TreeNode reConstructBinaryTree(int [] pre, int [] in) {
         if (pre.length == 0 || in.length == 0){
             return null;
         }

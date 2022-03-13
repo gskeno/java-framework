@@ -1,19 +1,19 @@
 package com.gson.algo.tree;
 
+import com.gson.algo.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class SearchTreeTest {
     @Test
     public void test1(){
-        SearchTree searchTree = new SearchTree();
-        SearchTree.TreeNode treeNode5 = new SearchTree.TreeNode(5);
-        SearchTree.TreeNode treeNode3 = new SearchTree.TreeNode(3);
-        SearchTree.TreeNode treeNode7 = new SearchTree.TreeNode(7);
-        SearchTree.TreeNode treeNode2 = new SearchTree.TreeNode(2);
-        SearchTree.TreeNode treeNode4 = new SearchTree.TreeNode(4);
-        SearchTree.TreeNode treeNode6 = new SearchTree.TreeNode(6);
-        SearchTree.TreeNode treeNode8 = new SearchTree.TreeNode(8);
+        TreeNode treeNode5 = new TreeNode(5);
+        TreeNode treeNode3 = new TreeNode(3);
+        TreeNode treeNode7 = new TreeNode(7);
+        TreeNode treeNode2 = new TreeNode(2);
+        TreeNode treeNode4 = new TreeNode(4);
+        TreeNode treeNode6 = new TreeNode(6);
+        TreeNode treeNode8 = new TreeNode(8);
 
         treeNode5.left = treeNode3;
         treeNode5.right = treeNode7;
@@ -24,8 +24,8 @@ public class SearchTreeTest {
 //             5
 //        3         7
 //    2      4   6      8
-
-        SearchTree.TreeNode treeNode = searchTree.kthNode(treeNode5, 3);
+        SearchTree searchTree = new SearchTree();
+        TreeNode treeNode = searchTree.kthNode(treeNode5, 3);
         System.out.println(treeNode.val);
 
         treeNode = searchTree.kthNode(treeNode5, 8);
@@ -35,9 +35,9 @@ public class SearchTreeTest {
     @Test
     public void test2(){
         SearchTree searchTree = new SearchTree();
-        SearchTree.TreeNode treeNode5 = new SearchTree.TreeNode(5);
+        TreeNode treeNode5 = new TreeNode(5);
 
-        SearchTree.TreeNode treeNode = searchTree.kthNode(treeNode5, 1);
+        TreeNode treeNode = searchTree.kthNode(treeNode5, 1);
         System.out.println(treeNode.val);
         Assert.assertEquals(treeNode.val,  5);
     }

@@ -1,5 +1,7 @@
 package com.gson.algo.tree;
 
+import com.gson.algo.TreeNode;
+
 /**
  * https://www.nowcoder.com/practice/a9d0ecbacef9410ca97463e4a5c83be7?tpId=13&tqId=11171&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
  *
@@ -20,16 +22,6 @@ package com.gson.algo.tree;
  */
 public class MirrorTree {
 
-
-    public class TreeNode {
-        int val = 0;
-        TreeNode left = null;
-        TreeNode right = null;
-
-        public TreeNode(int val) {
-            this.val = val;
-        }
-    }
 
     public TreeNode Mirror (TreeNode pRoot) {
         swap(pRoot);

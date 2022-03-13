@@ -1,5 +1,7 @@
 package com.gson.algo.tree;
 
+import com.gson.algo.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,18 +9,6 @@ import java.util.List;
  * 从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。
  */
 public class LevelPrint {
-
-    public static class TreeNode {
-        int val = 0;
-        TreeNode left = null;
-        TreeNode right = null;
-
-        public TreeNode(int val) {
-            this.val = val;
-
-        }
-
-    }
 
     ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
         ArrayList<TreeNode> levelParent = new ArrayList<>();

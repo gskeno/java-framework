@@ -1,21 +1,13 @@
 package com.gson.algo.tree;
 
+import com.gson.algo.TreeNode;
+
 /**
  * 给定一棵二叉搜索树，请找出其中的第k小的TreeNode结点。
  *
  * 核心思想:树的中序遍历
  */
 public class SearchTree {
-    public static class TreeNode {
-        int val = 0;
-        TreeNode left = null;
-        TreeNode right = null;
-
-        public TreeNode(int val) {
-            this.val = val;
-
-        }
-    }
 
     private int index = 0;
     private TreeNode[] nodes;

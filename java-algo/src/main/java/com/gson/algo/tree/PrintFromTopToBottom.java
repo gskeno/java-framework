@@ -1,14 +1,13 @@
 package com.gson.algo.tree;
 
+import com.gson.algo.TreeNode;
+
 import java.util.ArrayList;
 
 /**
  * 从上到下打印二叉树
  * https://www.nowcoder.com/practice/7fe2212963db4790b57431d9ed259701?tpId=13&tqId=11175&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
  */
-
-
-
 
 public class PrintFromTopToBottom {
     public ArrayList<Integer> PrintFromTopToBottom(TreeNode root) {
@@ -61,17 +60,6 @@ public class PrintFromTopToBottom {
             list.add(temp.val);
         }
         return list;
-    }
-
-    public static class TreeNode {
-        int val = 0;
-        TreeNode left = null;
-        TreeNode right = null;
-
-        public TreeNode(int val) {
-            this.val = val;
-
-        }
     }
 
     public static void main(String[] args) {
