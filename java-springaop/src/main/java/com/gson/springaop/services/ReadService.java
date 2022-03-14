@@ -11,7 +11,8 @@ public class ReadService {
 
     public String read(String message){
         writeService.write("xiix");
-        return message + "_read";
+        throw new RuntimeException("write 后出现了 异常");
+        //return message + "_read";
     }
 
     public String read1(){

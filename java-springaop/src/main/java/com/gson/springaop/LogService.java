@@ -9,6 +9,7 @@ public class LogService {
         // 配合expose-proxy=true和AopContext.currentProxy()才能使方法
         // 内部自我调用增强
         String b = ((LogService) AopContext.currentProxy()).getB();
+        // String b = getB();
         return "a" + b;
     }
 
