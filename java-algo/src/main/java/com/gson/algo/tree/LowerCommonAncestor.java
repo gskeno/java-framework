@@ -31,10 +31,21 @@ public class LowerCommonAncestor {
      * 如果o1,o2分别在其右子树，则返回node.right, 表示node.right可能为其最近的公共祖先，继续递归
      *
      * 前序遍历
+     *
+     * <br>
+     * 另一种理解, 关键在于找到节点node下，节点o1，o2 最近公共祖先节点B的特征，且B与node的关系，方法返回值就是B
+     *
+     * 1. 如果node就等于o1,则o2就在node(o1)的左子树或者右子树中, node就是o1,o2的最近公共祖先，直接返回，结束递归。
+     *    node等于o2时也同理。
+     * 2. 如果node既不等于o1, 也不等于o2。则o1,o2在node1的左右子树中，至于怎么分布的，不清楚，需要分别对node的左右
+     *    子树进行递归分析。
+     *
+     *
+     *
      */
     private TreeNode helper(TreeNode node, int o1, int o2){
         if (node == null){
-            return null;
+            return node;
         }
         if (node.val == o1){
             return node;
@@ -46,19 +57,18 @@ public class LowerCommonAncestor {
         TreeNode left = helper(node.left, o1, o2);
         TreeNode right = helper(node.right, o1, o2);
 
-        // 说明node的左子树遍历完也找不到一个节点等于o1或者o2
-        // 说明o1,o2都在node的右子节点中
+        // 左子树中o1, o2 都没有遍历到，则o1,o2都在右子树中，右子树中先遍历到的o1(或者o2)就是o1,o2的最近祖先
         if (left == null){
             return right;
         }
 
-        // 说明o1,o2都在node的左子节点中
+        // 右子树中o1,o2都没有遍历到，则o1,o2都在左子树中，左子树中最先遍历到的o1(o2)就是o1,o2的最近祖先
         if (right == null){
             return left;
         }
 
         //如果left和right都不为空，说明这两个节点一个在node的左子树上一个在node的右子树上，
-        //我们只需要返回cur结点即可。
+        //当前节点就是o1,o2的最近祖先
         return node;
     }
 
