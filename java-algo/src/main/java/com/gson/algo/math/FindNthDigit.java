@@ -21,7 +21,7 @@ public class FindNthDigit {
         int needDigit = 1;
         long baseSegmentLen = 0;
         while (true){
-            long numsCount = needDigit == 1? 10: (int)Math.pow(10, needDigit-1) * 9 * needDigit;
+            long numsCount = needDigit == 1? 10: (long)Math.pow(10, needDigit-1) * 9 * needDigit;
             if (baseSegmentLen + numsCount >= n){
                 break;
             }
@@ -33,7 +33,7 @@ public class FindNthDigit {
         // 1位数字的最小数字是0
         // 2位数字的最小数字是10
         // 3位数字的最小数字是100
-        int firstNum = needDigit == 1 ? 0 : (int)Math.pow(10, (needDigit-1));
+        long firstNum = needDigit == 1 ? 0 : (long)Math.pow(10, (needDigit-1));
 
         int m = (int)(n - baseSegmentLen);
         int p = m/needDigit;
@@ -67,6 +67,9 @@ public class FindNthDigit {
 //        System.out.println(findNthDigit.findNthDigit2(191));
 //        System.out.println(findNthDigit.findNthDigit2(192));
 //        System.out.println(findNthDigit.findNthDigit2(193));
-        System.out.println(findNthDigit.findNthDigit2(1000000000));
+//        for (int i = 0; i < 30; i++) {
+//            int  n = 1000000000 + i;
+//            System.out.println(n + "-->" + findNthDigit.findNthDigit2(1000000000 + i));
+//        }
     }
 }
