@@ -36,6 +36,7 @@ public class MaxSumSubArrayMaxLen {
         // 说明，如果dp[i-1]<0,表示array[i]之前连续子数组最大和小于0，那么到array[i]为止的连续子数组最大和就是只选择array[i]即可
         // 如果dp[i-1]>=0,表示array[i]之前连续子数组最大和不小于0，那么到array[i]为止的连续子数组最大和就是dp[i-1]+array[i]
         int[] dp = new int[array.length];
+        dp[0] = array[0];
         for (int i = 1; i < array.length; i++) {
             right++;
             dp[i] = Math.max(dp[i-1] + array[i], array[i]);
@@ -56,12 +57,13 @@ public class MaxSumSubArrayMaxLen {
         for (int i = leftSnapshot; i <= rightSnapshot; i++) {
             res[index++] = array[i];
         }
-
         return res;
     }
 
     public static void main(String[] args) {
-        int[] ints = new MaxSumSubArrayMaxLen().maxSumSubArrayMaxLen(new int[]{1, -2, 3, 10, -4, 7, 2, -5});
+        // int[] ori = new int[]{1, -2, 3, 10, -4, 7, 2, -5};
+        int[] ori = new int[]{-1,1,2,1};
+        int[] ints = new MaxSumSubArrayMaxLen().maxSumSubArrayMaxLen(ori);
         System.out.println(Arrays.toString(ints));
     }
 }
