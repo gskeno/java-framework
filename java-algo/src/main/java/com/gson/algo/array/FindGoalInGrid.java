@@ -44,20 +44,17 @@ public class FindGoalInGrid {
      *     0  1   2
      *     1  2   3
      *     2  3   4
-     * @param grid   是一个长宽
+     * @param grid   是一个长宽相等的二维数组，至少1行1列
+     *               注意到存在规律
+     *               array[n][n] n行n列的二维数组最大值在array[n-1][n-1],即在二维数组的右下角
      * @return
      */
     public boolean find3(int target, int[][] grid) {
         int beginIndex = 0;
         int endIndex = grid.length - 1;
-        if (grid[endIndex][endIndex] < target){
-            return false;
-        }
-        if (grid[0][0] > target ){
-            return false;
-        }
 
-        while (beginIndex + 1< endIndex) {
+        // 因为（endIndex - beginIndex）<= 1时，二分不了了,就结束
+        while (endIndex - beginIndex > 1 ) {
             int midIndex = (beginIndex + endIndex) / 2;
             if (grid[midIndex][midIndex] == target){
                 return true;
