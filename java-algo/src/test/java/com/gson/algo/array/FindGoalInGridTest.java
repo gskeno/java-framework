@@ -34,7 +34,7 @@ public class FindGoalInGridTest {
     public void test(){
         int target = 107;
         FindGoalInGrid findGoalInGrid = new FindGoalInGrid();
-        boolean result = findGoalInGrid.find3(target, grid);
+        boolean result = findGoalInGrid.find(target, grid);
         System.out.println(result);
     }
 }
