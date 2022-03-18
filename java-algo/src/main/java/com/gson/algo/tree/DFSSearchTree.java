@@ -103,6 +103,7 @@ public class DFSSearchTree {
         // 对右孩子进行上述同样的处理
         while (curNode != null || !stack.isEmpty()){
             while (curNode != null){
+                // 压栈的时机
                 stack.push(curNode);
                 curNode = curNode.left;
             }
