@@ -26,6 +26,9 @@ public class SearchTreePostOrderSequence {
      * @return
      */
     public boolean VerifySquenceOfBST2(int [] sequence) {
+        if (sequence.length == 0){
+            return false;
+        }
         int[] preOrders = Arrays.copyOf(sequence, sequence.length);
         Arrays.sort(preOrders);
         // 以中序结果入栈，以后序结果出栈，如果能走到中序遍历数组的末尾和后序遍历数组的末尾，就满足题目要求
@@ -35,14 +38,20 @@ public class SearchTreePostOrderSequence {
             stack.push(preOrders[i]);
 
             // 后序数组当前元素要出栈
-            while (stack.peek() == sequence[j]){
+            while (!stack.isEmpty()  && stack.peek() == sequence[j]){
                 stack.pop();
                 j++;
             }
         }
-        if (j == sequence.length-1){
+        if (j == sequence.length){
             return true;
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        SearchTreePostOrderSequence searchTreePostOrderSequence = new SearchTreePostOrderSequence();
+        boolean b = searchTreePostOrderSequence.VerifySquenceOfBST2(new int[]{1, 3, 2});
+        System.out.println(b);
     }
 }
