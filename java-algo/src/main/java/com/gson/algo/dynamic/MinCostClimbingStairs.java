@@ -1,4 +1,4 @@
-package com.gson.algo.dynamic.plan;
+package com.gson.algo.dynamic;
 
 /**
  * 一个数组cost的所有数字都是正数，

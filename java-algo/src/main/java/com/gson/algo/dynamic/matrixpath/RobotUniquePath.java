@@ -1,4 +1,4 @@
-package com.gson.algo.dynamic.plan.matrixpath;
+package com.gson.algo.dynamic.matrixpath;
 
 /**
  * 机器人行走路径，机器从一个m*n的方格的左上顶点走到右下顶点，

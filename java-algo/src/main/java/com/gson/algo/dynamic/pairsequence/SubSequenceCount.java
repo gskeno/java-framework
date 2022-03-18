@@ -1,4 +1,4 @@
-package com.gson.algo.dynamic.plan.pairsequence;
+package com.gson.algo.dynamic.pairsequence;
 
 /**
  * 子序列数目

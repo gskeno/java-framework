@@ -1,4 +1,4 @@
-package com.gson.algo.dynamic.plan;
+package com.gson.algo.dynamic;
 
 /**
  * <p>https://www.nowcoder.com/practice/459bd355da1549fa8a49e350bf3df484?tpId=13&tqId=11183&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey</p>

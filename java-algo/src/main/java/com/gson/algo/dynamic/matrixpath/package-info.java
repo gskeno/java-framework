@@ -8,5 +8,5 @@
  * </ul>
  *
  */
-package com.gson.algo.dynamic.plan.matrixpath;
+package com.gson.algo.dynamic.matrixpath;
 

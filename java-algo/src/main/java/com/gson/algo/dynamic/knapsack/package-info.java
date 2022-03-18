@@ -1,4 +1,4 @@
-package com.gson.algo.dynamic.plan.knapsack;
+package com.gson.algo.dynamic.knapsack;
 
 /**
  * 背包问题

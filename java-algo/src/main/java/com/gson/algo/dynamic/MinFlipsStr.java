@@ -1,4 +1,4 @@
-package com.gson.algo.dynamic.plan;
+package com.gson.algo.dynamic;
 
 /**
  * 翻转字符串

@@ -1,9 +1,7 @@
 package com.gson.algo.danamic.plan;
 
-import com.gson.algo.dynamic.plan.MaxSumSubArray;
+import com.gson.algo.dynamic.MaxSumSubArray;
 import org.junit.Test;
-
-import java.util.Arrays;
 
 public class MaxSumSubArrayTest {
     @Test

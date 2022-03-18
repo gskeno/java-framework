@@ -1,4 +1,4 @@
-package com.gson.algo.dynamic.plan.knapsack;
+package com.gson.algo.dynamic.knapsack;
 
 /**
  * 给定一个非空的正整数数组nums和一个目标值t，
