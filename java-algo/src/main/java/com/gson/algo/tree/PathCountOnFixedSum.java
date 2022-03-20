@@ -4,7 +4,7 @@ import com.gson.algo.TreeNode;
 
 /**
  * https://www.nowcoder.com/practice/965fef32cae14a17a8e86c76ffe3131f
- * 二叉树中和为某一值的路径(三)
+ * 二叉树中和为某一值的路径条数(三)
  *
  * 给定一个二叉树root和一个整数值 sum ，求该树有多少路径的的节点值之和等于 sum 。
  * 1.该题路径定义不需要从根节点开始，也不需要在叶子节点结束，但是一定是从父亲节点往下到孩子节点
