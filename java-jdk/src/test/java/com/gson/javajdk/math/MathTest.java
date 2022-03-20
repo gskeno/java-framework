@@ -146,4 +146,15 @@ public class MathTest {
         int c = a * b;
         System.out.println(c);
     }
+
+    @Test
+    public void testInt(){
+        int minValue = Integer.MIN_VALUE;
+        System.out.println(minValue);
+
+        int n = (Integer.MIN_VALUE - (0-8))/10;
+        System.out.println(n);
+        n = (Integer.MIN_VALUE - (0-9))/10;
+        System.out.println(n);
+    }
 }
