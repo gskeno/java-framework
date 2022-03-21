@@ -39,4 +39,15 @@ public class RegexTest {
             System.out.println("no match!!");
         }
     }
+
+    /**
+     * .*测试
+     */
+    @Test
+    public void testDotAsterisk(){
+        String regex = ".*";
+        String m = "ahdoahdi";
+        boolean matches = m.matches(regex);
+        System.out.println(matches);
+    }
 }
