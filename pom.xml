@@ -34,6 +34,7 @@
         <module>java-lucene</module>
         <module>java-roaring-bitmap</module>
         <module>java-diagram</module>
+        <module>java-interview</module>
     </modules>
 
     <name>java-framework</name>
