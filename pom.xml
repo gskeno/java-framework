@@ -36,6 +36,10 @@
         <module>java-diagram</module>
         <module>java-interview</module>
         <module>java-thread</module>
+        <module>java-spi-apple-interface</module>
+        <module>java-spi-apple-juice</module>
+        <module>java-spi-apple-sauce</module>
+        <module>java-spi-apple-test</module>
     </modules>
 
     <name>java-framework</name>
