@@ -9,6 +9,21 @@ import com.gson.algo.ListNode;
  *  https://blog.csdn.net/FaustoPatton/article/details/82993032
  */
 public class SwapNodesInPairs {
+
+    static ListNode swapPairs(ListNode head){
+        ListNode list1=new ListNode(0);
+        list1.next=head;
+        ListNode list2=list1;
+        while(head!=null&&head.next!=null){
+            list2.next=head.next;
+            head.next=list2.next.next;
+            list2.next.next=head;
+            list2=list2.next.next;
+            head=list2.next;
+        }
+        return list1.next;
+    }
+
     public static ListNode swapPairs1(ListNode head){
         //构造一个哑结点
         ListNode dummy = new ListNode(-1);
