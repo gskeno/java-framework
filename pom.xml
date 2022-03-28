@@ -35,6 +35,7 @@
         <module>java-roaring-bitmap</module>
         <module>java-diagram</module>
         <module>java-interview</module>
+        <module>java-thread</module>
     </modules>
 
     <name>java-framework</name>
