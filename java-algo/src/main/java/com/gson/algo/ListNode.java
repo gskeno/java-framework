@@ -1,9 +1,9 @@
 package com.gson.algo;
 
 public class ListNode {
-    private ListNode next;
+    public ListNode next;
 
-    private int value;
+    public int value;
 
 
     public ListNode(int value) {

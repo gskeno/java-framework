@@ -1,25 +1,11 @@
 package com.gson.algo.linklist;
 
+import com.gson.algo.ListNode;
+
 /**
  * 链表反转
  */
 public class ReverseList {
-
-    static class ListNode{
-        Integer value;
-        ListNode next;
-
-        public ListNode(Integer value){
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            return "ListNode{" +
-                    "value=" + value +
-                    '}';
-        }
-    }
 
     public static ListNode reverseList(ListNode head) {
         if(head == null){
