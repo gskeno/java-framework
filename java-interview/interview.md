@@ -168,6 +168,9 @@
 - [二叉搜索树-日历排期-TreeMap](https://github.com/gsonkeno/java-framework/blob/master/java-algo/src/main/java/com/gson/algo/tree/MyCalendar.java)
 - [二叉搜索树-递归-利用二叉搜索树性质](https://github.com/gsonkeno/java-framework/blob/master/java-algo/src/main/java/com/gson/algo/tree/LowerCommonAncestorSearchTree.java)
 
+## 存储
+- [什么是列式存储](https://juejin.cn/post/6844904118872440840)
+- [为什么 OLAP 需要列式存储](https://draveness.me/whys-the-design-olap-column-oriented/)
 ## 其他(博主站点+github)
 - [jdon](https://www.jdon.com/)
 - [crossoverjie blog](https://crossoverjie.top/)
@@ -181,7 +184,7 @@
 - [Edison Zhou](https://www.cnblogs.com/edisonchou/)
 - [纸上得来终觉浅](https://www.cnblogs.com/binyue)
 - [未读代码](https://www.wdbyte.com/)
-
+- [为什么这么设计](https://draveness.me/)
 ## 优秀项目
 - [guava](https://github.com/google/guava/wiki/FunctionalExplained)
 - [RoaringBitmap](https://github.com/RoaringBitmap/RoaringBitmap)
