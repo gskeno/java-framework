@@ -12,6 +12,7 @@ public class ClassLoaderTest {
      * {@link ClassLoader#parent}
      * {@link ClassLoader#loadClass(String)}
      * {@link java.sql.DriverManager#getConnection(String)}
+     * {@link ClassLoader#getSystemClassLoader()}
      * @param args
      */
     public static void main(String[] args) {
@@ -33,6 +34,8 @@ public class ClassLoaderTest {
 
         Launcher launcher = new Launcher();
         System.out.println("Launcher实例的类加载器是" + launcher.getClassLoader());
+
+        System.out.println("ClassLoader.getSystemClassLoader " + ClassLoader.getSystemClassLoader());
     }
 
     /**
