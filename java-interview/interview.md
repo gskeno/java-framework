@@ -1,5 +1,5 @@
-## 1 java基础
-### 1.1 基础知识
+## java基础
+### 基础知识
 - [HashCode的作用](https://www.cnblogs.com/xrq730/p/4842028.html)
 - [java foreach的原理](https://blog.csdn.net/wangjun5159/article/details/61415263)
 - [java枚举类型的实现原理](https://blog.csdn.net/mhmyqn/article/details/48087247)
@@ -9,22 +9,22 @@
 - [图解排序算法(四)之归并排序](https://www.cnblogs.com/chengxiao/p/6194356.html)
 - [如何计算Java对象所占内存的大小](https://segmentfault.com/a/1190000015009289)
 
-### 1.2 多线程
+### 多线程
 - [线程池之ThreadPoolExecutor使用](https://www.jianshu.com/p/f030aa5d7a28)
 - [如何让一段程序并发的执行，并最终汇总结果](https://blog.csdn.net/qq_34039315/article/details/78542498)
 
-### 1.3集合
+### 集合
 - [ArrayList中elementData为什么被transient修饰？](https://blog.csdn.net/zero__007/article/details/52166306)
 - [优先队列底层数据结构](https://www.cnblogs.com/Elliott-Su-Faith-change-our-life/p/7472265.html)
 - [hashmap位操作的秘密](https://blog.csdn.net/qq_42034205/article/details/90384772)
 
-### 1.4 网络编程
+### 网络编程
 - [Java NIO1：I/O模型概述](https://www.cnblogs.com/xrq730/p/5074199.html)
 - [Linux下五种I/O模型详解（阻塞IO、非阻塞IO、IO复用、信号驱动、异步IO）](https://blog.csdn.net/gui951753/article/details/82348485)
 - [Linux IO模式及 select、poll、epoll详解](https://segmentfault.com/a/1190000003063859)
 - [java网络编程之传统IO与伪异步IO（一）](https://blog.csdn.net/qq_33524158/article/details/78605725)
 
-### 1.5 性能优化
+### 性能优化
 - [尽量指定类、方法的final修饰符](https://www.cnblogs.com/xrq730/p/4865416.html)
 
 ### NIO
@@ -40,6 +40,7 @@
 - [Java中的注解(Annotation)处理器解析](https://blog.csdn.net/yang_yang1994/article/details/79729621)
 - [Java SPI机制 - ServiceLoader](https://zhuanlan.zhihu.com/p/67665359)
 - [Java虚拟机类加载器及双亲委派机制](https://www.cnblogs.com/secbro/p/11759046.html)
+- [面试官，不要再问我“Java虚拟机类加载机制”了](http://www.choupangxia.com/2019/10/27/interview-jvm-load-01/)
 
 ##  mysql
 - [联合索引底层存储结构](https://blog.csdn.net/u010922732/article/details/82992920)

@@ -1,10 +1,19 @@
 package com.gson.javajdk.clazzloader;
 
+import org.junit.Test;
 import sun.misc.Launcher;
 import sun.net.spi.nameservice.dns.DNSNameService;
 
 public class ClassLoaderTest {
 
+    /**
+     * 几个重要的源码
+     * {@link Launcher#Launcher()}
+     * {@link ClassLoader#parent}
+     * {@link ClassLoader#loadClass(String)}
+     * {@link java.sql.DriverManager#getConnection(String)}
+     * @param args
+     */
     public static void main(String[] args) {
         // 应用类 加载器
         System.out.println(ClassLoaderTest.class.getClassLoader());
@@ -24,6 +33,21 @@ public class ClassLoaderTest {
 
         Launcher launcher = new Launcher();
         System.out.println("Launcher实例的类加载器是" + launcher.getClassLoader());
+    }
 
+    /**
+     * 类加载器只会加载直接定义静态字段的类，注意"直接"两字
+     */
+    @Test
+    public void test1(){
+        System.out.println(SubClass.ABC);
+    }
+
+    @Test
+    public void test2(){
+        // 只会输出abc
+        // 常量在编译阶段会存入调用类的常量池中，也就是说Main类对SubClass1.ABC的引用
+        // 已经与SuperClass1无关了，实际上已经转行为Main类对ABC字符串的引用了
+        System.out.println(SubClass1.ABC);
     }
 }
