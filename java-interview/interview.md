@@ -110,6 +110,8 @@
 - [redis: 详解三种集群策略](https://blog.csdn.net/q649381130/article/details/79931791)
 - [redis单点、redis主从、redis哨兵sentinel，redis集群cluster配置搭建与使用](https://www.cnblogs.com/demingblog/p/10295236.html)
 - [一、Redis基本操作——String(原理篇)](https://www.cnblogs.com/idiotgroup/p/5450157.html)
+- [redisfans网址](http://doc.redisfans.com/index.html)
+- [redis中文网](http://www.redis.cn/)
 
 ### zookeeper
 - [基于zookeeper的分布式锁](https://blog.csdn.net/qiangcuo6087/article/details/79067136)
