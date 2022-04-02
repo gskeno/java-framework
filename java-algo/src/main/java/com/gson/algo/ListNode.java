@@ -1,9 +1,14 @@
 package com.gson.algo;
 
-public class ListNode {
+public final class ListNode {
     public ListNode next;
 
     public int value;
+
+    public ListNode(int value, ListNode next){
+        this.value = value;
+        this.next = next;
+    }
 
 
     public ListNode(int value) {

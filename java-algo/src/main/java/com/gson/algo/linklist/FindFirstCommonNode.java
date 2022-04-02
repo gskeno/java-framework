@@ -1,18 +1,11 @@
 package com.gson.algo.linklist;
 
+import com.gson.algo.ListNode;
+
 /**
  * https://www.nowcoder.com/practice/6ab1d9a29e88450685099d45c9e31e46?tpId=13&tqId=11189&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
  */
 public class FindFirstCommonNode {
-
-    public static class ListNode {
-        int val;
-        ListNode next = null;
-
-        ListNode(int val) {
-            this.val = val;
-        }
-    }
 
     public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
         int len1 = findListLenth(pHead1);

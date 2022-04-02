@@ -1,19 +1,12 @@
 package com.gson.algo.linklist.circle;
 
+import com.gson.algo.ListNode;
+
 /**
  * https://www.nowcoder.com/practice/253d2c59ec3e4bc68da16833f79a38e4?tpId=13&tqId=11208&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tab=answerKey
  * 给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
  */
 public class CircleList {
-
-    public class ListNode {
-        int val;
-        ListNode next = null;
-
-        ListNode(int val) {
-            this.val = val;
-        }
-    }
 
     //方法1, 双指针，巧妙
     //初始化：快指针fast指向头结点， 慢指针slow指向头结点

@@ -1,5 +1,6 @@
 package com.gson.algo.linklist;
 
+import com.gson.algo.ListNode;
 import org.junit.Test;
 
 public class MergeTwoLinkTest {
@@ -7,13 +8,13 @@ public class MergeTwoLinkTest {
     public void test(){
         MergeTwoLink mergeTwoLink = new MergeTwoLink();
 
-        MergeTwoLink.ListNode listNode1 = new MergeTwoLink.ListNode(1);
-        listNode1.next = new MergeTwoLink.ListNode(3);
-        listNode1.next.next = new MergeTwoLink.ListNode(5);
+        ListNode listNode1 = new ListNode(1);
+        listNode1.next = new ListNode(3);
+        listNode1.next.next = new ListNode(5);
 
-        MergeTwoLink.ListNode listNode2 = new MergeTwoLink.ListNode(2);
-        listNode2.next = new MergeTwoLink.ListNode(4);
-        listNode2.next.next = new MergeTwoLink.ListNode(6);
+        ListNode listNode2 = new ListNode(2);
+        listNode2.next = new ListNode(4);
+        listNode2.next.next = new ListNode(6);
 
         mergeTwoLink.merge(listNode1, listNode2);
     }
