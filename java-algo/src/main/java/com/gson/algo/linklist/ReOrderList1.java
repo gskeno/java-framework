@@ -82,6 +82,7 @@ public class ReOrderList1 {
             return head.next;
         }
         ListNode midTail= reorderList(head.next,cnt-2);
+        System.out.println("midTail=" + midTail);
         ListNode headNext=head.next; // m
 
         ListNode post=midTail.next;
