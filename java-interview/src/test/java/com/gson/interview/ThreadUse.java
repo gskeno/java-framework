@@ -1,5 +1,6 @@
-package com.gson.interview.concurrentprogrammingart;
+package com.gson.interview;
 
+import com.gson.interview.concurrentprogrammingart.SleepUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

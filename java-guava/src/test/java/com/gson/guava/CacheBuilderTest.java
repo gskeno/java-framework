@@ -10,8 +10,15 @@ import java.io.FileNotFoundException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * https://segmentfault.com/a/1190000011105644
+ */
 public class CacheBuilderTest extends Assert {
 
+    /**
+     * 一个基本的CacheBuilder的测试,
+     * {@link Cache#getIfPresent(Object)}
+     */
     @Test
     public void testPureBuilder() {
         Cache<Object, Object> cache = CacheBuilder.newBuilder().build();
@@ -128,13 +135,17 @@ public class CacheBuilderTest extends Assert {
         Cache<Object, Object> cache = CacheBuilder.newBuilder().expireAfterWrite(3, TimeUnit.SECONDS).build();
         cache.put("A", "A");
         assertEquals(cache.getIfPresent("A"), "A");
+        System.out.println("逐出前size=" + cache.size());
         Thread.sleep(2 * 1000);
         //睡2s未过期
         assertEquals(cache.getIfPresent("A"), "A");
         Thread.sleep(2 * 1000);
+        System.out.println("睡2s后size=" + cache.size());
+
 
         //睡4秒已过期
         assertNull(cache.getIfPresent("A"));
+        System.out.println("睡4s后size=" + cache.size());
     }
 
     /**
@@ -145,6 +156,9 @@ public class CacheBuilderTest extends Assert {
         Cache<Object, Object> cache = CacheBuilder.newBuilder().weakValues().build();
         Object value = new Object();
         cache.put("A", value);
+        cache.put("B", "B1");
+        System.out.println(cache.asMap().toString());
+        System.out.println(cache.size());
         assertTrue(cache.asMap().keySet().contains("A"));
 
         //原对象不在有强引用
@@ -152,9 +166,13 @@ public class CacheBuilderTest extends Assert {
         //如果不加gc，原对象不会被清除
         Thread.sleep(3 * 1000);
         System.gc();
-        assertEquals(cache.size(), 1);
-        assertEquals(cache.asMap().toString(), "{}");
+        assertEquals(cache.size(), 2);
+        System.out.println("gc后 " + cache.asMap().toString());
+        System.out.println("gc后size= " + cache.asMap().size());
+
         assertNull(cache.getIfPresent("A"));
+        System.out.println("gc后getA后size= " + cache.asMap().size());
+
     }
 
     @Test

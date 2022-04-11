@@ -24,9 +24,14 @@ public class Reference1 {
                     try {
                         Thread.sleep(1);
                         //被垃圾回收器回收则返回null
-//                        System.out.println(wf.get());
+                        System.out.println(wf.get());
 //                        //返回是否被垃圾回收器标记为即将回收的垃圾
-//                        System.out.println(wf.isEnqueued());
+                       System.out.println(wf.isEnqueued());
+                       System.gc();
+                        System.out.println(wf.isEnqueued());
+
+                        Thread.sleep(1000);
+                        System.out.println(wf.isEnqueued());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -34,19 +39,19 @@ public class Reference1 {
             }
         }).start();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 1000000000; i++) {
-
-                    try {
-                        list.add(new String(i + ""));
-                        //Thread.sleep(1);
-                    } catch (Exception e) {
-                        System.out.println("发生异常");
-                    }
-                }
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                for (int i = 0; i < 1000000000; i++) {
+//
+//                    try {
+//                        list.add(new String(i + ""));
+//                        //Thread.sleep(1);
+//                    } catch (Exception e) {
+//                        System.out.println("发生异常");
+//                    }
+//                }
+//            }
+//        }).start();
     }
 }

@@ -1,4 +1,4 @@
-package com.gson.interview.understandJvm.chapter2;
+package com.gson.interview;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;

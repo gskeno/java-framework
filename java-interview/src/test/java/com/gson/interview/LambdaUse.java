@@ -1,4 +1,4 @@
-package com.gson.interview.java8;
+package com.gson.interview;
 
 import org.junit.Test;
 

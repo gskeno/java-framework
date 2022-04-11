@@ -1,4 +1,4 @@
-package com.gson.interview.nio;
+package com.gson.interview;
 
 import org.junit.Test;
 
