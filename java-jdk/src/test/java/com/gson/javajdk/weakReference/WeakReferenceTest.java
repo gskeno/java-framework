@@ -26,20 +26,21 @@ public class WeakReferenceTest {
 
     @Test
     public void testWeakReferenceWithQueue() throws InterruptedException {
-        BigObject obj = new BigObject();
+        BigObject obj = new BigObject("m1");
         // 创建弱引用对象时没有设置相关联队列，所以当弱引用失效时，wf.isEnqueued永远为false
         ReferenceQueue<Object> queue = new ReferenceQueue<>();
         WeakReference<Object> wf = new WeakReference<Object>(obj, queue);
-        System.out.println(wf);
-        System.out.println(wf.isEnqueued());
+        System.out.println("未gc前弱引用包裹的对象是 " + wf.get());
+        System.out.println("未gc前弱引用是否入队列 " + wf.isEnqueued());
         obj = null;
         System.gc();
         // Thread.sleep(2000);
-        System.out.println("wf.get " + wf.get());
+        System.out.println("gc后弱引用包裹的对象是 " + wf.get());
+
         Thread.sleep(2000);
-        System.out.println(wf.isEnqueued());
+        System.out.println("gc后弱引用是否入队列 " + wf.isEnqueued());
         Reference<?> poll = queue.poll();
-        System.out.println(poll);
-        System.out.println(poll.get());
+        System.out.println("移除队列中的弱引用包裹器是 " + poll);
+        System.out.println("移除队列中的弱引用包裹器包裹的真实对象是 " + poll.get());
     }
 }
