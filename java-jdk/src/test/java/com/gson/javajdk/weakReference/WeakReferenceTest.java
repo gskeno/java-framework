@@ -6,6 +6,9 @@ import org.junit.Test;
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
+import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 /**
  * @author ruchen
@@ -42,5 +45,30 @@ public class WeakReferenceTest {
         Reference<?> poll = queue.poll();
         System.out.println("移除队列中的弱引用包裹器是 " + poll);
         System.out.println("移除队列中的弱引用包裹器包裹的真实对象是 " + poll.get());
+    }
+
+    /**
+     * WeakHashMap内部的Entry继承WeakReference，实现了Map.Entry,
+     * 键为弱建，当只有WeakHashMap引用key，key不再被其他对象引用时，
+     * gc回收时会回收该key。
+     */
+    @Test
+    public void testWeakHashMap(){
+        WeakHashMap<String,String> whm = new WeakHashMap<>();
+        String key1 = new String("张三丰");
+        String value1 = "武当创始人";
+        String key2 = new String("郭襄");
+        String value2 = "峨眉创始人";
+        whm.put(key1, value1);
+        whm.put(key2, value2);
+        System.out.println(whm.size());
+        key1 = null;
+        System.gc();
+        System.out.println("gc后立即取size=" + whm.size());
+        Set<Map.Entry<String, String>> entries = whm.entrySet();
+        for(Map.Entry<String,String> entry : entries){
+            System.out.println("遍历到元素 " + entry.getKey() + ":" + entry.getValue());
+        }
+        System.out.println("gc后遍历后取size=" + whm.size());
     }
 }
