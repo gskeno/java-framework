@@ -41,7 +41,7 @@
 - [Java SPI机制 - ServiceLoader](https://zhuanlan.zhihu.com/p/67665359)
 - [Java虚拟机类加载器及双亲委派机制](https://www.cnblogs.com/secbro/p/11759046.html)
 - [面试官，不要再问我“Java虚拟机类加载机制”了](http://www.choupangxia.com/2019/10/27/interview-jvm-load-01/)
-
+- [Java1.8-WeakHashMap源码解析](https://blog.csdn.net/Dongguabai/article/details/114464064)
 ##  mysql
 - [联合索引底层存储结构](https://blog.csdn.net/u010922732/article/details/82992920)
 - [mysql知识自己的git文件夹](mysql)
