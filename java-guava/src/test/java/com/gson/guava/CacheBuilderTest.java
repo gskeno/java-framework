@@ -80,6 +80,8 @@ public class CacheBuilderTest extends Assert {
         cache.put("E", "E");
         //由于B被读取，所以C最少使用，C被逐出
         assertTrue(cache.asMap().keySet().containsAll(Sets.newHashSet("B", "D", "E")));
+        System.out.println(cache.getIfPresent("C"));
+        System.out.println(cache.getIfPresent("D"));
     }
 
     /**

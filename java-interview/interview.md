@@ -17,6 +17,7 @@
 - [ArrayList中elementData为什么被transient修饰？](https://blog.csdn.net/zero__007/article/details/52166306)
 - [优先队列底层数据结构](https://www.cnblogs.com/Elliott-Su-Faith-change-our-life/p/7472265.html)
 - [hashmap位操作的秘密](https://blog.csdn.net/qq_42034205/article/details/90384772)
+- [通过分析LinkedHashMap了解LRU](https://juejin.cn/post/6844903669121417224)
 
 ### 网络编程
 - [Java NIO1：I/O模型概述](https://www.cnblogs.com/xrq730/p/5074199.html)
