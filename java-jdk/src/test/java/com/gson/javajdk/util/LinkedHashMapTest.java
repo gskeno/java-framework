@@ -2,6 +2,7 @@ package com.gson.javajdk.util;
 
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -23,6 +24,13 @@ public class LinkedHashMapTest {
     @Test
     public void testLinkedHashMap(){
         LinkedHashMap<String, String> map1 = new LinkedHashMap<String, String>(16,0.75f,true);
+
+        /**
+         * {@link LinkedHashMap#head} 最近最少使用
+         * {@link LinkedHashMap#tail} 最近使用
+         * {@link LinkedHashMap.Entry} 多了before,after两个指针维护访问顺序的双向链表
+         *{@link LinkedHashMap#newNode(int, Object, Object, HashMap.Node)}
+         */
         map1.put("1","1");
         map1.put("3","3");
         map1.put("2","2");
