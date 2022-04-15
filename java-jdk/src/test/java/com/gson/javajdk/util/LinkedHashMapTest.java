@@ -1,9 +1,11 @@
-package com.gson.interview;
+package com.gson.javajdk.util;
+
+import org.junit.Test;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class LinkedHashMap1 {
+public class LinkedHashMapTest {
     public static void main(String[] args) {
         LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
         map.put("1","1");
@@ -15,6 +17,11 @@ public class LinkedHashMap1 {
             System.out.println(entry.getKey() + ":" + entry.getValue());
         }
 
+
+    }
+
+    @Test
+    public void testLinkedHashMap(){
         LinkedHashMap<String, String> map1 = new LinkedHashMap<String, String>(16,0.75f,true);
         map1.put("1","1");
         map1.put("3","3");
