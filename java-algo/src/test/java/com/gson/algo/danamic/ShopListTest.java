@@ -43,6 +43,14 @@ public class ShopListTest {
         System.out.println(dp[m][N]);
     }
 
+    /**
+     *
+     * @param v 价格
+     * @param p 重要度
+     * @param q 主副件
+     * @param m  物品件数
+     * @param money 用户能支出的钱
+     */
     private static void packet(int[] v, int[] p, int[] q, int m, int money) {
         dp = new int[m + 1][money + 1];
         // pr用于记录物品的附件情况, 例如pr[1] = {x, x} 代表第一个物品的附件情况, x取值为0或1,
