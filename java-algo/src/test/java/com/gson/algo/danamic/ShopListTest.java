@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 /**
  *
+ * https://blog.nowcoder.net/n/477ed49f893941bbb20ef8a0651acfd0?f=comment
+ *
  * https://www.nowcoder.com/practice/f9c6f980eeec43ef85be20755ddbeaf4
  * https://mp.weixin.qq.com/s?__biz=Mzg5Mzc1NDI2NA==&mid=2247483693&idx=1&sn=32c82f7ea0340b5b178bf946b7db073e&chksm=c02b4fdaf75cc6cc14c5df2374f17e86c44d77e39c4d7bd7f402291899b81568be5af32d6ddb&token=666797164&lang=zh_CN#rd
  */
