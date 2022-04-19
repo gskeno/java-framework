@@ -7,6 +7,8 @@ import java.util.Scanner;
  * 购物单
  * 华为机试
  * https://blog.nowcoder.net/n/5eb528b238db4613870c29011d7c1cec
+ * https://www.cxymm.net/article/qq_27139155/79767539
+ * https://www.cxymm.net/article/qq_27139155/79767539
  */
 public class ShopList1 {
 
