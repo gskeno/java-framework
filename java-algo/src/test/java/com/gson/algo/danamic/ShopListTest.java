@@ -53,10 +53,10 @@ public class ShopListTest {
      */
     private static void packet(int[] v, int[] p, int[] q, int m, int money) {
         dp = new int[m + 1][money + 1];
-        // pr用于记录物品的附件情况, 例如pr[1] = {x, x} 代表第一个物品的附件情况, x取值为0或1,
+        // pr用于记录物品的附件情况, 例如pr[5] = {1, 2} 代表第5号物品的附件分别为1号物品和2号物品
         pr = new int[m + 1][2];
         for (int i = 0; i < q.length; i++) {
-            if (q[i] != 0) // q[i]代表第 i+1 件物品的主附标识
+            if (q[i] != 0) // q[i]代表第 i+1 号物品的主附标识
                 // 走到这里说明是 附件
                 if (pr[q[i]][0] == 0) // pr[X][0]默认值为0, 标识没附件, 若不为0, 说明已有一个附件
                     // 因为是附件, 所以q[i]的值为主件的索引, 注意看题干, 索引从1开始
