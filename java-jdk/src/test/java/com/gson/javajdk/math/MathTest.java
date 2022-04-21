@@ -183,5 +183,14 @@ public class MathTest {
         System.out.println(String.format("%.1f", d));
     }
 
+    @Test
+    public void testMathRound(){
+        System.out.println(Math.round(1.55d));
+        System.out.println(Math.round(-1.5d));
+        System.out.println(Math.round(-1.50001d));
+
+        System.out.println((double) Math.round(1.74444 * 10 )/10);
+    }
+
 
 }

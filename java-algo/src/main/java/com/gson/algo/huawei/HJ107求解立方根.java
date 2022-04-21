@@ -31,6 +31,9 @@ public class HJ107求解立方根 {
     public static  double getCubeRoot(double input){
         double left = 0;
         double right = input;
+        if (input < 1){
+            right = 1;
+        }
         // 取1位小数
         // double mid = Double.parseDouble(String.format("%.1f", (left + right)/2));
         double precision = 0.01d;
