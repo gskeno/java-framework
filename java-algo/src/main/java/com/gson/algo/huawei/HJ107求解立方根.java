@@ -11,11 +11,16 @@ public class HJ107求解立方根 {
             if (input == 0){
                 System.out.println(0);
             }else if (input > 0){
-                System.out.println(getCubeRoot(input));
+                System.out.println(parseDouble(getCubeRoot(input)));
             }else {
-                System.out.println(-getCubeRoot(-input));
+                System.out.println(-parseDouble(getCubeRoot(-input)));
             }
         }
+    }
+
+    public static double parseDouble(double d){
+        String dAftFormat = String.format("%.1f", d);
+        return Double.parseDouble(dAftFormat);
     }
 
     /**
@@ -36,8 +41,9 @@ public class HJ107求解立方根 {
                 left = mid;
             }else if (cube > input && Math.abs(cube - input) > precision){
                 right = mid;
+            }else {
+                return mid;
             }
-            return mid;
         }
     }
 }

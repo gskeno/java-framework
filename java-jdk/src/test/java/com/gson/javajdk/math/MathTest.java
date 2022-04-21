@@ -157,4 +157,31 @@ public class MathTest {
         n = (Integer.MIN_VALUE - (0-9))/10;
         System.out.println(n);
     }
+
+    @Test
+    public void testDoubleString(){
+        double d = 1.541;
+        System.out.println(String.format("%.1f", d));
+
+        d = 1.5499;
+        System.out.println(String.format("%.1f", d));
+
+        //四舍五入
+        d = 1.55;
+        System.out.println(String.format("%.1f", d));
+
+        //四舍五入
+        d = -1.55;
+        System.out.println(String.format("%.1f", d));
+
+        //四舍五入
+        d = -1.54;
+        System.out.println(String.format("%.1f", d));
+
+        //四舍五入
+        d = -1.5499;
+        System.out.println(String.format("%.1f", d));
+    }
+
+
 }
