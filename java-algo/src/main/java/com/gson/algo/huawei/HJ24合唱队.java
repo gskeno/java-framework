@@ -3,6 +3,7 @@ package com.gson.algo.huawei;
 import java.util.Scanner;
 
 /**
+ * https://www.nowcoder.com/practice/6d9d69e3898f45169a441632b325c7b4
  * 动态规划
  */
 public class HJ24合唱队 {
