@@ -60,6 +60,12 @@ public class HJ24合唱队 {
         return heights.length - maxLen;
     }
 
+    /**
+     * https://blog.csdn.net/weixin_38019299/article/details/116922809
+     * @param n
+     * @param heights
+     * @return
+     */
     public static int getEvictNums2(int n, int[] heights){
         int[] seq = new int[n], rev_seq = new int[n];
         int[] k = new int[n];  // 用于记录以i为终点的从左向右和从右向走的子序列元素个数
