@@ -68,23 +68,37 @@ public class HJ24合唱队 {
      */
     public static int getEvictNums2(int n, int[] heights){
         int[] seq = new int[n], rev_seq = new int[n];
-        int[] k = new int[n];  // 用于记录以i为终点的从左向右和从右向走的子序列元素个数
-        seq[0] = heights[0];  // 初始化从左向右子序列首元素为第一个元素
-        int index = 1; // 记录当前子序列的长度
+        // 用于记录以i为终点的从左向右和从右向左走的子序列元素个数
+        int[] k = new int[n];
+        // 初始化从左向右子序列首元素为第一个元素
+        seq[0] = heights[0];
+        // 记录当前子序列的长度
+        int index = 1;
         for (int i = 1; i < n; i++) {
-            if (heights[i] > seq[index - 1]) {  // 当当前元素大于递增序列最后一个元素时
-                k[i] = index;  // 其左边元素个数
-                seq[index++] = heights[i];  // 更新递增序列
-            } else {  // 当当前元素位于目前维护递增序列之间时
+            // 当 当前元素大于递增序列最后一个元素时
+            if (heights[i] > seq[index - 1]) {
+                // 其左边元素个数
+                k[i] = index;
+                // 更新递增序列
+                seq[index] = heights[i];
+                index++;
+            } else {
+                // 当 当前元素位于目前维护递增序列之间时
                 // 使用二分搜索找到其所属位置
                 int l = 0, r = index - 1;
                 while (l < r) {
                     int mid = l + (r - l) / 2;
-                    if (seq[mid] < heights[i]) l = mid + 1;
-                    else r = mid;
+                    if (seq[mid] < heights[i]) {
+                        l = mid + 1;
+                    }
+                    else {
+                        r = mid;
+                    }
                 }
-                seq[l] = heights[i];  // 将所属位置值进行替换
-                k[i] = l;  // 其左边元素个数
+                // 将所属位置值进行替换
+                seq[l] = heights[i];
+                // 其左边元素个数
+                k[i] = l;
             }
         }
 
@@ -94,13 +108,19 @@ public class HJ24合唱队 {
         for (int i = n - 2; i >= 0; i--) {
             if (heights[i] > rev_seq[index - 1]) {
                 k[i] += index;
-                rev_seq[index++] = heights[i];
+                rev_seq[index] = heights[i];
+                index++;
             } else {
+                // l到r之间是递增序列
                 int l = 0, r = index - 1;
                 while (l < r) {
                     int mid = l + (r - l) / 2;
-                    if (rev_seq[mid] < heights[i]) l = mid + 1;
-                    else r = mid;
+                    if (rev_seq[mid] < heights[i]) {
+                        l = mid + 1;
+                    }
+                    else {
+                        r = mid;
+                    }
                 }
                 rev_seq[l] = heights[i];
                 k[i] += l;
@@ -108,10 +128,12 @@ public class HJ24合唱队 {
         }
 
         int max = 1;
-        for (int num : k)
-            if (max < num) max = num;
+        for (int num : k){
+            if (max < num) {
+                max = num;
+            }
+        }
         // max+1为最大的k
-        return n - max - 1;
-
+        return n - (max +1);
     }
 }
