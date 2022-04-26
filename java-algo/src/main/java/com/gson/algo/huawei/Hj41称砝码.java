@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 /**
- *
+ * https://www.nowcoder.com/practice/f9a4c19050fc477e9e27eb75f3bfd49c
  */
 public class Hj41称砝码 {
     public static void main(String[] args) {
