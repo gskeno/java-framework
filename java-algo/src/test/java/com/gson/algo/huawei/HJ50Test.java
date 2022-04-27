@@ -26,4 +26,9 @@ public class HJ50Test {
         System.out.println(HJ50四则运算.operate("2+[1+2*3-(5-1)]"));
         System.out.println("-----------------------------");
     }
+
+    @Test
+    public void test3(){
+        System.out.println(HJ50四则运算.operate("3+2*{1+2*[-4/(8-6)+7]}"));
+    }
 }
