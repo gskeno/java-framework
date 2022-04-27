@@ -1,5 +1,6 @@
 package com.gson.algo.huawei;
 
+import java.util.Scanner;
 import java.util.Stack;
 
 /**
@@ -47,7 +48,11 @@ public class HJ50四则运算 {
      * @param args
      */
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            System.out.println(operate(line));
+        }
     }
 
     public static int operate(String str){
@@ -77,7 +82,7 @@ public class HJ50四则运算 {
             }
             // - 表示减号，因为前面是一个数字
             else if (c == '-' && Character.isDigit(pre)){
-                if (lowerOrEqualPriority(c, symbolStack)){
+                while (lowerOrEqualPriority(c, symbolStack)){
                     f(numStack, symbolStack);
                 }
                 symbolStack.push(c);
@@ -95,10 +100,14 @@ public class HJ50四则运算 {
                         break;
                     }
                 }
+                pre = (char)(Math.abs(numStack.peek()%10) + '0');
+                continue;
             }
             // 运算符，比栈顶运算符优先级低或相等,减号不再这里执行
             else if (lowerOrEqualPriority(c, symbolStack)){
-                f(numStack, symbolStack);
+                while (lowerOrEqualPriority(c, symbolStack)){
+                    f(numStack, symbolStack);
+                }
                 symbolStack.push(c);
             }
             else {
@@ -106,8 +115,8 @@ public class HJ50四则运算 {
             }
             pre = chars[i];
         }
-        System.out.println(numStack);
-        System.out.println(symbolStack);
+        // System.out.println(numStack);
+        // System.out.println(symbolStack);
         while (!symbolStack.isEmpty()){
             f(numStack, symbolStack);
         }
@@ -167,7 +176,7 @@ public class HJ50四则运算 {
             return true;
         }
         // *,/ 比 *,/相比，优先级一致
-        if ( (c1 == '*' && c1 == '/') && (peek == '*' || peek == '/')){
+        if ( (c1 == '*' || c1 == '/') && (peek == '*' || peek == '/')){
             return true;
         }
         return false;
