@@ -33,6 +33,51 @@ public class HJ67Test {
         System.out.println(dfs);
     }
 
+    @Test
+    public void test3(){
+        List<Integer> list = new ArrayList<>();
+        list.add(9);
+        list.add(7);
+        list.add(7);
+        list.add(3);
+        boolean flag = HJ67的24点游戏算法.reach24(list);
+        System.out.println(flag);
+    }
+
+
+    @Test
+    public void test4(){
+        List<Integer> list = new ArrayList<>();
+        list.add(10);
+        list.add(7);
+        list.add(1);
+        list.add(2);
+        boolean flag = HJ67的24点游戏算法.reach24(list);
+        System.out.println(flag);
+    }
+
+    @Test
+    public void test5(){
+        List<Integer> list = new ArrayList<>();
+        list.add(10);
+        list.add(7);
+        list.add(1);
+        list.add(3);
+        boolean flag = HJ67的24点游戏算法.reach24(list);
+        System.out.println(flag);
+    }
+
+    @Test
+    public void test6(){
+        List<Integer> list = new ArrayList<>();
+        list.add(10);
+        list.add(7);
+        list.add(1);
+        list.add(4);
+        boolean flag = HJ67的24点游戏算法.reach24(list);
+        System.out.println(flag);
+    }
+
 
 
 
