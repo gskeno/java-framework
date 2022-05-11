@@ -12,7 +12,7 @@ public class BaseTest {
         System.out.println("original serializedSizeInBytes=" + roaringBitmap.serializedSizeInBytes());
         System.out.println("original sizeInBytes=" + roaringBitmap.getSizeInBytes());
 
-        for (int i = 1000; i < 1010; i++) {
+        for (int i = 0; i < 100; i++) {
             if (i>0){
                 roaringBitmap.add(i);
             }
@@ -42,7 +42,10 @@ public class BaseTest {
 
     @Test
     public void test2(){
-        int value = 400000 / 8;
-        System.out.println("第40万商家的标需要多少个字节:" + value /1024 + "KB");
+        // 如果某用户入会了第4万号商家，设其标位为 40000，用传统的bitmap，大概需要 40000/8 = 5000B，即5千个字节
+        // 而用RoaringBitmap只需要两个字节，用0号桶,用0号桶映射的0号Container(
+        // 实现是ArrayContainer, 内部有一个可变长度的short[]), short数组的第一个元素是8
+        int value = 40000 / 8;
+        System.out.println("第4万商家的标需要多少个字节:" + value  + "B");
     }
 }
