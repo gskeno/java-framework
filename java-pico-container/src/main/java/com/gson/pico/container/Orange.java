@@ -7,13 +7,16 @@ public class Orange {
         this.desc = "橘子是酸的";
     }
 
+    public Orange(String desc){
+        this.desc = desc;
+    }
     public String getDesc() {
         return desc;
     }
 
-//    public void setDesc(String desc) {
-//        this.desc = desc;
-//    }
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
     @Override
     public String toString() {
