@@ -8,13 +8,12 @@
  * Original code by                                                          *
  *****************************************************************************/
 package org.picocontainer.alternatives;
-
-import com.thoughtworks.paranamer.AdaptiveParanamer;
-import com.thoughtworks.paranamer.CachingParanamer;
-import com.thoughtworks.paranamer.DefaultParanamer;
-import com.thoughtworks.paranamer.Paranamer;
 import org.junit.Test;
 import org.picocontainer.injectors.ParameterNameBinding;
+import org.picocontainer.paranamer.AdaptiveParanamer;
+import org.picocontainer.paranamer.CachingParanamer;
+import org.picocontainer.paranamer.DefaultParanamer;
+import org.picocontainer.paranamer.Paranamer;
 
 import java.lang.reflect.Method;
 

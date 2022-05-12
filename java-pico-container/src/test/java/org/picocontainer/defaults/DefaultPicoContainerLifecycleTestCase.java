@@ -410,12 +410,15 @@ public class DefaultPicoContainerLifecycleTestCase {
             one(cm).invoked(with(aNull(PicoContainer.class)),
                     with(aNull(ComponentAdapter.class)),
                     with(equal(Startable.class.getMethod("stop", (Class[])null))),
-                    with(same(s1)), with(any(Long.class)), with(any(Object[].class)), with(same(null)));
+                    with(same(s1)), with(any(Long.class)), with(any(Object[].class)), //with(same(null))
+                    null);
             // s2 expectations
             one(cm).invoking(with(aNull(PicoContainer.class)), with(aNull(ComponentAdapter.class)), with(equal(Startable.class.getMethod("start", (Class[])null))), with(same(s2)), with(any(Object[].class)));
-            one(cm).invoked(with(aNull(PicoContainer.class)), with(aNull(ComponentAdapter.class)), with(equal(Startable.class.getMethod("start", (Class[])null))), with(same(s2)), with(any(Long.class)), with(any(Object[].class)), with(same(null)));
+            one(cm).invoked(with(aNull(PicoContainer.class)), with(aNull(ComponentAdapter.class)), with(equal(Startable.class.getMethod("start", (Class[])null))), with(same(s2)), with(any(Long.class)), with(any(Object[].class)), //with(same(null))
+                    null);
             one(cm).invoking(with(aNull(PicoContainer.class)), with(aNull(ComponentAdapter.class)), with(equal(Startable.class.getMethod("stop", (Class[])null))), with(same(s2)), with(any(Object[].class)));
-            one(cm).invoked(with(aNull(PicoContainer.class)), with(aNull(ComponentAdapter.class)), with(equal(Startable.class.getMethod("stop", (Class[])null))), with(same(s2)), with(any(Long.class)), with(any(Object[].class)), with(same(null)));
+            one(cm).invoked(with(aNull(PicoContainer.class)), with(aNull(ComponentAdapter.class)), with(equal(Startable.class.getMethod("stop", (Class[])null))), with(same(s2)), with(any(Long.class)), with(any(Object[].class)), //with(same(null))
+                    null);
     	}});
 
         DefaultPicoContainer dpc = new DefaultPicoContainer(cm);

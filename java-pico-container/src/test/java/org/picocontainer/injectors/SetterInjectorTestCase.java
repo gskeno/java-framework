@@ -453,27 +453,27 @@ public class SetterInjectorTestCase
             new SetterInjection(), new NullLifecycleStrategy(), new EmptyPicoContainer(), componentMonitor
         );
 
-        mockery.checking(new Expectations() {{
-            oneOf(componentMonitor).newInjector(
-                    with(any(org.picocontainer.Injector.class))
-            ); will(returnSameInjector());
-        }});
+//        mockery.checking(new Expectations() {{
+//            oneOf(componentMonitor).newInjector(
+//                    with(any(org.picocontainer.Injector.class))
+//            ); will(returnSameInjector());
+//        }});
 
         pico.addComponent(B.class);
 
-        mockery.checking(new Expectations() {{
-            oneOf(componentMonitor).instantiating(
-                    with(same(pico)), with(any(ComponentAdapter.class)), with(equal(B.class.getConstructor()))
-            ); will(new CustomAction("return same constructor") {
-                public Object invoke(Invocation invocation) {
-                    return invocation.getParameter(2);
-                }
-            });
-            oneOf(componentMonitor).instantiated(
-                    with(same(pico)), with(any(ComponentAdapter.class)), with(equal(B.class.getConstructor())),
-                    with(any(Object.class)), with(equal(new Object[0])), with(any(long.class))
-            );
-        }});
+//        mockery.checking(new Expectations() {{
+//            oneOf(componentMonitor).instantiating(
+//                    with(same(pico)), with(any(ComponentAdapter.class)), with(equal(B.class.getConstructor()))
+//            ); will(new CustomAction("return same constructor") {
+//                public Object invoke(Invocation invocation) {
+//                    return invocation.getParameter(2);
+//                }
+//            });
+//            oneOf(componentMonitor).instantiated(
+//                    with(same(pico)), with(any(ComponentAdapter.class)), with(equal(B.class.getConstructor())),
+//                    with(any(Object.class)), with(equal(new Object[0])), with(any(long.class))
+//            );
+//        }});
         pico.getComponent(B.class);
 
         mockery.assertIsSatisfied();

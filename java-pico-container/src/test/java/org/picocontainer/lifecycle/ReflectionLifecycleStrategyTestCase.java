@@ -101,7 +101,10 @@ public class ReflectionLifecycleStrategyTestCase {
 				one(componentMonitor).invoked(with(aNull(PicoContainer.class)),
 						with(aNull(ComponentAdapter.class)),
 						with(isDisposeMethod), with(same(disposable)),
-                        with(any(Long.class)), with(any(Object[].class)), with(same(null)));
+                        with(any(Long.class)), with(any(Object[].class)),
+						//with(same(null))
+						null
+				);
 				one(componentMonitor2).invoking(
 						with(aNull(PicoContainer.class)),
 						with(aNull(ComponentAdapter.class)),
@@ -110,7 +113,10 @@ public class ReflectionLifecycleStrategyTestCase {
 						with(aNull(PicoContainer.class)),
 						with(aNull(ComponentAdapter.class)),
 						with(isDisposeMethod), with(same(disposable)),
-                        with(any(Long.class)), with(any(Object[].class)), with(same(null)));
+                        with(any(Long.class)), with(any(Object[].class)),
+						//with(same(null))
+						null
+						);
 			}
 		});
 		strategy.dispose(disposable);
@@ -139,7 +145,9 @@ public class ReflectionLifecycleStrategyTestCase {
 				one(componentMonitor).invoked(with(aNull(PicoContainer.class)),
 						with(aNull(ComponentAdapter.class)),
 						with(isStartMethod), with(same(lifecycle)),
-                        with(any(Long.class)), with(any(Object[].class)), with(same(null)));
+                        with(any(Long.class)), with(any(Object[].class)),
+						//with(same(null))
+						null);
 				one(componentMonitor).invoking(
 						with(aNull(PicoContainer.class)),
 						with(aNull(ComponentAdapter.class)),
@@ -147,7 +155,8 @@ public class ReflectionLifecycleStrategyTestCase {
 				one(componentMonitor).invoked(with(aNull(PicoContainer.class)),
 						with(aNull(ComponentAdapter.class)),
 						with(isStopMethod), with(same(lifecycle)),
-                        with(any(Long.class)), with(any(Object[].class)), with(same(null)));
+                        with(any(Long.class)), with(any(Object[].class)), //with(same(null))
+						null);
 				one(componentMonitor).invoking(
 						with(aNull(PicoContainer.class)),
 						with(aNull(ComponentAdapter.class)),
@@ -155,7 +164,8 @@ public class ReflectionLifecycleStrategyTestCase {
 				one(componentMonitor).invoked(with(aNull(PicoContainer.class)),
 						with(aNull(ComponentAdapter.class)),
 						with(isDisposeMethod), with(same(lifecycle)),
-                        with(any(Long.class)), with(any(Object[].class)), with(same(null)));
+                        with(any(Long.class)), with(any(Object[].class)), //with(same(null))
+						null);
 			}
 		});
 
@@ -190,7 +200,10 @@ public class ReflectionLifecycleStrategyTestCase {
 							.invoked(with(aNull(PicoContainer.class)),
 									with(aNull(ComponentAdapter.class)),
 									with(isStartMethod), with(same(mock)),
-                                    with(any(Long.class)), with(any(Object[].class)), with(same(null)));
+                                    with(any(Long.class)), with(any(Object[].class)),
+									//with(same(null))
+									null
+							);
 					one(componentMonitor).invoking(
 							with(aNull(PicoContainer.class)),
 							with(aNull(ComponentAdapter.class)),
@@ -198,7 +211,8 @@ public class ReflectionLifecycleStrategyTestCase {
 					one(componentMonitor).invoked(
 							with(aNull(PicoContainer.class)),
 							with(aNull(ComponentAdapter.class)),
-							with(isStopMethod), with(same(mock)), with(any(Long.class)), with(any(Object[].class)), with(same(null)));
+							with(isStopMethod), with(same(mock)), with(any(Long.class)), with(any(Object[].class)), //with(same(null))
+							null);
 				}
 			});
 			return mock;
@@ -216,7 +230,10 @@ public class ReflectionLifecycleStrategyTestCase {
 							.invoked(with(aNull(PicoContainer.class)),
 									with(aNull(ComponentAdapter.class)),
 									with(isDisposeMethod), with(same(mock)),
-                                    with(any(Long.class)), with(any(Object[].class)), with(same(null)));
+                                    with(any(Long.class)), with(any(Object[].class)),
+									//with(same(null))
+									null
+							);
 				}
 			});
 			return mock;
