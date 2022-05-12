@@ -42,6 +42,7 @@
         <module>java-spi-apple-test</module>
         <module>java-apache-commons</module>
         <module>java-springboot</module>
+        <module>java-pico-container</module>
     </modules>
 
     <name>java-framework</name>
