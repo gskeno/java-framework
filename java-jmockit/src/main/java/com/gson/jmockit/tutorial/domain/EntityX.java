@@ -3,8 +3,6 @@ package com.gson.jmockit.tutorial.domain;
 import java.math.*;
 import javax.persistence.*;
 
-import static javax.persistence.GenerationType.*;
-
 @Entity
 public class EntityX
 {

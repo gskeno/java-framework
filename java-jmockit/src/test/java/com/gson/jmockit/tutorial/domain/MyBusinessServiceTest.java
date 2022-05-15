@@ -11,6 +11,9 @@ import mockit.*;
 
 import org.apache.commons.mail.*;
 
+/**
+ * http://jmockit.github.io/tutorial/Introduction.html#anExample
+ */
 public final class MyBusinessServiceTest
 {
    @Rule public final ExpectedException thrown = ExpectedException.none();
