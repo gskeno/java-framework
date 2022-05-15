@@ -43,6 +43,7 @@
         <module>java-apache-commons</module>
         <module>java-springboot</module>
         <module>java-pico-container</module>
+        <module>java-jmockit</module>
     </modules>
 
     <name>java-framework</name>

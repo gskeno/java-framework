@@ -7,10 +7,20 @@ import org.picocontainer.MutablePicoContainer;
 import org.picocontainer.behaviors.Caching;
 import org.picocontainer.injectors.SetterInjection;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Unit test for simple App.
  */
 public class AppTest {
+
+    @Test
+    public void test0(){
+        MutablePicoContainer pico = new DefaultPicoContainer();
+        pico.addComponent(ArrayList.class);
+        List list = pico.getComponent(ArrayList.class);
+    }
     /**
      * 不缓存单例，每次都是通过构造函数重新初始化一个实例
      */
