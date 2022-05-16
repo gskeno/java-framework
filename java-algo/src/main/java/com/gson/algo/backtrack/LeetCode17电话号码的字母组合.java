@@ -12,6 +12,7 @@ import java.util.List;
  * 返回["ad","ae",...,"cf"]
  */
 public class LeetCode17电话号码的字母组合 {
+    // 考虑一下不用二维数组，而用一纬数组，原始是String类型呢？遍历String的每个字母
     static char[][] keys = {
             {'a', 'b', 'c'},
             {'d', 'e', 'f'},
