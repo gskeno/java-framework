@@ -108,6 +108,9 @@
         <configuration>
           <argLine>
             -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar=coverage
+            -Dcoverage-outputDir=target/coverage-report
+            <!-- 一定要配置这个才能生效 -->
+            -Dcoverage-output=html
           </argLine>
           <systemPropertyVariables>
             <coverage-output>html</coverage-output>
