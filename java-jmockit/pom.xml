@@ -22,9 +22,19 @@
     <dependency>
       <groupId>org.jmockit</groupId>
       <artifactId>jmockit</artifactId>
+      <!--1.46之后不再支持mock私有方法 -->
       <version>1.46</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.jmockit/jmockit-coverage -->
+    <dependency>
+      <groupId>org.jmockit</groupId>
+      <artifactId>jmockit-coverage</artifactId>
+      <version>1.23</version>
+      <scope>test</scope>
+    </dependency>
+
 
     <dependency>
       <groupId>junit</groupId>
@@ -88,15 +98,22 @@
 
   </dependencies>
 
+  <!-- http://jmockit.cn/showArticle.htm?channel=3&id=30 -->
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
+        <!--2.15试一试-->
         <version>2.22.2</version> <!-- or some other version -->
         <configuration>
           <argLine>
-            -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
+            -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar=coverage
           </argLine>
+          <systemPropertyVariables>
+            <coverage-output>html</coverage-output>
+            <coverage-metrics>all</coverage-metrics>
+            <coverage-outputDir>target/coverage-report</coverage-outputDir>
+          </systemPropertyVariables>
         </configuration>
       </plugin>
     </plugins>
