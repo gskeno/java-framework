@@ -28,12 +28,12 @@
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.jmockit/jmockit-coverage -->
-    <dependency>
-      <groupId>org.jmockit</groupId>
-      <artifactId>jmockit-coverage</artifactId>
-      <version>1.23</version>
-      <scope>test</scope>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.jmockit</groupId>-->
+<!--      <artifactId>jmockit-coverage</artifactId>-->
+<!--      <version>1.23</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -106,15 +106,15 @@
         <configuration>
           <argLine>
             -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar=coverage
-            -Dcoverage-outputDir=target/coverage-report
+<!--            -Dcoverage-outputDir=target/coverage-report-->
             -Dcoverage-output=html
 <!--            -DforkCount=0-->
           </argLine>
-<!--          <systemPropertyVariables>-->
+          <systemPropertyVariables>
 <!--            <coverage-output>html</coverage-output>-->
 <!--            <coverage-metrics>all</coverage-metrics>-->
 <!--            <coverage-outputDir>target/coverage-report</coverage-outputDir>-->
-<!--          </systemPropertyVariables>-->
+          </systemPropertyVariables>
         </configuration>
       </plugin>
     </plugins>
