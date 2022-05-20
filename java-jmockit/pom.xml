@@ -22,8 +22,8 @@
     <dependency>
       <groupId>org.jmockit</groupId>
       <artifactId>jmockit</artifactId>
-      <!--1.46之后不再支持mock私有方法 -->
-      <version>1.46</version>
+      <!--1.46之后不再支持mock私有方法, 存在空指针bug-->
+      <version>${jmockit.version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -101,7 +101,6 @@
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <!--2.15试一试-->
         <version>2.22.2</version> <!-- or some other version -->
         <configuration>
           <argLine>
@@ -110,11 +109,11 @@
             -Dcoverage-output=html
 <!--            -DforkCount=0-->
           </argLine>
-          <systemPropertyVariables>
+<!--          <systemPropertyVariables>-->
 <!--            <coverage-output>html</coverage-output>-->
 <!--            <coverage-metrics>all</coverage-metrics>-->
 <!--            <coverage-outputDir>target/coverage-report</coverage-outputDir>-->
-          </systemPropertyVariables>
+<!--          </systemPropertyVariables>-->
         </configuration>
       </plugin>
     </plugins>
