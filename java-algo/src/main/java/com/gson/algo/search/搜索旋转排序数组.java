@@ -21,8 +21,8 @@ public class 搜索旋转排序数组 {
             if (nums[mid] == target){
                 return mid;
             }
-            // mid左侧是递增数组
-            if (nums[mid] > nums[left]){
+            // mid左侧是递增数组,第一次时这里少了个等于号，{3,1},1的case通不过
+            if (nums[mid] >= nums[left]){
                 // 目标在有序数组中
                 if (nums[left] <= target && target < nums[mid]){
                     right = mid - 1;
@@ -36,7 +36,7 @@ public class 搜索旋转排序数组 {
                 if (target >nums[mid] && target <= nums[right]){
                     left = mid +1;
                 }else {
-                    right = mid + 1;
+                    right = mid - 1;
                 }
             }
         }
