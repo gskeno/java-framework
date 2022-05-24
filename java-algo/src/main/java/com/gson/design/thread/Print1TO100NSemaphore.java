@@ -27,10 +27,10 @@ public class Print1TO100NSemaphore {
         Semaphore[] semaphores = new Semaphore[totalThreads];
         for (int i = 0; i < totalThreads; i++) {
             semaphores[i] = new Semaphore(1);
-        }
-        // 除了最后一个线程，其他线程的信号量全部被占用，则第一个线程首先执行
-        for (int i = 0; i < totalThreads-1; i++) {
-            semaphores[i].acquire();
+            // 除了最后一个线程，其他线程的信号量全部被占用，则第一个线程首先执行
+            if (i != totalThreads - 1){
+                semaphores[i].acquire();
+            }
         }
 
         for (int i = 0; i <totalThreads; i++) {
@@ -70,43 +70,6 @@ public class Print1TO100NSemaphore {
             }
         }
     }
-//    static int result = 0;
-//
-//    public static void main(String[] args) throws InterruptedException {
-//        //假设有20个线程
-//        int n = 20;
-//        Thread[] threads = new Thread[n];
-//        //创建n个信号量
-//        final Semaphore[] s = new Semaphore[n];
-//        //阻塞1-99号线程，然后让0号线程先执行就行了
-//        for (int i = 0; i < n; i++) {
-//            //每个信号量各有1个凭证
-//            s[i] = new Semaphore(1);
-//            if (i != n - 1) {
-//                s[i].acquire();
-//            }
-//        }
-//        for (int i = 0; i < n; i++) {
-//            final Semaphore lastSemphore = i == 0 ? s[n - 1] : s[i - 1];
-//            final Semaphore curSemphore = s[i];
-//            final int index = i;
-//            threads[i] = new Thread(() -> {
-//                try {
-//                    while (true) {
-//                        lastSemphore.acquire();
-//                        System.out.println("thread" + index + ": " + result++);
-//                        if (result > 100) {
-//                            System.exit(0);
-//                        }
-//                        curSemphore.release();
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            });
-//            threads[i].start();
-//        }
-//    }
 
     public static void main(String[] args) throws InterruptedException {
         Print1TO100NSemaphore print1TO100N = new Print1TO100NSemaphore(21);
