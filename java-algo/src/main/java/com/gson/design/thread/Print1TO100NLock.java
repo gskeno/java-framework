@@ -18,7 +18,7 @@ public class Print1TO100NLock {
      */
     private int totalThreads;
 
-    private int value = 1;
+    private volatile int value = 1;
 
     private Lock lock = new ReentrantLock();
 
@@ -49,11 +49,20 @@ public class Print1TO100NLock {
                     if (value % totalThreads == threadNo){
                         System.out.println("thread" + threadNo + "-" + value++);
                         i++;
+                        // 一定要调用signalAll，否则会锁住执行不完
+                        condition.signal();
                     }else if (value % totalThreads == 0 && threadNo == totalThreads){
-                        System.out.println("thread" + totalThreads + "-" + value++);
+                        System.out.println("thread" + threadNo + "-" + value++);
                         i++;
+                        condition.signal();
+                    }else {
+                        // 该线程当前不应该打印，放弃锁,等待其他线程signal唤醒，只有重新获取到锁的线程才能用等待方法返回
+                        condition.signal();
+                        // 线程放弃锁之前，自身要唤醒其他线程
+                        condition.await();
                     }
                 }catch (Exception e){
+                    e.printStackTrace();
                 }finally {
                     lock.unlock();
                 }
