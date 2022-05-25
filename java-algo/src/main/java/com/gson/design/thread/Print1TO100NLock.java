@@ -6,6 +6,22 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * N个线程顺序打印print1-1， print2-2, .... , printN-100*N
  *
+     * 使用范式
+     * lock.lock();
+     * try{
+     *     while(不满足条件){
+     *      // 一定要加上这句，唤醒等待队列中的线程去尝试获取锁
+     *       condition.signal();
+     *       condition.await();
+     *   }
+     *
+     *   // 满足条件
+     *   condition.signal()
+     * }finally{
+     *     lock.unlock();
+     * }
+ *
+ *
  * 参考 https://codeantenna.com/a/9cBdZnlJlS
  */
 public class Print1TO100NLock {
@@ -46,21 +62,33 @@ public class Print1TO100NLock {
             for (int i = 1; i <= printTimesPerThread;) {
                 lock.lock();
                 try {
-                    if (value % totalThreads == threadNo){
-                        System.out.println("thread" + threadNo + "-" + value++);
-                        i++;
-                        // 一定要调用signalAll，否则会锁住执行不完
+//                    boolean shouldPrint1 = (value % totalThreads == threadNo);
+//
+//                    boolean shouldPrint2 = (value % totalThreads == 0 && threadNo == totalThreads);
+
+                    // 不满足条件
+                    while (!(value % totalThreads == threadNo) && !(value % totalThreads == 0 && threadNo == totalThreads)){
                         condition.signal();
-                    }else if (value % totalThreads == 0 && threadNo == totalThreads){
-                        System.out.println("thread" + threadNo + "-" + value++);
-                        i++;
-                        condition.signal();
-                    }else {
-                        // 该线程当前不应该打印，放弃锁,等待其他线程signal唤醒，只有重新获取到锁的线程才能用等待方法返回
-                        condition.signal();
-                        // 线程放弃锁之前，自身要唤醒其他线程
                         condition.await();
                     }
+                    System.out.println("thread" + threadNo + "-" + value++);
+                    i++;
+                    condition.signal();
+//                    if (value % totalThreads == threadNo){
+//                        System.out.println("thread" + threadNo + "-" + value++);
+//                        i++;
+//                        // 一定要调用signalAll，否则会锁住执行不完
+//                        condition.signal();
+//                    }else if (value % totalThreads == 0 && threadNo == totalThreads){
+//                        System.out.println("thread" + threadNo + "-" + value++);
+//                        i++;
+//                        condition.signal();
+//                    }else {
+//                        // 该线程当前不应该打印，放弃锁,等待其他线程signal唤醒，只有重新获取到锁的线程才能用等待方法返回
+//                        condition.signal();
+//                        // 线程放弃锁之前，自身要唤醒其他线程
+//                        condition.await();
+//                    }
                 }catch (Exception e){
                     e.printStackTrace();
                 }finally {
