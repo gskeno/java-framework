@@ -4,6 +4,8 @@ import org.junit.Test;
 import sun.misc.Launcher;
 import sun.net.spi.nameservice.dns.DNSNameService;
 
+import java.sql.*;
+
 public class ClassLoaderTest {
 
     /**
@@ -53,4 +55,25 @@ public class ClassLoaderTest {
         // 已经与SuperClass1无关了，实际上已经转行为Main类对ABC字符串的引用了
         System.out.println(SubClass1.ABC);
     }
+
+    @Test
+    public void testAppClassLoader(){
+        // 应用类加载器
+        ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
+        System.out.println(systemClassLoader);
+    }
+
+    @Test
+    public void testClassForName(){
+        try {
+            // 会报错，重点在看源码
+            Class<?> aClass = Class.forName("com.mysql.jdbc.Driver");
+            DriverManager.getConnection("localhost:127.0.0.1:3306/mysql");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+
 }
