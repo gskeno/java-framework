@@ -1,5 +1,6 @@
 package com.gson.javajdk.clazzloader;
 
+import org.junit.Assert;
 import org.junit.Test;
 import sun.misc.Launcher;
 import sun.net.spi.nameservice.dns.DNSNameService;
@@ -19,23 +20,29 @@ public class ClassLoaderTest {
      */
     public static void main(String[] args) {
         // 应用类 加载器
-        System.out.println(ClassLoaderTest.class.getClassLoader());
-        System.out.println("------------");
+        ClassLoader classLoader = ClassLoaderTest.class.getClassLoader();
+        // 规范名
+        String name = classLoader.getClass().getCanonicalName();
+        Assert.assertEquals(name, "sun.misc.Launcher.AppClassLoader");
 
         // 扩展类 加载器。
         // 该环境变量指定的路径下的jar包中的类被扩展类加载器所加载
-        System.out.println(System.getProperty("java.ext.dirs"));
-        System.out.println(DNSNameService.class.getClassLoader());
-        System.out.println("------------");
+        String extDirs = System.getProperty("java.ext.dirs");
+        System.out.println(extDirs);
+        String extClassLoaderClassName = DNSNameService.class.getClassLoader().getClass().getCanonicalName();
+        Assert.assertEquals(extClassLoaderClassName, "sun.misc.Launcher.ExtClassLoader");
 
         // 启动类加载器
-        // 该环境变量指定的路径下的jar包中的类被启动类加载器所加载
-        System.out.println(System.getProperty("sun.boot.class.path"));
-        System.out.println(String.class.getClassLoader());
-        System.out.println("Launcher类的加载器是" + Launcher.class.getClassLoader());
+        // 该环境变量指定的路径下的jar包中的类被启动类加载器所加载,如rt.jar
+        System.out.println("bootClassPath为 " + System.getProperty("sun.boot.class.path"));
+        ClassLoader bootStrapClassLoader = String.class.getClassLoader();
+        Assert.assertEquals("bootStrapClassLoader就用null表示", bootStrapClassLoader, null);
+
 
         Launcher launcher = new Launcher();
-        System.out.println("Launcher实例的类加载器是" + launcher.getClassLoader());
+        System.out.println("Launcher实例的获取类加载器方法getClassLoader(专有方法)返回值为" + launcher.getClassLoader());
+        System.out.println("Launcher类的类加载器是" + Launcher.class.getClassLoader());
+
 
         System.out.println("ClassLoader.getSystemClassLoader " + ClassLoader.getSystemClassLoader());
     }
