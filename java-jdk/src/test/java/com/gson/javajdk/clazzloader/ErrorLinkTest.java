@@ -7,6 +7,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
+/**
+ * http://ifeve.com/classloader/
+ */
 public class ErrorLinkTest {
     @Test
     public void test() throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
