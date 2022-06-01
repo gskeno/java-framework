@@ -53,6 +53,10 @@
 
 
 ##  框架
+### osgi
+- [Java模块化的守护神-OSGi就是这么简单！](https://blog.csdn.net/woniu211111/article/details/118036346)
+
+
 ### spring
 - [sring事务传播机制实例讲解](https://kingj.iteye.com/blog/1680350)
 - [使用 FactoryBean 接口创建实例](https://cloud.tencent.com/developer/article/1362787) 
