@@ -1,7 +1,6 @@
 package com.gson.osgi;
 
 import com.gson.hello.facade.HelloService;
-import com.gson.hello.facade.HelloServiceImpl;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
