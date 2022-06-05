@@ -9,10 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>java-log</artifactId>
+    <artifactId>java-log4j</artifactId>
     <version>1.0.0</version>
 
-    <name>java-log</name>
+    <name>java-log4j</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
