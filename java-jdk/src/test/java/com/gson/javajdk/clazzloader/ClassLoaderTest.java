@@ -5,6 +5,10 @@ import org.junit.Test;
 import sun.misc.Launcher;
 import sun.net.spi.nameservice.dns.DNSNameService;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.sql.*;
 
 public class ClassLoaderTest {
@@ -16,6 +20,7 @@ public class ClassLoaderTest {
      * {@link ClassLoader#loadClass(String)}
      * {@link java.sql.DriverManager#getConnection(String)}
      * {@link ClassLoader#getSystemClassLoader()}
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -51,12 +56,12 @@ public class ClassLoaderTest {
      * 类加载器只会加载直接定义静态字段的类，注意"直接"两字
      */
     @Test
-    public void test1(){
+    public void test1() {
         System.out.println(SubClass.ABC);
     }
 
     @Test
-    public void test2(){
+    public void test2() {
         // 只会输出abc
         // 常量在编译阶段会存入调用类的常量池中，也就是说Main类对SubClass1.ABC的引用
         // 已经与SuperClass1无关了，实际上已经转行为Main类对ABC字符串的引用了
@@ -64,23 +69,42 @@ public class ClassLoaderTest {
     }
 
     @Test
-    public void testAppClassLoader(){
+    public void testAppClassLoader() {
         // 应用类加载器
         ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
         System.out.println(systemClassLoader);
     }
 
     @Test
-    public void testClassForName(){
+    public void testClassForName() {
         try {
             // 会报错，重点在看源码
             Class<?> aClass = Class.forName("com.mysql.jdbc.Driver");
             DriverManager.getConnection("localhost:127.0.0.1:3306/mysql");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @Test
+    public void testUrlClassLoader() throws MalformedURLException, ClassNotFoundException {
+        URL[] urls = {new File("target/classes").toURI().toURL()};
+        // 父加载器是AppClassLoader
+        URLClassLoader urlClassLoader = new URLClassLoader(urls);
+        // 因为其有父类加载器AppClassLoader，由于双亲委托模型的存在，该类由AppClassLoader加载
+        Class<?> aClass = urlClassLoader.loadClass("com.gson.javajdk.clazzloader.UrlClassLoaderModel");
+        System.out.println(aClass.getClassLoader());
+    }
 
+    @Test
+    public void testUrlClassLoader2() throws MalformedURLException, ClassNotFoundException {
+        URL[] urls = {new File("target/classes").toURI().toURL()};
+        // 父加载器是null
+        URLClassLoader urlClassLoader = new URLClassLoader(urls, null);
+        // 因为其无父类加载器，该类则由自身类加载器进行加载
+        Class<?> aClass = urlClassLoader.loadClass("com.gson.javajdk.clazzloader.UrlClassLoaderModel");
+        System.out.println(aClass.getClassLoader());
+    }
 
 }
+
