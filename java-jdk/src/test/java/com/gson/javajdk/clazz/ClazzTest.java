@@ -2,6 +2,7 @@ package com.gson.javajdk.clazz;
 
 import org.junit.Test;
 
+import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,5 +29,27 @@ public class ClazzTest {
 
         cast = (List)a;
         System.out.println(cast);
+    }
+
+    @Test
+    public void testGetDeclaredField() throws NoSuchFieldException {
+        Field value = String.class.getDeclaredField("value");
+        System.out.println(value);
+
+        int[] ints = new int[5];
+        // 数组是没有DeclaredField的
+        Field[] declaredFields = ints.getClass().getDeclaredFields();
+        for(Field field : declaredFields){
+            System.out.println(field);
+        }
+    }
+
+    @Test
+    public void testGetDeclaredField1() throws NoSuchFieldException {
+        System.out.println(WholeObject.class.getDeclaredField("a"));
+        System.out.println(WholeObject.class.getDeclaredField("b"));
+        System.out.println(WholeObject.class.getDeclaredField("c"));
+        System.out.println(WholeObject.class.getDeclaredField("d"));
+        System.out.println(WholeObject.class.getDeclaredField("e"));
     }
 }
