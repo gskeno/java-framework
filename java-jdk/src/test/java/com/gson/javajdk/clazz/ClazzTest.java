@@ -3,6 +3,7 @@ package com.gson.javajdk.clazz;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
+import java.rmi.UnexpectedException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,9 +33,17 @@ public class ClazzTest {
     }
 
     @Test
-    public void testGetDeclaredField() throws NoSuchFieldException {
+    public void testGetDeclaredField() throws NoSuchFieldException, IllegalAccessException {
         Field value = String.class.getDeclaredField("value");
         System.out.println(value);
+        String abc = new String("abc");
+        try{
+            value.get(String.class);
+            throw new UnexpectedException("not run here");
+        }catch (Exception e){
+            e.printStackTrace();
+            assert  e instanceof IllegalAccessException;
+        }
 
         int[] ints = new int[5];
         // 数组是没有DeclaredField的
@@ -45,11 +54,17 @@ public class ClazzTest {
     }
 
     @Test
-    public void testGetDeclaredField1() throws NoSuchFieldException {
+    public void testGetDeclaredField1() throws NoSuchFieldException, IllegalAccessException {
         System.out.println(WholeObject.class.getDeclaredField("a"));
         System.out.println(WholeObject.class.getDeclaredField("b"));
         System.out.println(WholeObject.class.getDeclaredField("c"));
         System.out.println(WholeObject.class.getDeclaredField("d"));
         System.out.println(WholeObject.class.getDeclaredField("e"));
+        System.out.println(WholeObject.class.getDeclaredField("f"));
+
+        Field f = WholeObject.class.getDeclaredField("f");
+        System.out.println(f.get(WholeObject.class));
+        System.out.println(f.get(new WholeObject()));
+        System.out.println(f.get(new WholeObject()));
     }
 }

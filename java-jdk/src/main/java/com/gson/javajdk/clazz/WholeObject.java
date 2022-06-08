@@ -6,4 +6,5 @@ public class WholeObject {
     private Animal c ;
     protected Animal d;
     public Animal e;
+    public static final Animal f = new Dog("泰迪");
 }
