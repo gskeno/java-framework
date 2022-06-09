@@ -11,6 +11,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.rmi.UnexpectedException;
 import java.security.AccessControlException;
+import java.security.Permission;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -92,9 +93,9 @@ public class ClazzTest {
         // 因为其无父类加载器，该Bar类则由自身类加载器URLClassLoader进行加载
         Class<Bar> barClass = (Class<Bar>) urlClassLoader.loadClass("com.gson.javajdk.clazzloader.Bar");
         try {
-            System.setSecurityManager(new SecurityManager());
+            System.setSecurityManager(new CustomizerSecurityManager());
             foo.invokeDeclaredField(barClass);
-            throw new RuntimeException("not run here");
+            // throw new RuntimeException("not run here");
         }
         // java.security.AccessControlException: access denied
         // ("java.lang.RuntimePermission" "accessDeclaredMembers")
@@ -103,6 +104,70 @@ public class ClazzTest {
         }
 
         // Foo 和Bar 都是AppClassLoader加载的，所以不会有访问权限异常
-        foo.invokeDeclaredField(Bar.class);
+        // foo.invokeDeclaredField(Bar.class);
+    }
+
+    @Test
+    public void testGetDeclaredField4() throws NoSuchFieldException, ClassNotFoundException, MalformedURLException {
+        // Foo 由AppClassLoader加载
+        Foo foo = new Foo();
+        URL[] urls = {new File("target/classes").toURI().toURL()};
+        // 父加载器是null
+        URLClassLoader urlClassLoader = new URLClassLoader(urls, null);
+        // 因为其无父类加载器，该Bar类则由自身类加载器URLClassLoader进行加载
+        Class<Bar> barClass = (Class<Bar>) urlClassLoader.loadClass("com.gson.javajdk.clazzloader.Bar");
+        try {
+            System.setSecurityManager(new CustomizerSecurityManager());
+            foo.invokeDeclaredField(barClass);
+        }
+        // java.security.AccessControlException: access denied
+        // ("java.lang.RuntimePermission" "accessDeclaredMembers")
+        catch (AccessControlException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    static class CustomizerSecurityManager extends SecurityManager{
+        @Override
+        public void checkPermission(Permission perm) {
+            // 检查通过
+            String name = perm.getName();
+            if (name.equals("accessDeclaredMembers")){
+                return;
+            }
+            super.checkPermission(perm);
+        }
+
+        @Override
+        public void checkPackageAccess(String pkg) {
+            if (pkg.equals("com.gson.javajdk.clazzloader")){
+                throw new RuntimeException("not allow access package com.gson.javajdk.clazzloader");
+            }
+            super.checkPackageAccess(pkg);
+        }
+    }
+
+    public static void main(String[] args) throws MalformedURLException, ClassNotFoundException {
+        // Foo 由AppClassLoader加载
+        Foo foo = new Foo();
+        URL[] urls = {new File("java-jdk/target/classes").toURI().toURL()};
+        System.out.println(urls[0]);
+        // 父加载器是null
+        URLClassLoader urlClassLoader = new URLClassLoader(urls, null);
+        // 因为其无父类加载器，该Bar类则由自身类加载器URLClassLoader进行加载
+        Class<Bar> barClass = (Class<Bar>) urlClassLoader.loadClass("com.gson.javajdk.clazzloader.Bar");
+        try {
+            System.setSecurityManager(new CustomizerSecurityManager());
+            foo.invokeDeclaredField(barClass);
+        }
+        // java.security.AccessControlException: access denied
+        // ("java.lang.RuntimePermission" "accessDeclaredMembers")
+        catch (AccessControlException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
