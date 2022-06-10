@@ -25,10 +25,14 @@ public class HierarchyTest {
         Peeler peeler = z.getComponent(Peeler.class);
         System.out.println(peeler);
         // WON'T WORK! peeler will be null
+        // x是最顶层容器，其内只有Apple组件，没有Peeler组件
         peeler = x.getComponent(Peeler.class);
         System.out.println(peeler);
         // WON'T WORK! This will throw an exception
+        // 因为Juicer的构造函数依赖一个Peeler和一个Peelable
+        // y容器可以看到x父容器中的Apple作为Peelable,
+        // 但是看不到z子容器中的Peeler，所以抛出异常
         Juicer juicer =  y.getComponent(Juicer.class);
-
+        System.out.println(juicer);
     }
 }

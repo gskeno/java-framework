@@ -5,6 +5,7 @@ import com.gson.javajdk.clazzloader.Foo;
 import org.junit.Test;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -169,5 +170,50 @@ public class ClazzTest {
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    public void testClassForName() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Class<?> forNameObjectClass1 =  Class.forName(
+                "com.gson.javajdk.clazz.ForNameObject",
+                // 不进行初始化，则类变量不会被初始化，且静态代码块不会执行
+                false,
+                this.getClass().getClassLoader());
+        System.out.println("-----------");
+//        ForNameObject o = (ForNameObject)forNameObjectClass1.newInstance();
+//        System.out.println(o.getName0());
+        System.out.println("-----------");
+
+        Class<?> forNameObjectClass2 =  Class.forName(
+                "com.gson.javajdk.clazz.ForNameObject",
+                // 进行初始化，则类变量会被初始化，且静态代码块会执行
+                true,
+                this.getClass().getClassLoader());
+    }
+
+    @Test
+    public void testGetSuperClass(){
+        // Void的父类是Object
+        System.out.println(Void.class.getSuperclass());
+        // int的父类是Number
+        Object a = 5;
+        Class<?> superclass = a.getClass().getSuperclass();
+        System.out.println(superclass);
+
+        // 数组的父类是Object
+        int[] m = new int[]{1,2};
+        System.out.println(m.getClass().getSuperclass());
+
+        // 顶级接口的父类是null
+        System.out.println(Iterable.class.getSuperclass());
+
+        // List接口的父类是null, 它没有父类，虽然它继承Iterable接口
+        System.out.println(List.class.getSuperclass());
+
+        // 不可变类String的父类是Object
+        System.out.println(String.class.getSuperclass());
+
+        System.out.println(Array.class.getSuperclass());
+
     }
 }

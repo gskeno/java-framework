@@ -1,5 +1,6 @@
 package com.gson.pico.container;
 
+
 public class Apple {
     private Orange orange;
     private Pear pear;
@@ -22,4 +23,5 @@ public class Apple {
                 ", banana=" + banana +
                 '}';
     }
+
 }
