@@ -2,6 +2,7 @@ package com.gson.pico.container;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.picocontainer.Characteristics;
 import org.picocontainer.DefaultPicoContainer;
 import org.picocontainer.MutablePicoContainer;
 import org.picocontainer.behaviors.Caching;
@@ -81,5 +82,21 @@ public class AppTest {
         System.out.println(component3);
 
         System.out.println(component3 == component2);
+    }
+
+    @Test
+    public void  testCache1(){
+        MutablePicoContainer pico = new DefaultPicoContainer();
+        // 一次性，所以as与addComponent要一起使用
+        pico.as(Characteristics.CACHE).addComponent(Foo.class);
+        Foo foo1 = pico.getComponent(Foo.class);
+        Foo foo2 = pico.getComponent(Foo.class);
+        assert foo1 == foo2;
+
+        // 单例模式不再生效
+        pico.addComponent(Bar.class);
+        Bar bar1 = pico.getComponent(Bar.class);
+        Bar bar2 = pico.getComponent(Bar.class);
+        assert bar1 != bar2;
     }
 }
