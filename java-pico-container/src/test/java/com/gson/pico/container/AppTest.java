@@ -241,13 +241,18 @@ public class AppTest {
     @Test
     public void testAmbiguous(){
         MutablePicoContainer pico = new DefaultPicoContainer();
-        pico.addComponent("house", new House("别墅"));
+        pico.addComponent("house1", new House("别墅"));
         pico.addComponent("house2", new House("大平层"));
 
-        // 构造函数的参数名是house
-        pico.as(Characteristics.USE_NAMES).addComponent(City.class);
-        City component = pico.getComponent(City.class);
-        System.out.println(component);
+        try {
+            // 构造函数的参数名是house
+            pico.as(Characteristics.USE_NAMES).addComponent(City.class);
+            City component = pico.getComponent(City.class);
+            System.out.println(component);
+            throw new RuntimeException("not should go here");
+        }catch (AbstractInjector.AmbiguousComponentResolutionException e){
+            assert e.getMessage().contains("but there are too many choices to inject");
+        }
     }
 
 
