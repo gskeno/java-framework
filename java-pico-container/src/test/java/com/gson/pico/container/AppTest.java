@@ -1,5 +1,6 @@
 package com.gson.pico.container;
 
+import com.gson.pico.container.introduce.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.picocontainer.Characteristics;
@@ -99,4 +100,40 @@ public class AppTest {
         Bar bar2 = pico.getComponent(Bar.class);
         assert bar1 != bar2;
     }
+
+    @Test
+    public void testConstructorInject(){
+        DefaultPicoContainer pico = new DefaultPicoContainer();
+        pico.addComponent(Water.class);
+        pico.addComponent(Vegetable.class);
+        pico.addComponent(Beef.class);
+        pico.addComponent(Pig.class);
+        pico.addComponent(Food.class);
+
+        Food food = pico.getComponent(Food.class);
+        System.out.println(food);
+    }
+
+    @Test
+    public void testSetterInject(){
+        DefaultPicoContainer pico = new DefaultPicoContainer(new SetterInjection());
+        pico.addComponent(Food.class);
+        pico.addComponent(Water.class);
+        pico.addComponent(Beef.class);
+        pico.addComponent(Pig.class);
+        pico.addComponent(Vegetable.class);
+
+        pico.getComponent(Food.class);
+    }
+
+    @Test
+    public void testSetterInject1(){
+        DefaultPicoContainer pico = new DefaultPicoContainer(new SetterInjection("mySynonymForSet"));
+        pico.addComponent(City.class);
+        pico.addComponent(House.class);
+
+        pico.getComponent(City.class);
+    }
+
+
 }
