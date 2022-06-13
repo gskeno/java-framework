@@ -9,6 +9,10 @@ public class City {
         this.house = house;
     }
 
+    public City(House house){
+        this.house = house;
+    }
+
     public House getHouse() {
         return house;
     }
