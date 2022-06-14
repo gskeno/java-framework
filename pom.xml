@@ -45,6 +45,7 @@
         <module>java-pico-container</module>
         <module>java-jmockit</module>
         <module>java-paranamer</module>
+        <module>java-maven-shade-plugin</module>
     </modules>
 
     <name>java-framework</name>
