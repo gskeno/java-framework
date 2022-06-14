@@ -35,15 +35,19 @@ public class ParanamerPicoContainerTestCase {
     
 
     @Test
-    public void
-           testNameBindingShouldNotThrowWhenAreParameterNamesAreNotAvailable()
-            throws Exception {
+    public void testNameBindingShouldNotThrowWhenAreParameterNamesAreNotAvailable() throws Exception {
         Paranamer paranamer = new CachingParanamer(new AdaptiveParanamer());
 
         Method method = getClass().getMethod("methodToFind", String.class);
         ParameterNameBinding binding = new ParameterNameBinding(paranamer, method, 0);
 
         assertEquals("name", binding.getName());
+    }
+
+    public static void main(String[] args) {
+        System.out.println(AdaptiveParanamer.__PARANAMER_DATA);
+        System.out.println("------");
+        System.out.println(CachingParanamer.__PARANAMER_DATA);
     }
 
 

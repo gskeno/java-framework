@@ -9,6 +9,10 @@ public class City {
         this.house = house;
     }
 
+    public City(){
+
+    }
+
     public City(House house){
         System.out.println("City Constructor house invoked");
         this.house = house;
@@ -19,7 +23,7 @@ public class City {
     }
 
     public void setHouse(House house) {
-        System.out.println("setHouse in City invoked");
+        System.out.println("setHouse in City invoked," + house);
         this.house = house;
     }
 

@@ -239,8 +239,8 @@ public class AppTest {
     }
 
     @Test
-    public void testAmbiguous(){
-        MutablePicoContainer pico = new DefaultPicoContainer();
+    public void testAmbiguousNames(){
+        MutablePicoContainer pico = new DefaultPicoContainer(new SetterInjection());
         pico.addComponent("house1", new House("别墅"));
         pico.addComponent("house2", new House("大平层"));
 
