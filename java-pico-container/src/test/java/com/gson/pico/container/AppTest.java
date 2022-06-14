@@ -253,6 +253,11 @@ public class AppTest {
         }catch (AbstractInjector.AmbiguousComponentResolutionException e){
             assert e.getMessage().contains("but there are too many choices to inject");
         }
+
+        // 执行构造函数
+        pico.addComponent("house", new House("商品房"));
+        City component = pico.getComponent(City.class);
+
     }
 
 

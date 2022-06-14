@@ -8,6 +8,7 @@
 - [世界上最快的排序算法——Timsort](https://www.cnblogs.com/sunshuyi/p/12680918.html)
 - [图解排序算法(四)之归并排序](https://www.cnblogs.com/chengxiao/p/6194356.html)
 - [如何计算Java对象所占内存的大小](https://segmentfault.com/a/1190000015009289)
+- [JDK8新特性:编译器保留方法参数名字](https://blog.csdn.net/qq_22017543/article/details/98103704)
 
 ### 多线程
 - [线程池之ThreadPoolExecutor使用](https://www.jianshu.com/p/f030aa5d7a28)

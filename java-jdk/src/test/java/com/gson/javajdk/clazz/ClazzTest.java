@@ -7,6 +7,8 @@ import org.junit.Test;
 import java.io.File;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -214,6 +216,14 @@ public class ClazzTest {
         System.out.println(String.class.getSuperclass());
 
         System.out.println(Array.class.getSuperclass());
+    }
 
+    @Test
+    public void testGetMethodArgs() throws NoSuchMethodException {
+        Method describe = Mountain.class.getMethod("describe", Stone.class,  Tree.class);
+        Parameter[] parameters = describe.getParameters();
+        for (int i = 0; i < parameters.length; i++) {
+            System.out.println(parameters[i].getType() + ":" + parameters[i].getName());
+        }
     }
 }

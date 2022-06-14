@@ -10,6 +10,7 @@ public class City {
     }
 
     public City(House house){
+        System.out.println("City Constructor house invoked");
         this.house = house;
     }
 
@@ -19,7 +20,6 @@ public class City {
 
     public void setHouse(House house) {
         System.out.println("setHouse in City invoked");
-
         this.house = house;
     }
 
