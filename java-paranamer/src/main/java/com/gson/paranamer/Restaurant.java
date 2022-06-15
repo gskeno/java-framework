@@ -17,4 +17,8 @@ public class Restaurant {
         staffs.add(new Staff());
         return staffs;
     }
+
+    public void getName(String name){
+
+    }
 }
