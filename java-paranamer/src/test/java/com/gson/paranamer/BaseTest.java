@@ -29,6 +29,13 @@ public class BaseTest {
     }
 
     @Test
+    public void testDefaultParanamer() throws NoSuchMethodException {
+        Paranamer paranamer = new DefaultParanamer();
+        String[] getStaffs = paranamer.lookupParameterNames(Restaurant.class.getMethod("getStaffs", Staff.class));
+        System.out.println(Arrays.toString(getStaffs));
+    }
+
+    @Test
     public void testBytecodeReadingParanamer() throws NoSuchMethodException {
         BytecodeReadingParanamer paranamer = new BytecodeReadingParanamer();
 

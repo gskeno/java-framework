@@ -55,30 +55,63 @@
             <version>1</version>
             <optional>true</optional>
         </dependency>
+
+        <dependency>
+            <groupId>org.gson.poem</groupId>
+            <artifactId>java-poem</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <testSourceDirectory>src/test/java</testSourceDirectory>
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>com.thoughtworks.paranamer</groupId>-->
-<!--                <artifactId>paranamer-maven-plugin</artifactId>-->
-<!--                <version>2.5.1</version>-->
-<!--                <configuration>-->
-<!--                    <sourceDirectory>target/test</sourceDirectory>-->
-<!--                    <outputDirectory>target/test-classes</outputDirectory>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>test</phase>-->
-<!--                        <id>generate</id>-->
-<!--                        <goals>-->
-<!--                            <goal>generate</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
+        <!--        <sourceDirectory>src/main/java</sourceDirectory>-->
+        <!--        <testSourceDirectory>src/test/java</testSourceDirectory>-->
+        <plugins>
+            <!--            <plugin>-->
+            <!--                <groupId>com.thoughtworks.paranamer</groupId>-->
+            <!--                <artifactId>paranamer-maven-plugin</artifactId>-->
+            <!--                <version>2.5.1</version>-->
+            <!--                <configuration>-->
+            <!--                    <sourceDirectory>target/test</sourceDirectory>-->
+            <!--                    <outputDirectory>target/test-classes</outputDirectory>-->
+            <!--                </configuration>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <phase>test</phase>-->
+            <!--                        <id>generate</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>generate</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+
+
+            <plugin>
+                <groupId>com.thoughtworks.paranamer</groupId>
+                <artifactId>paranamer-maven-plugin</artifactId>
+                <version>2.5.1</version>
+                <executions>
+                    <execution>
+                        <id>run</id>  <!-- id is optional -->
+                        <configuration>
+                            <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                        </configuration>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+<!--                <dependencies>-->
+<!--                    &lt;!&ndash; if some of parameter names you need to retain are held in pre-existing jars, they need to be added to the classpath &ndash;&gt;-->
+<!--                    <dependency>-->
+<!--                        <groupId>org.gson.poem</groupId>-->
+<!--                        <artifactId>java-poem</artifactId>-->
+<!--                        <version>1.0-SNAPSHOT</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+            </plugin>
+        </plugins>
     </build>
 </project>
