@@ -20,7 +20,7 @@ public class LongestUnRepeateSubStr {
             }
 
             map.put(cur, i);
-            maxLen = Math.max(maxLen, i -start);
+            maxLen = Math.max(maxLen, i - start);
 
         }
         // 返回最大长度
