@@ -25,6 +25,35 @@ public class 寻找两个正序数组的中位数_4 {
      * @return
      */
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        return 0;
+        // 寻找第k(k从1算起)小的数
+        int k = (nums1.length  + nums2.length ) /2 + 1;
+        // 从数组1的哪个下标位置元素开始分析
+        int beginPos1 = 0;
+        // 从数组2的哪个下标位置元素开始分析
+        int beginPos2 = 0;
+        while (true){
+            int width = k/2;
+            // 数组1从beginPos1开始的前k/2个数的最后一个
+            int segEnd1 = nums1[beginPos1 + width - 1];
+            // 数组2从beginPos2开始的前k/2个数的最后一个
+            int segEnd2 = nums2[beginPos2 + width - 1];
+
+            // segEnd1前的k/2-1个数都比segEnd2小，肯定不是中位数，后面将不再考虑(segEnd1也不考虑)
+            if (segEnd1 < segEnd2){
+                beginPos1 = beginPos1 + width;
+                k = k - k/2;
+            }
+            // segEnd2前的k/2-1个数都比segEnd1小，肯定不是中位数，后面将不再考虑(segEnd2也不考虑)
+            else if (segEnd1 > segEnd2){
+                beginPos2 = beginPos2 + width;
+                k = k - k/2;
+            }
+            // segEnd1, segEnd2前的共计k-2个数都比segEnd1=segEnd2小，后面都不再考虑
+            else {
+
+            }
+        }
+
+        return null;
     }
 }
