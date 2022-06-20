@@ -25,7 +25,8 @@ public class 正则表达式匹配_10 {
      * 2, If p.charAt(j) == '.' : dp[i][j] = dp[i-1][j-1];
      * 3, If p.charAt(j) == '*':
      *    here are two sub conditions:
-     *                1   if p.charAt(j-1) != s.charAt(i) : dp[i][j] = dp[i][j-2]  //in this case, a* only counts as empty
+     *                1   if p.charAt(j-1) != s.charAt(i) and p.charAt(j-1) != '.'
+     *                  : dp[i][j] = dp[i][j-2]  //in this case, a* only counts as empty
      *                2   if p.charAt(j-1) == s.charAt(i) or p.charAt(i-1) == '.':
      *                               dp[i][j] = dp[i-1][j]    //in this case, a* counts as multiple a
      *                            or dp[i][j] = dp[i][j-1]   // in this case, a* counts as single a
@@ -41,7 +42,13 @@ public class 正则表达式匹配_10 {
         // 由于s,j长度都>0,所以dp[0][0]表示s的前0个字符与j的前0个字符是否匹配没有现实意义。
         // 但是循环中有用到该值，且空字符串与空模式串自然是完全匹配的
         dp[0][0] = true;
-        for (int i = 1; i <=s.length() ; i++) {
+        // 空字符串与任意多个 .* 都匹配
+        for (int j = 2; j <=p.length(); j++) {
+            if (p.charAt(j-1) == '*' && dp[0][j-2]){
+                dp[0][j] = dp[0][j-2];
+            }
+        }
+        for (int i = 0; i <=s.length() ; i++) {
             for (int j = 1; j <=p.length() ; j++) {
                 if (p.charAt(j-1) == s.charAt(i-1)){
                     dp[i][j] = dp[i-1][j-1];
@@ -57,5 +64,13 @@ public class 正则表达式匹配_10 {
             }
         }
         return dp[s.length()][p.length()];
+    }
+
+    public static void main(String[] args) {
+        正则表达式匹配_10 solution = new 正则表达式匹配_10();
+        System.out.println(solution.isMatch("aa","a"));
+        System.out.println(solution.isMatch("aa","a*"));
+        System.out.println(solution.isMatch("ab",".*"));
+        System.out.println(solution.isMatch("aab","c*a*b"));
     }
 }
