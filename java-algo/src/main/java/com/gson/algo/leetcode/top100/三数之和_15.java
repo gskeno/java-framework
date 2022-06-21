@@ -69,8 +69,45 @@ public class 三数之和_15 {
                     list.add(nums[second]);
                     list.add(nums[third]);
                     ans.add(list);
-                    // 别忘了这里的continue
+                }
+            }
+        }
+        return ans;
+    }
+
+    public List<List<Integer>> threeSum1(int[] nums) {
+        if (nums.length < 3) {
+            return new ArrayList<>();
+        }
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(nums);
+        // first表示第一个选中的元素对应的位置
+        for (int first = 0; first < nums.length - 2; first++) {
+            if (first > 0 && nums[first] == nums[first - 1]) {
+                continue;
+            }
+            int target = -nums[first];
+            // second表示第二个选中的元素对应的位置
+            int third = nums.length - 1;
+            for (int second = first + 1; second < nums.length - 1; second++) {
+                if (second > first + 1 && nums[second] == nums[second - 1]) {
                     continue;
+                }
+                // third表示第三个选中的元素对应的位置
+                if (nums[second] + nums[third] < target) {
+                    continue;
+                }
+
+                while (nums[second] + nums[third] > target && third > second) {
+                    third--;
+                }
+
+                if (nums[second] + nums[third] == target && third > second) {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums[first]);
+                    list.add(nums[second]);
+                    list.add(nums[third]);
+                    ans.add(list);
                 }
             }
         }
