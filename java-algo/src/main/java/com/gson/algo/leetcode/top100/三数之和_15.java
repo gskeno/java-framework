@@ -69,6 +69,8 @@ public class 三数之和_15 {
                     list.add(nums[second]);
                     list.add(nums[third]);
                     ans.add(list);
+                    // 别忘了这里的continue
+                    continue;
                 }
             }
         }
