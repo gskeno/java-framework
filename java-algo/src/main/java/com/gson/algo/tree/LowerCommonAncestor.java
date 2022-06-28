@@ -37,10 +37,12 @@ public class LowerCommonAncestor {
      *
      * 1. 如果node就等于o1,则o2就在node(o1)的左子树或者右子树中, node就是o1,o2的最近公共祖先，直接返回，结束递归。
      *    node等于o2时也同理。
-     * 2. 如果node既不等于o1, 也不等于o2。则o1,o2在node1的左右子树中，至于怎么分布的，不清楚，需要分别对node的左右
+     * 2. 如果node既不等于o1, 也不等于o2。则o1,o2在node的左右子树中，至于怎么分布的，不清楚，需要分别对node的左右
      *    子树进行递归分析。
      *
      *
+     * 再次说明:
+     * helper函数返回值表示 在以node为根节点的树中寻找o1,o2节点，找到了o1或者o2,立马返回o1或者o2
      *
      */
     private TreeNode helper(TreeNode node, int o1, int o2){
