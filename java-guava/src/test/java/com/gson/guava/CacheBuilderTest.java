@@ -15,6 +15,27 @@ import java.util.concurrent.TimeUnit;
  */
 public class CacheBuilderTest extends Assert {
 
+    @Test
+    public void testExpireAfterWrite() throws ExecutionException, InterruptedException {
+        LoadingCache<String,Integer> cache = CacheBuilder.newBuilder().expireAfterWrite(5, TimeUnit.SECONDS)
+                .build(new CacheLoader<String, Integer>() {
+                    @Override
+                    public Integer load(String key) throws Exception {
+                        System.out.println("load" + key);
+                        if (key.equals("s1")){
+                            return 1;
+                        }
+                        return 2;
+                    }
+                });
+        // 没有，将会加载
+        cache.get("s1");
+        // 5秒内不会再加载
+        cache.get("s1");
+        Thread.sleep(6*1000);
+        cache.get("s1");
+    }
+
     /**
      * 一个基本的CacheBuilder的测试,
      * {@link Cache#getIfPresent(Object)}
