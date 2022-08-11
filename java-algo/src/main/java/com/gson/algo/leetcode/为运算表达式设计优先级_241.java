@@ -61,7 +61,7 @@ public class 为运算表达式设计优先级_241 {
             for (int j = i; j < dp[0].length; j++) {
                 dp[i][j] = new ArrayList<>();
                 // 单个数字的运算操作组合结果永远都是自己，这一种情况
-                if (i == j && (i&1) == 0) {
+                if (i == j && (i & 1) == 0) {
                     dp[i][j].add(ops.get(i));
                 }
             }
@@ -74,20 +74,20 @@ public class 为运算表达式设计优先级_241 {
     private List<Integer> dfs(List<Integer>[][] dp, int left, int right, List<Integer> ops) {
         // 记忆化搜索，已经存储过计算记过，直接返回,不再计算，否则进行首次计算，存储记忆以备下次查询
         System.out.println(left + "," + right);
-        if (dp[left][right].isEmpty()){
+        if (dp[left][right].isEmpty()) {
             // 注意，这里是k+=2,因为连续的两个运算符之间是隔了一个数字的
             // left,k,right指向的都是操作数，且都是偶数
-            for (int k = left ; k < right; k+=2) {
+            for (int k = left; k < right; k += 2) {
                 List<Integer> leftRes = dfs(dp, left, k, ops);
-                List<Integer> rightRes = dfs(dp, k+2, right, ops);
+                List<Integer> rightRes = dfs(dp, k + 2, right, ops);
                 Integer operator = ops.get(k + 1);
-                for(int leftV : leftRes){
-                    for(int rightV : rightRes){
-                        if (operator == ADDITION){
+                for (int leftV : leftRes) {
+                    for (int rightV : rightRes) {
+                        if (operator == ADDITION) {
                             dp[left][right].add(leftV + rightV);
-                        }else if (operator == SUBTRACTION){
+                        } else if (operator == SUBTRACTION) {
                             dp[left][right].add(leftV - rightV);
-                        }else {
+                        } else {
                             dp[left][right].add(leftV * rightV);
                         }
                     }
@@ -125,30 +125,59 @@ public class 为运算表达式设计优先级_241 {
                 dp[i][j] = new ArrayList<Integer>();
             }
         }
+        // 能够知道，ops的长度是基数，以 2*3-4*5为例子
+        // 处理并设置 表达式宽度为1的结果， 如2, 3, 4, 5
         for (int i = 0; i < ops.size(); i += 2) {
             dp[i][i].add(ops.get(i));
         }
-        for (int i = 3; i <= ops.size(); i += 2) {
-            for (int j = 0; j + i <= ops.size(); j += 2) {
-                int l = j;
-                int r = j + i - 1;
-                for (int k = j + 1; k < r; k += 2) {
-                    List<Integer> left = dp[l][k - 1];
-                    List<Integer> right = dp[k + 1][r];
-                    for (int num1 : left) {
-                        for (int num2 : right) {
-                            if (ops.get(k) == ADDITION) {
-                                dp[l][r].add(num1 + num2);
-                            } else if (ops.get(k) == SUBTRACTION) {
-                                dp[l][r].add(num1 - num2);
-                            } else if (ops.get(k) == MULTIPLICATION) {
-                                dp[l][r].add(num1 * num2);
+        // 表达式宽度为3，5...的情况。
+        // 宽度为3的表达式有 2*3, 3-4, 4*5, 首尾数字跨度为2
+        // 宽度为5的表达式有 2*3-4, 3-4*5， 首尾数字跨度为4
+        // 这里先处理首位数字跨度为2的表达式，再处理跨度为4，6, ....
+        for (int stage = 2; stage <= ops.size(); stage += 2) {
+            // left表示要处理的表达式起始位置，下一个表达式起始位置在+2处
+            for (int left = 0; left + stage < ops.size(); left += 2) {
+                // 此时, left, right都指向数字元素
+                int right = left + stage;
+                // k指向运算符元素，下一个运算符是+2的位置
+                for (int k = left + 1; k < right; k += 2) {
+                    List<Integer> leftRes = dp[left][k-1];
+                    List<Integer> rightRes = dp[k+1][right];
+                    for(int num1 : leftRes){
+                        for(int num2: rightRes){
+                            if (ops.get(k) == ADDITION){
+                                dp[left][right].add(num1 + num2);
+                            }else if (ops.get(k) == SUBTRACTION){
+                                dp[left][right].add(num1 - num2);
+                            }else {
+                                dp[left][right].add(num1 * num2);
                             }
                         }
                     }
                 }
             }
         }
+//        for (int i = 3; i <= ops.size(); i += 2) {
+//            for (int j = 0; j + i <= ops.size(); j += 2) {
+//                int l = j;
+//                int r = j + i - 1;
+//                for (int k = j + 1; k < r; k += 2) {
+//                    List<Integer> left = dp[l][k - 1];
+//                    List<Integer> right = dp[k + 1][r];
+//                    for (int num1 : left) {
+//                        for (int num2 : right) {
+//                            if (ops.get(k) == ADDITION) {
+//                                dp[l][r].add(num1 + num2);
+//                            } else if (ops.get(k) == SUBTRACTION) {
+//                                dp[l][r].add(num1 - num2);
+//                            } else if (ops.get(k) == MULTIPLICATION) {
+//                                dp[l][r].add(num1 * num2);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
         return dp[0][ops.size() - 1];
     }
 
