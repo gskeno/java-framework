@@ -224,7 +224,7 @@ public int shoppingOffers(List<Integer> price, List<List<Integer>> special, List
 //                        return dfs(nextState, summ + nums[i], nums, n, target);
 //                    }
                             // 修改如下:
-                            // 寻找下一个子集合，使其和未target
+                            // 寻找下一个子集合，使其和=target
                             if (summ + nums[i] == target && dfs(nextState, 0, nums, n, target)) {
                                 res = true;
                             }
