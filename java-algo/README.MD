@@ -140,6 +140,109 @@ public int shoppingOffers(List<Integer> price, List<List<Integer>> special, List
 }
 ```
 
+- [划分为k个相等的子集](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/)
+
+> 题目:给定一个整数数组  nums 和一个正整数 k，找出是否有可能把这个数组分成 k 个非空子集，其总和都相等。
+
+> 示例: 输入： nums = [1,2,2,3,3,4,5], k = 4
+输出： True
+说明： 有可能将其分成 4 个子集（5），（1,4），（2,3），（2,3）等于总和。
+
+> 分析: 
+<br> 1. k个子集，每个子集的和为target = sum/k，数组排序后再分析更方便。
+<br> 2. 如何标记是否已划分某个元素？由于最多才16个元素，可以采取**位操作**来标记数组中某个元素是否已经划分。
+如101b,表示数组中第1，3个元素(从1算起)已经划分。
+<br> 3. 我们尝试找出这样的一个个子集，具体这样操作，从未划分的元素中选取一个元素，
+> 如果与当前正在处理的子集元素总和summ相加仍然不超过target，则该元素可划分；否则不可划分。
+当划分后，新的子集元素总和为summ+nums[i],如果正好为target，一个元素和为target的子集我们已经找到了，
+我们需要找下一个子集了，否则当前子集需要继续找元素进行补充。当最后所有元素都用完，且最后一个集合元素之和
+为target时
+
+```java
+/**
+     * dfs + 记忆化搜索
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public boolean canPartitionKSubsets(int[] nums, int k) {
+        if (k == 1) {
+            return true;
+        }
+
+        int len = nums.length;
+        Arrays.sort(nums);
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        if (sum % k != 0) {
+            return false;
+        }
+        int target = sum / k;
+        if (nums[len - 1] > target) {
+            return false;
+        }
+
+
+        return dfs(0, 0, nums, len, target);
+    }
+
+    /**
+     * 能否根据state所表示的未使用数字集合，任意个元素组合，使其和都为target
+     *
+     * @param state
+     * @param summ 当前已经获取到的累计和，不大于target。要尝试从nums中未选择的一个数中，找一个使其和未target
+     * <p>
+     * 这里加上缓存 state->bool
+     */
+    Map<Integer, Boolean> cache = new HashMap<>();
+
+    private boolean dfs(int state, int summ, int[] nums, int n, int target) {
+        if (cache.get(state) == null) {
+            boolean res = false;
+            // 表示原始数组中的所有元素都已经使用完
+            if (state == (1 << n) - 1) {
+                res = true;
+            } else {
+                // 遍历原始数组中的每个未使用的元素，都可以尝试累加在summ上，只要累加后和不超过target
+                for (int i = 0; i < n; i++) {
+                    // 表示第i个数未使用(i从0算起)
+                    if ((state & (1 << i)) == 0) {
+                        //尝试使用
+                        if (summ + nums[i] > target) {
+                            // 后续的数字比nums[i]更大，更不可能
+                            break;
+                        } else {
+                            int nextState = state | (1 << i);
+//                    注意:这种写法不对，这种写法表示选择任意一个未使用的数，达不到目标，目标就无法达成
+//                    实际上应该是 选择一个未使用的数(任意选择)，有一种选择方案，能达到目标，就可以
+//                    if (summ + nums[i] == target){
+//                        return dfs(nextState, 0, nums, n, target);
+//                    }else {
+//                        return dfs(nextState, summ + nums[i], nums, n, target);
+//                    }
+                            // 修改如下:
+                            // 寻找下一个子集合，使其和未target
+                            if (summ + nums[i] == target && dfs(nextState, 0, nums, n, target)) {
+                                res = true;
+                            }
+                            // 寻找下一个未使用元素，使当前子集元素和 + 下一个未使用元素 = target
+                            else if (dfs(nextState, summ + nums[i], nums, n, target)) {
+                                res = true;
+                            }
+                        }
+                    }
+                }
+            }
+            cache.put(state, res);
+        }
+        return cache.get(state);
+
+    }
+```
+
 # 动态规划
 - [变换的迷宫(困难)](https://leetcode.cn/problems/Db3wC1/)
 > 1. 多维矩阵(3维及以上)
