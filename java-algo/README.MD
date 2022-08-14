@@ -321,3 +321,87 @@ private boolean dfs(int n){
 ```
 ## 总结
 - 博弈论主要用于在一个平等的对局中，二人各自利用对方的策略变化自己的策略，以达到取胜的最终目的。
+
+# 状态压缩
+
+## 总结
+- 判断一个数字x二进制下第i位是不是等于1。
+> 方法：if(((1<<(i−1))&x)>0)
+
+- 将一个数字x二进制下第i位更改成1
+> 方法：x=x|(1<<(i−1))
+
+- 把一个数字二进制下最靠右的第一个1去掉
+> 方法：x=x&(x−1)
+
+- 状态压缩本质还是一种暴力求解
+
+# 桶排序
+- [存在重复元素 III](https://leetcode.cn/problems/contains-duplicate-iii/)
+
+> 题目: 给你一个整数数组 nums 和两个整数k 和 t 。
+请你判断是否存在 两个不同下标 i 和 j，使得abs(nums[i] - nums[j]) <= t ，同时又满足 abs(i - j) <= k 。
+如果存在则返回 true，不存在返回 false。
+
+> 分析: 
+<br><br>1. k决定了滑动窗口的大小，当遍历到nums[i]元素时，如何知道其前的k个元素nums[i-k]到nums[i-1]与nums[i]
+的差值绝对值都在t范围内?
+<br><br>2. **使用桶**，每个桶的理论元素最大值与理论最小值差值为t，则两个元素的差值绝对值
+<=t时，必然两个元素落在同一个桶里，或者在相邻的桶里且差值<=t，否则必然超过t。
+<br><br>3. 注意到两个int相减可能会溢出，且计算允许桶内元素差值最大值为t+1时也可能溢出，
+代码中要将int转化为long
+
+```java
+/**
+     * 桶排序，每个桶的容量设置为t+1,连续的数字可以尝试放置进一个桶里面，
+     * 比如 t=3,
+     * 0,1,2,3 放置到桶编号0里，
+     * 4,5,6,7 放置到桶编号1里
+     * value = (t+1)*a+b。如果value满足左侧表达式，则value应该放置在编号a桶里
+     * 注意，value可能为负数，所以桶编号也可能为负数
+     *
+     * 遍历到元素nums[i]时，根据计算nums[i]如果应该放置在桶编号m里，
+     * 去查询m桶里是否已经存在元素，如果存在，则说明已经存在一个元素满足abs(nums[i] - nums[j]) <= t ,则返回true。
+     * 如果不存在，则查m桶相邻的m-1桶和m+1桶是否存在元素满足abs(nums[i] - nums[j]) <= t,如果存在，则返回true。
+     *
+     * 否则, 将nums[i]放置到m桶里。另外，将nums[i-k]从桶里移除。
+     *
+     * 另外，要注意到溢出的风险。int val1, val2,
+     * val1+1可能溢出。
+     * val1-val2也可能溢出。
+     * @param nums
+     * @param k
+     * @param t
+     * @return
+     */
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+        Map<Long, Integer> bucketToVals = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int val = nums[i];
+            // size必须使用long型，因为t+1可能会溢出int
+            long size = (long)t + 1;
+            long bucketIdx = getIdx(val, size);
+            if (bucketToVals.get(bucketIdx) != null){
+                return true;
+            }
+            if (bucketToVals.get(bucketIdx-1) != null && Math.abs((long)bucketToVals.get(bucketIdx-1) - val) <= t){
+                return true;
+            }
+            if (bucketToVals.get(bucketIdx+1) != null && Math.abs((long)bucketToVals.get(bucketIdx+1)-val) <=t ){
+                return true;
+            }
+            bucketToVals.put(bucketIdx, val);
+            if (i - k >= 0){
+                bucketToVals.remove(getIdx(nums[i-k], size));
+            }
+        }
+        return false;
+    }
+
+    public long getIdx(int val, long size){
+        if (val>= 0){
+            return val /size;
+        }
+        return ((long)val + 1)/size - 1;
+    }
+```
