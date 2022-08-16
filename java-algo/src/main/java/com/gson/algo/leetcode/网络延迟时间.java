@@ -24,6 +24,7 @@ public class 网络延迟时间 {
         int[][] grid = new int[n][n];
         for (int i = 0; i < n; i++) {
             Arrays.fill(grid[i], INF);
+            grid[i][i] = 0;
         }
         // 这里将节点编号都-1,使节点编号区间为[0, n-1]
         for(int[] time : times){
@@ -64,6 +65,7 @@ public class 网络延迟时间 {
 
     public static void main(String[] args) {
         test1();
+        test2();
     }
 
     public static void test1(){
@@ -73,6 +75,14 @@ public class 网络延迟时间 {
                 {2, 3, 1},
                 {3, 4, 1}
         }, 4, 2);
+        System.out.println(ans);
+    }
+
+    public static void test2(){
+        网络延迟时间 solution = new 网络延迟时间();
+        int ans = solution.networkDelayTime(new int[][]{
+                {1,2,1}
+        }, 2, 2);
         System.out.println(ans);
     }
 }
