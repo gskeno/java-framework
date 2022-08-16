@@ -14,6 +14,7 @@
 
 [排序](#排序)
 
+[前缀和](#前缀和)
 
 -----------------
 
@@ -419,4 +420,24 @@ private boolean dfs(int n){
 
 > 时间复杂度都为O(nlogn),空间复杂度快速O(logn)，堆排序O(1),归并O(n)。
 <br><br> 主要是理解并记忆解题模板。
+
+
+# 前缀和
+- [将数组分成三个子数组的方案数](https://leetcode.cn/problems/ways-to-split-array-into-three-subarrays/)
+
+> 题目: 我们称一个分割整数数组的方案是 好的 ，当它满足：
+数组被分成三个 非空 连续子数组，从左至右分别命名为 left ， mid ， right 。
+left 中元素和小于等于 mid 中元素和，mid 中元素和小于等于 right 中元素和。
+给你一个 非负 整数数组 nums ，请你返回 好的 分割 nums 方案数目。由于答案可能会很大，请你将结果对 109 + 7 取余后返回。
+
+> 分析: 
+<br><br>1. 就是给数组切两刀，分成3个片段，每个片段的元素之和 递增(非严格递增),问这两刀有多少种切法?
+<br><br>2. 由于总是要计算片段内的元素和，还不如一次计算完，因为要搞出一个前缀和数组int[] sum。
+> sum[i]表示原数组中从nums[0]到nums[i]的元素的和。
+<br><br>3. 使用二分查找解决, 假设第一道在i位置砍下去，第二刀在k位置砍下去,sum[k]的最小值为`2*sum[i]`, 
+sum[k]的最大值为 `sum[i] + (sum[n-1]-sum[i])/2`。
+<br><br>4. 使用三指针解决，在前缀数组上枚举第一刀 i 的位置，对于每个 i 我们寻找第二刀最小的 
+left 和最大的 right，分别满足 sum[left] - sum[i] >= sum[i] 
+和 sum[n] - sum[right] >= sum[right] - sum[i]，即sum(mid) >= sum(left) 和 sum(right) >= sum(mid)，
+这两个条件满足单调性，可以利用三指针求解。
 
