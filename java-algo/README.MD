@@ -5,11 +5,14 @@
 [广度优先搜索](#广度优先搜索)
 
 [深度优先搜索](#深度优先搜索)
-<br>&nbsp; &nbsp; &nbsp; &nbsp;  [可能的二分法](#可能的二分法)
+<br>&nbsp; &nbsp; &nbsp; &nbsp;  [可能的二分法](#可能的二分法) `图论+深度搜索优先`
 
 [记忆化搜索](#记忆化搜索)
 
 [动态规划](#动态规划)
+<br>&nbsp; &nbsp; &nbsp; &nbsp;  [最大子数组和](#最大子数组和) 
+<br>&nbsp; &nbsp; &nbsp; &nbsp;  [变换的迷宫](#变换的迷宫) 
+
 
 [博弈论](#博弈论)
 
@@ -338,6 +341,28 @@ public int shoppingOffers(List<Integer> price, List<List<Integer>> special, List
 > 分析:三维数组，递归 + 记忆化搜索
 
 # 动态规划
+
+## 最大子数组和
+>[最大子数组和](https://leetcode.cn/problems/maximum-subarray/) 。
+> 给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+子数组 是数组中的一个连续部分。
+
+>使用动态规划的思想，设置f(i)表示以`nums[i]`为末尾元素的子数组最大和。则
+`f(i) = Math.max(f(i-1)+nums[i], nums[i])`，即nums[i]单独作为子数组A，
+或者nums[i]与f(i-1)所表示的子数组结合起来作为子数组B，两者选其一。
+```java
+// 以nums[i]结尾的最大子数组和
+        int pre = 0;
+        int ans = nums[0];
+        for(int n : nums){
+            pre = Math.max(pre + n, n);
+            ans = Math.max(ans, pre);
+        }
+        return ans;
+```
+
+## 变换的迷宫
+
 - [变换的迷宫(困难)](https://leetcode.cn/problems/Db3wC1/)
 > 1. 多维矩阵(3维及以上)
 > 2. 解决该问题涉及到的知识点很多，有动态规划，深度优先搜索，广度优先搜索，状态机等。

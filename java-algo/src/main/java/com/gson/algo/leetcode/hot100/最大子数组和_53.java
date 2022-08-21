@@ -15,7 +15,9 @@ public class 最大子数组和_53 {
      * @return
      */
     public int maxSubArray(int[] nums) {
-        int pre = 0; int ans = nums[0];
+        // 以nums[i]结尾的最大子数组和
+        int pre = 0;
+        int ans = nums[0];
         for(int n : nums){
             pre = Math.max(pre + n, n);
             ans = Math.max(ans, pre);
