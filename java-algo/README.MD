@@ -1,5 +1,9 @@
 算法标签:
 
+[递归](#递归)
+<br>&nbsp; &nbsp; &nbsp; &nbsp;  [二叉树的最近公共祖先](#二叉树的最近公共祖先)
+
+
 [双指针](#双指针)
 
 [广度优先搜索](#广度优先搜索)
@@ -27,6 +31,38 @@
 [图论](#图论)
 
 -----------------
+
+# 递归
+## 二叉树的最近公共祖先
+> 题目: [二叉树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+```java
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+         return dfs(root, p, q);
+    }
+
+    public TreeNode dfs(TreeNode node, TreeNode p, TreeNode q){
+        if(node == p || node == q){
+            return node;
+        }
+        if(node == null){
+            return null;
+        }
+
+        TreeNode ans1 = dfs(node.left, p, q);
+        TreeNode ans2 = dfs(node.right, p, q);
+        // p,q 分布在node的左右子树上
+        if( ans1!= null && ans2!= null){
+            return node;
+        }
+        //p,q都在node的左子树上
+        if(ans1 != null){
+            return ans1;
+        }
+        // p,q都在node的右子树上
+        return ans2;
+    }
+```
 
 # 双指针 
 - [四数之和](https://leetcode.cn/problems/4sum/)
