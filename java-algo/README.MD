@@ -4,6 +4,9 @@
 
 [广度优先搜索](#广度优先搜索)
 
+[深度优先搜索](#深度优先搜索)
+<br>&nbsp; &nbsp; &nbsp; &nbsp;  [可能的二分法](#可能的二分法)
+
 [记忆化搜索](#记忆化搜索)
 
 [动态规划](#动态规划)
@@ -17,6 +20,8 @@
 [前缀和](#前缀和)
 
 [最短路](#最短路)
+
+[图论](#图论)
 
 -----------------
 
@@ -45,6 +50,70 @@
 - 广度优先搜索一般使用队列来处理，如果需要识别已经搜索过的位置，还需要使用辅助数组visit，在遍历过程中
 已经访问过的路径需要忽略掉。
 
+# 深度优先搜索
+
+## 可能的二分法
+> [可能的二分法](https://leetcode.cn/problems/possible-bipartition/)
+图论与深度优先搜索的结合,本质是一个深度优先搜索题目，没有充分的图论只是也能解决，不过一定的图论只是对于解题思路理解很有帮助。
+```java
+// 节点key着的色value
+    Map<Integer, Integer> colorMap = new HashMap<>();
+    // 一个人不喜欢的所有人
+    Map<Integer, Set<Integer>> dislikesMap = new HashMap<>();
+
+    /**
+     * 二分着色
+     * @param n
+     * @param dislikes
+     * @return
+     */
+    public boolean possibleBipartition(int n, int[][] dislikes){
+        for(int[] dislike : dislikes){
+            dislikesMap.computeIfAbsent(dislike[0], (key)->new HashSet<>()).add(dislike[1]);
+            dislikesMap.computeIfAbsent(dislike[1], (key)->new HashSet<>()).add(dislike[0]);
+        }
+        // 对n个人进行着色。
+        // 着色策略: 如果A没有着色，将其着红色(值为0)，所有A不喜欢的人和不喜欢A的人 （记为B) 都着黑色, 不喜欢B和B不喜欢的
+        // 人(记为C)再着红色,如果C中已经有人着过色且不是红色，则发生冲突。
+        for (int i = 0; i < n; i++) {
+            // 如果节点还没着色，则尝试着红色，如果着色失败，则发生冲突
+            if (!colorMap.containsKey(i) && !setColor(i, 0)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    /**
+     * 是否可以将i节点染成color色(0 表示红， 1表示黑)
+     * @param i
+     * @param color
+     * @return
+     */
+    private boolean setColor(int i, int color){
+        // 如果节点i已经着色，则判断已着色是否与目标色相同
+        if (colorMap.get(i) != null){
+            return colorMap.get(i) == color;
+        }
+        // 着色
+        colorMap.put(i, color);
+
+        // 互斥的其他节点着互斥色
+        Set<Integer> dislikePersons = dislikesMap.get(i);
+        if (dislikePersons != null && !dislikePersons.isEmpty()){
+            for(int dislikeId : dislikePersons){
+                // 任意一个互斥节点没有成功着色，从当前节点发起的着色行为就算失败。
+                if (!setColor(dislikeId, color ^ 1)){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+
+    }
+```
 # 记忆化搜索
 - [为运算表达式设计优先级](https://leetcode.cn/problems/different-ways-to-add-parentheses/)
 ```
@@ -603,3 +672,8 @@ left 和最大的 right，分别满足 sum[left] - sum[i] >= sum[i]
 
 > 参考
 <br>[bellman-ford 贝尔曼福特百度百科](https://baike.baidu.com/item/%E8%B4%9D%E5%B0%94%E6%9B%BC-%E7%A6%8F%E7%89%B9%E7%AE%97%E6%B3%95/15804876?fr=aladdin)
+
+
+# 图论
+
+## 无向图是否存在环
