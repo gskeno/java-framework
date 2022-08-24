@@ -127,6 +127,7 @@
 - [死锁的四个必要条件和解决办法](https://blog.csdn.net/guaiguaihenguai/article/details/80303835)
 - [linux基础——linux线程间通信及同步机制总结](https://blog.csdn.net/a987073381/article/details/52029070)
 - [一文读懂什么是进程、线程、协程](https://www.cnblogs.com/Survivalist/p/11527949.html)
+- [为什么linux内存页大小是4k](https://draveness.me/whys-the-design-linux-default-page/)
 
 ### linux
 - [CentOS的free命令](https://blog.csdn.net/for_tech/article/details/53044610)
@@ -202,6 +203,7 @@
 - [纸上得来终觉浅](https://www.cnblogs.com/binyue)
 - [未读代码](https://www.wdbyte.com/)
 - [为什么这么设计](https://draveness.me/)
+- [不忘初心，方得始终](https://www.polarxiong.com/)
 ## 优秀项目
 - [guava](https://github.com/google/guava/wiki/FunctionalExplained)
 - [RoaringBitmap](https://github.com/RoaringBitmap/RoaringBitmap)
