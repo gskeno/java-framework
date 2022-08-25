@@ -28,14 +28,19 @@ public class 找到K个最接近的元素 {
             int distI = i < 0 ? Integer.MAX_VALUE : Math.abs(arr[i] - x);
             int distJ = j >= n ? Integer.MAX_VALUE : Math.abs(arr[j] - x);
             if (distJ < distI){
-                ans.add(arr[j]);
+                //ans.add(arr[j]);
                 j++;
             }else {
-                ans.add(arr[i]);
+                // ans.add(arr[i]);
                 i--;
             }
         }
-        Collections.sort(ans);
+
+        i++;
+        j--;
+        for (int l = i; l <= j; l++) {
+            ans.add(arr[l]);
+        }
         return ans;
     }
 
