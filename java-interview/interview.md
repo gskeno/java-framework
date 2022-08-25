@@ -128,6 +128,7 @@
 - [linux基础——linux线程间通信及同步机制总结](https://blog.csdn.net/a987073381/article/details/52029070)
 - [一文读懂什么是进程、线程、协程](https://www.cnblogs.com/Survivalist/p/11527949.html)
 - [为什么linux内存页大小是4k](https://draveness.me/whys-the-design-linux-default-page/)
+- [虚拟内存概述](https://www.modb.pro/db/167342)
 
 ### linux
 - [CentOS的free命令](https://blog.csdn.net/for_tech/article/details/53044610)
