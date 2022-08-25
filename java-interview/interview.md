@@ -205,6 +205,7 @@
 - [未读代码](https://www.wdbyte.com/)
 - [为什么这么设计](https://draveness.me/)
 - [不忘初心，方得始终](https://www.polarxiong.com/)
+- [wiki](https://oi-wiki.org/)
 ## 优秀项目
 - [guava](https://github.com/google/guava/wiki/FunctionalExplained)
 - [RoaringBitmap](https://github.com/RoaringBitmap/RoaringBitmap)
