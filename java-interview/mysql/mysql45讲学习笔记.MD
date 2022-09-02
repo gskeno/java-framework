@@ -155,3 +155,7 @@ mysql事务的隔离级别分为4种，串行化`Serializable`, 可重复读`Rep
 - `唯一索引上的等值查询`，在找到目标记录时，`next-key lock`可以退化为 `行锁`。
 - `普通索引上的等值查询`，在找到最后一个不满足条件的记录时，`next-key lock`退化为 `间隙锁`。
 - [mysql 45讲加锁规则](https://time.geekbang.org/column/article/75659)
+
+# 命令
+
+- 查看死锁日志 `show engine innodb status`;
