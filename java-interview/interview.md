@@ -129,6 +129,7 @@
 - [一文读懂什么是进程、线程、协程](https://www.cnblogs.com/Survivalist/p/11527949.html)
 - [为什么linux内存页大小是4k](https://draveness.me/whys-the-design-linux-default-page/)
 - [虚拟内存概述](https://www.modb.pro/db/167342)
+- [彻底理解mmap](https://blog.csdn.net/Holy_666/article/details/86532671)
 
 ### linux
 - [CentOS的free命令](https://blog.csdn.net/for_tech/article/details/53044610)
