@@ -130,6 +130,7 @@
 - [为什么linux内存页大小是4k](https://draveness.me/whys-the-design-linux-default-page/)
 - [虚拟内存概述](https://www.modb.pro/db/167342)
 - [彻底理解mmap](https://blog.csdn.net/Holy_666/article/details/86532671)
+- [maolloc与mmap](https://www.cnblogs.com/dream397/p/14629276.html)
 
 ### linux
 - [CentOS的free命令](https://blog.csdn.net/for_tech/article/details/53044610)

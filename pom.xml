@@ -46,6 +46,7 @@
         <module>java-jmockit</module>
         <module>java-paranamer</module>
         <module>java-maven-shade-plugin</module>
+        <module>java-jvm</module>
     </modules>
 
     <name>java-framework</name>
