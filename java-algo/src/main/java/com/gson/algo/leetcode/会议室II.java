@@ -1,7 +1,6 @@
 package com.gson.algo.leetcode;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * https://www.cnblogs.com/grandyang/p/5244720.html
@@ -47,7 +46,41 @@ public class 会议室II {
          return ans;
      }
 
-    public static void main(String[] args) {
+    /**
+     * 最小堆
+     * @param intervals
+     * @return
+     */
+    public int minMeetingRooms1(int[][] intervals){
+        // 按照开始时间排序
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0];
+            }
+        });
+        // 最小堆, 记录的都是会议结束时间。
+        Queue<Integer> queue = new PriorityQueue<>();
+        // 每次循环后，最小的会议结束时间 会在最小堆顶。
+        // 下次循环中，如果会议的开始时间 >= 最小的会议B 结束时间，则该会议不需要会议室，可沿用B会议室
+        for(int[] interval : intervals){
+            if (!queue.isEmpty() && queue.peek() <= interval[0]){
+                queue.poll();
+            }
+            queue.offer(interval[1]);
+        }
+        return queue.size();
+    }
 
+
+
+    public static void main(String[] args) {
+        会议室II solution = new 会议室II();
+        int ans = solution.minMeetingRooms1(new int[][]{
+                {0, 30},
+                {5, 10},
+                {15, 20},
+        });
+        System.out.println(ans);
     }
 }
