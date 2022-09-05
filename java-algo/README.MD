@@ -1,9 +1,11 @@
 算法标签:
 
 [贪心](#贪心)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; [最长数对链](#最长数对链)
 
 [递归](#递归)
 <br>&nbsp; &nbsp; &nbsp; &nbsp;  [二叉树的最近公共祖先](#二叉树的最近公共祖先)
+
 
 
 [双指针](#双指针)
@@ -27,6 +29,7 @@
 [排序](#排序)
 
 [前缀和](#前缀和)
+
 
 [最短路](#最短路)
 
@@ -580,6 +583,9 @@ sum[k]的最大值为 `sum[i] + (sum[n-1]-sum[i])/2`。
 left 和最大的 right，分别满足 sum[left] - sum[i] >= sum[i] 
 和 sum[n] - sum[right] >= sum[right] - sum[i]，即sum(mid) >= sum(left) 和 sum(right) >= sum(mid)，
 这两个条件满足单调性，可以利用三指针求解。
+
+# 线段树
+- [线段树的一篇详解](https://baijiahao.baidu.com/s?id=1736339086704827934&wfr=spider&for=pc)
 
 # 最短路
 - [网络延迟时间](https://leetcode.cn/problems/network-delay-time/)
