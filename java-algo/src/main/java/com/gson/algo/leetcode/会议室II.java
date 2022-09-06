@@ -24,16 +24,17 @@ public class 会议室II {
      public int minMeetingRooms(int[][] intervals){
          // 红黑树结构的Map
          TreeMap<Integer,Integer> treeMap = new TreeMap<>();
-         // key是会议开始时间和结束时间，val是这一时间对应的会议数量。
+         // key是会议开始时间 或 结束时间，val是这一时间对应的会议数量。
          for (int i = 0; i < intervals.length; i++) {
              int[] interval = intervals[i];
              // 某一个会议开始，则val++
              Integer val1 = treeMap.getOrDefault(interval[0], 0);
              treeMap.put(interval[0], val1 + 1);
              // 某一会议结束，则val--
-             Integer val2 = treeMap.getOrDefault(interval[1], 1);
+             Integer val2 = treeMap.getOrDefault(interval[1], 0);
              treeMap.put(interval[1], val2 - 1);
          }
+         // 记录整个过程中需要的最大房间数量，可能在中间过程时 需要用到最多房间，开始和结束时会议比较少，并不需要特别多的会议室
          int ans = 0;
          // 正在使用的房间
          int usingRooms = 0;
@@ -72,15 +73,59 @@ public class 会议室II {
         return queue.size();
     }
 
+    /**
+     * 使用两个数组，一个数组存储会议开始时间startArr，一个存储会议结束时间endArr，并排序。
+     * 使用一个指针p，开始指向最小会议结束时间endArr[0]。
+     * 使用一个变量ans, 记录所需要的最少会议室。
+     *
+     * 遍历startArr数组，当元素值小于 p时， ans++(因为最早结束的会议结束之前，新开始了一个会议，就需要一个新会议室)
+     * 否则, p指向下一个会议结束最早时间(ans不需要自增，因为此会议晚于p开始，可以沿用p时结束的会议室)
+     *
+     * @param intervals
+     * @return
+     */
+    public int minMeetingRooms2(int[][] intervals){
+        int[] startArr = new int[intervals.length];
+        int[] endArr = new int[intervals.length];
+        for (int i = 0; i < intervals.length; i++) {
+            startArr[i] = intervals[i][0];
+            endArr[i] = intervals[i][1];
+        }
+        Arrays.sort(startArr);
+        Arrays.sort(endArr);
+        int i = 0;
+        int p = endArr[i];
+        int ans = 0;
+        for (int start : startArr){
+            if (start < p){
+                ans++;
+            }else {
+                p = endArr[++i];
+            }
+        }
+        return ans;
+    }
+
 
 
     public static void main(String[] args) {
         会议室II solution = new 会议室II();
-        int ans = solution.minMeetingRooms1(new int[][]{
+        int[][] params = new int[][]{
                 {0, 30},
                 {5, 10},
                 {15, 20},
-        });
+        };
+
+        int ans = solution.minMeetingRooms(params);
         System.out.println(ans);
+
+        ans = solution.minMeetingRooms1(params);
+        System.out.println(ans);
+
+        ans = solution.minMeetingRooms2(params);
+        System.out.println(ans);
+
+
+
     }
 }
