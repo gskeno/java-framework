@@ -132,6 +132,8 @@
 - [虚拟内存概述](https://www.modb.pro/db/167342)
 - [彻底理解mmap](https://blog.csdn.net/Holy_666/article/details/86532671)
 - [maolloc与mmap](https://www.cnblogs.com/dream397/p/14629276.html)
+- [CPU过高排查](https://www.cnblogs.com/zhoading/p/12482943.html)
+- [top命令参数详解](https://blog.csdn.net/yjclsx/article/details/81508455)
 
 ### linux
 - [CentOS的free命令](https://blog.csdn.net/for_tech/article/details/53044610)
