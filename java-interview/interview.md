@@ -105,6 +105,7 @@
 - [为什么说ES是近实时搜索的](https://www.elastic.co/guide/cn/elasticsearch/guide/current/near-real-time.html#img-pre-refresh)
 - [lucene源码阅读笔记](https://github.com/gsonkeno/lucene-8.8.2-maven-notes)
 - [什么是docValues](https://www.cnblogs.com/bonelee/p/6669306.html)
+- [Lucene FST](https://blog.csdn.net/zx2011302580235/article/details/88594342)
 
 ### kafka && rocketMQ
 - [kafka producer的发送消息的ack机制](http://orchome.com/511)
