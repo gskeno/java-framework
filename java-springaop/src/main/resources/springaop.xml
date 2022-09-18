@@ -6,10 +6,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--无法实施切面增强-->
-    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+<!--    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>-->
 
     <!--可以实施切面增强-->
-<!--    <aop:aspectj-autoproxy expose-proxy="true"></aop:aspectj-autoproxy>-->
+    <aop:aspectj-autoproxy expose-proxy="true"></aop:aspectj-autoproxy>
+
     <!-- component-scan要配合@Component注解 -->
     <context:component-scan base-package="com.gson.springaop"/>
 

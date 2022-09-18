@@ -48,4 +48,14 @@ public class BaseTest {
         int value = 40000 / 8;
         System.out.println("第4万商家的标需要多少个字节:" + value  + "B");
     }
+
+    @Test
+    public void test3(){
+        RoaringBitmap roaringBitmap = new RoaringBitmap();
+        roaringBitmap.add(10);
+        System.out.println(roaringBitmap.getSizeInBytes());
+
+        roaringBitmap.add(20);
+        System.out.println(roaringBitmap.getSizeInBytes());
+    }
 }

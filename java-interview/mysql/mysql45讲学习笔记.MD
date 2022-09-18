@@ -101,7 +101,7 @@ mysql事务的隔离级别分为4种，串行化`Serializable`, 可重复读`Rep
 - `show variables like '%tx_isolation%';`, 查看隔离级别。
 
 
-- `show @@tx_isolation;`, 查看**当前会话**隔离级别。
+- `select @@tx_isolation;`, 查看**当前会话**隔离级别。
 
 
 - `set session transaction isolation level read committed;`,

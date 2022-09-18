@@ -12,6 +12,7 @@ public class Main {
                 Main.class.getClassLoader(),
                 new Class[]{TicketCenter.class},
                 new ProxyTicketCenter(new RealTicketCenter()));
+        System.out.println(ticketCenter.getClass().getCanonicalName());
         ticketCenter.buyTicket(10);
     }
 }

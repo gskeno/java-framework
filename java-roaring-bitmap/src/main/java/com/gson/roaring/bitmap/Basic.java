@@ -74,4 +74,5 @@ public class Basic {
         // 序列化之后，再反序列化，两者元素是一致的，所以equals
         System.out.println(bitmap.equals(rr));
     }
+
 }
