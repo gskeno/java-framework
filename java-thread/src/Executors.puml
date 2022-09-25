@@ -1,0 +1,30 @@
+@startuml
+
+ interface Executor{
+ 	~void execute(Runnable command)  //执行线程类
+ }
+ interface ExecutorService{
+ 	~<T> Future<T> submit(Callable<T> task)
+ 	~<T> Future<T> submit(Runnable task, T result)
+ 	~Future<?> submit(Runnable task)
+ 	~void shutdown()
+ 	~List<Runnable> shutdownNow()
+ }
+ interface ScheduledExecutorService
+
+ class ThreadPoolExecutor{
+	 + void shutdown()
+ }
+
+  class Executors{
+	 + ExecutorService newFixedThreadPool(int nThreads)
+	 + ExecutorService newCachedThreadPool()
+	 + ExecutorService newSingleThreadExecutor()
+ }
+
+ Executor <|-- ExecutorService
+ ExecutorService <|-- ScheduledExecutorService
+ ExecutorService <|.. AbstractExecutorService
+ AbstractExecutorService <|-- ThreadPoolExecutor
+
+ @enduml

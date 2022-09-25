@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Abstract class not allowed for non-abstract beans -->
+    <!-- 抽象类不可以作为 non-abstract beans，因此需要添加子元素 lookup-method来对抽象方法进行说明
+         比如，返回什么类型的bean-->
+    <bean id="getBeanTest" class="com.gsonkeno.spring.bean.GetBeanTest">
+        <lookup-method name="getBean" bean="teacher"></lookup-method>
+    </bean>
+
+    <bean id="teacher" class="com.gsonkeno.spring.bean.Teacher"></bean>
+    <bean id="student" class="com.gsonkeno.spring.bean.Student"></bean>
+</beans>

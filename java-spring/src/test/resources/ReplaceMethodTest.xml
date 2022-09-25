@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 动态地改变原有方法changeMe的逻辑，使用 testMethodReplacer来替代
+         替代类需要实现MethodReplacer接口的reimplement方法-->
+    <bean id="testChangeMethod" class="com.gsonkeno.spring.bean.replace_method.TestChangeMethod">
+        <replaced-method name="changeMe" replacer="testMethodReplacer"></replaced-method>
+    </bean>
+
+    <bean id="testMethodReplacer" class="com.gsonkeno.spring.bean.replace_method.TestMethodReplacer"></bean>
+</beans>

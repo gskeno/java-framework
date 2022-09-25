@@ -1,0 +1,23 @@
+@startuml
+abstract class SchoolReport{
+{abstract} report() //报告成绩
+{abstract} sign(String name) //签字
+}
+abstract class Decorator
+
+class HighScoreDecorator{
+- reportHighScore()
++ report()
+}
+
+class HighSortDecorator{
+- reportHighSort()
++ report()
+}
+
+FourthGradeSchoolReport --|>SchoolReport
+Decorator --|>SchoolReport
+HighScoreDecorator --|>Decorator
+HighSortDecorator --|>Decorator
+Decorator *-->SchoolReport :成员变量
+@enduml

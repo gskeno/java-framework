@@ -1,0 +1,18 @@
+@startuml
+class Director{
+    + constructor()
+}
+
+abstract class Builder{
+    + buildPart()
+}
+
+class ConcreteBuilder{
+}
+class Product{
+}
+
+Director *-->Builder
+ConcreteBuilder --|>Builder
+ConcreteBuilder -->Product
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+interface IHandler{
++ handleRequest(Iwomen)
++ setNextHandler(IHandler)
+}
+
+interface IWomen{
++ getType()
++ getRequest()
+}
+
+class Handler{
++ {abstract}response(IWomen)
+}
+
+Handler --|> IHandler
+IHandler -->IWomen
+Women --|> IWomen
+Client --> IHandler
+
+
+@enduml

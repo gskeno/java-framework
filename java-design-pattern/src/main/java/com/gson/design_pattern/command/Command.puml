@@ -1,0 +1,32 @@
+@startuml
+
+abstract class Group{
++ find()
++ add()
++ delete()
++ change()
++ plan()
+}
+abstract class Command{
+# protected RequirementGroup rg = new RequirementGroup()
+# protected PageGroup pg = new PageGroup()
+# protected CodeGroup cg = new CodeGroup()
+--
++ void execute()
+}
+
+Group <|-- RequirementGroup
+Group <|-- PageGroup
+Group <|-- CodeGroup
+
+Command <|-- AddRequirementCommand
+Command <|-- DeletePageCommand
+
+Invoker *--> Command
+Command *--> RequirementGroup
+Command *--> PageGroup
+Command *--> CodeGroup
+
+Client --> Invoker
+
+@enduml
