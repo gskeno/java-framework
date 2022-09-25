@@ -1,4 +1,4 @@
-package com.gsonkeno.jdk.training.jvm;
+package com.gson.jvm;
 
 /**
  * Created by gaosong on 2018-03-13

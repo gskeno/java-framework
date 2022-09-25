@@ -1,4 +1,4 @@
-package com.gsonkeno.spring.bean.replace_method;
+package com.gson.spring.method_replace;
 
 import org.springframework.beans.factory.support.MethodReplacer;
 
@@ -10,7 +10,14 @@ import java.lang.reflect.Method;
 public class TestMethodReplacer implements MethodReplacer {
     @Override
     public Object reimplement(Object obj, Method method, Object[] args) throws Throwable {
-        System.out.println("我替换了原有的方法");
+        if (method.getName().equals("changeMe")){
+            System.out.println("我替换了原有的方法");
+            return null;
+        }else if (method.getName().equals("getCount")){
+            System.out.println("getCount被替换返回2");
+            return 2;
+        }
         return null;
+
     }
 }

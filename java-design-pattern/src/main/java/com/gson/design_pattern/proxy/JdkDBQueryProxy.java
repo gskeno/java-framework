@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.proxy;
+package com.gson.design_pattern.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

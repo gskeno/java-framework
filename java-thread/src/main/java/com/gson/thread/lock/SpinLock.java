@@ -1,4 +1,4 @@
-package com.gsonkeno.jdk.training.concurrent.lock;
+package com.gson.thread.lock;
 
 import java.util.concurrent.atomic.AtomicReference;
 

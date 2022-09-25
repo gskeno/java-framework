@@ -1,6 +1,6 @@
-package com.gsonkeno.spring.jdbc.transaction;
+package com.gson.springjdbc.transaction;
 
-import com.gsonkeno.spring.jdbc.User;
+import com.gson.springjdbc.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -13,7 +13,7 @@ public class UserServiceImpl1 implements UserService1 {
 
     private JdbcTemplate jdbcTemplate;
 
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
@@ -21,19 +21,17 @@ public class UserServiceImpl1 implements UserService1 {
     public void saveUser(User user) {
         jdbcTemplate.update("insert into user(name,age,sex) values(?,?,?)",
                 new Object[]{user.getName(), user.getAge(), user.getSex()}, new int[]{
-                Types.VARCHAR,Types.INTEGER,Types.VARCHAR
+                        Types.VARCHAR, Types.INTEGER, Types.VARCHAR
                 });
         //throw new RuntimeException("aa");
     }
 
     @Override
     public void updateUser(User user) {
-        jdbcTemplate.update("UPDATE USER SET name = ?, age = ?, sex = ? where id = ?",
+        jdbcTemplate.update("UPDATE user SET name = ?, age = ?, sex = ? where id = ?",
                 new Object[]{user.getName(), user.getAge(), user.getSex(), user.getId()}, new int[]{
-                        Types.VARCHAR,Types.INTEGER,Types.VARCHAR,Types.INTEGER
+                        Types.VARCHAR, Types.INTEGER, Types.VARCHAR, Types.INTEGER
                 });
-
-        System.out.println("mm");
     }
 
 }

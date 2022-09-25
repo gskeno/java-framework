@@ -1,4 +1,4 @@
-package com.gsonkeno.jdk.training.concurrent.lock;
+package com.gson.thread.lock;
 
 import com.gsonkeno.jdk.training.concurrent.SleepUtil;
 

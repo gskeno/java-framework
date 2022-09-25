@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.builder;
+package com.gson.design_pattern.builder;
 
 import java.util.ArrayList;
 

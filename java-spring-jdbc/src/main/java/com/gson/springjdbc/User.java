@@ -1,4 +1,4 @@
-package com.gsonkeno.spring.jdbc;
+package com.gson.springjdbc;
 
 /**
  * Created by gaosong on 2018-04-04

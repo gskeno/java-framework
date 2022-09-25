@@ -1,6 +1,4 @@
-package com.gsonkeno.jdk.training.concurrent.lock;
-
-import org.junit.Test;
+package com.gson.thread.lock;
 
 import java.util.ArrayList;
 import java.util.Collection;

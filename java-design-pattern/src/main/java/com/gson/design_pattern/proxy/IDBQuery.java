@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.proxy;
+package com.gson.design_pattern.proxy;
 
 /**
  * Created by gaosong on 2017-11-13

@@ -1,4 +1,4 @@
-package com.gsonkeno.jdk.training.jvm;
+package com.gson.jvm;
 
 /**
  * final关键字可以保证可见性

@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.abstractfactory;
+package com.gson.design_pattern.abstractfactory;
 
 /**
  * Created by gaosong on 2018-01-18

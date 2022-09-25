@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.prototype;
+package com.gson.design_pattern.prototype;
 
 import java.util.Random;
 

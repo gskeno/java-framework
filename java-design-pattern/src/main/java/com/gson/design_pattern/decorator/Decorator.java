@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.decorator;
+package com.gson.design_pattern.decorator;
 
 /**
  * Created by gaosong on 2018-01-16

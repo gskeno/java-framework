@@ -1,4 +1,4 @@
-package com.gsonkeno.jdk.training.concurrent.blockqueue;
+package com.gson.thread.blockqueue;
 
 import java.util.Arrays;
 import java.util.concurrent.ArrayBlockingQueue;

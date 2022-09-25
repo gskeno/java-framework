@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.bridge;
+package com.gson.design_pattern.bridge;
 
 /**
  * 产品就是应该被生成然后被销售

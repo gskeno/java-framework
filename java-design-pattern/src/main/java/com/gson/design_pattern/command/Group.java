@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.command;
+package com.gson.design_pattern.command;
 
 /**
  * 抽象执行者(接收者)

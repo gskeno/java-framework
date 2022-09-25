@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.command;
+package com.gson.design_pattern.command;
 
 /**
  * Created by gaosong on 2018-01-16

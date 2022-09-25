@@ -1,6 +1,4 @@
-package com.gsonkeno.jdk.training.jvm;
-
-import org.junit.Test;
+package com.gson.jvm;
 
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;

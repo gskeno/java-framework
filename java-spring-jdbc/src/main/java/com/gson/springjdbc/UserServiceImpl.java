@@ -1,4 +1,4 @@
-package com.gsonkeno.spring.jdbc;
+package com.gson.springjdbc;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

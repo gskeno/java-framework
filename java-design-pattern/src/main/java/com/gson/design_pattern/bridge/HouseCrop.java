@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.bridge;
+package com.gson.design_pattern.bridge;
 
 /**
  * Created by gaosong on 2018-01-18

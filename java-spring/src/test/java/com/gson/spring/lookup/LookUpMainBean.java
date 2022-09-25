@@ -1,14 +1,14 @@
-package com.gsonkeno.spring.bean;
+package com.gson.spring.lookup;
 
 
 /**
  * Created by gaosong on 2018-04-03
  */
-public abstract class GetBeanTest {
+public abstract class LookUpMainBean {
     public void showMe(){
-        this.getBean().showMe();
+        this.getUser().showMe();
     }
 
-    public abstract User getBean();
+    public abstract LookUpUser getUser();
 
 }

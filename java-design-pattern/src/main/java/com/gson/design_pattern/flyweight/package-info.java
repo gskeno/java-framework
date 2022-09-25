@@ -3,4 +3,4 @@
  * 享元模式(字符串常量池)
  *
  */
-package com.gsonkeno.pattern.flyweight;
+package com.gson.design_pattern.flyweight;

@@ -1,10 +1,10 @@
-package com.gsonkeno.dsaa.sort;
+package com.gson.algo.sort;
 
 /**
  * 归并排序
  * Created by gaosong on 2018-01-30
  */
-public class MergeSort {
+public class MergeSort1 {
 
     /**
      * 将两个有序表合并成一个有序表

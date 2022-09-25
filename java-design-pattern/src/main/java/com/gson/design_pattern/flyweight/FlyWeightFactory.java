@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.flyweight;
+package com.gson.design_pattern.flyweight;
 
 import java.util.HashMap;
 import java.util.Map;

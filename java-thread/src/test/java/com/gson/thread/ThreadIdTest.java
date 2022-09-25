@@ -1,4 +1,4 @@
-package com.gsonkeno.jdk.training.concurrent;
+package com.gson.thread;
 
 import com.gsonkeno.jdk.training.ThreadId;
 

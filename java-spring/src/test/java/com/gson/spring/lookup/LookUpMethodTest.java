@@ -1,6 +1,5 @@
-package com.gsonkeno.spring.test;
+package com.gson.spring.lookup;
 
-import com.gsonkeno.spring.bean.GetBeanTest;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -10,10 +9,16 @@ import org.springframework.core.io.ClassPathResource;
  */
 public class LookUpMethodTest {
 
+
     public static void main(String[] args) {
         BeanFactory bf = new XmlBeanFactory(new ClassPathResource("LookUpTest.xml"));
-        GetBeanTest getBeanTest = (GetBeanTest)bf.getBean("getBeanTest");
-        getBeanTest.showMe();
-        System.out.println(getBeanTest.getClass().getCanonicalName());
+        LookUpMainBean lookUpMainBean = (LookUpMainBean)bf.getBean("lookUpMainBean");
+        lookUpMainBean.showMe();
+        System.out.println(lookUpMainBean.getClass().getCanonicalName());
+        System.out.println(lookUpMainBean.getUser());
+        System.out.println(lookUpMainBean.getUser().getClass().getCanonicalName());
+
+        System.out.println(lookUpMainBean.getUser());
+        System.out.println(lookUpMainBean.getUser().getClass().getCanonicalName());
     }
 }

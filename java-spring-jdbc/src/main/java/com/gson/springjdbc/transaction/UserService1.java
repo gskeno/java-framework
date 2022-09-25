@@ -1,6 +1,6 @@
-package com.gsonkeno.spring.jdbc.transaction;
+package com.gson.springjdbc.transaction;
 
-import com.gsonkeno.spring.jdbc.User;
+import com.gson.springjdbc.User;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 

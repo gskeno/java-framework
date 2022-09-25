@@ -17,10 +17,6 @@
         <property name="maxIdle" value="2"></property>
     </bean>
 
-    <bean id="userService" class="com.gsonkeno.spring.jdbc.UserServiceImpl">
-        <!--向属性dataSource注入数据源-->
-       <property name="dataSource" ref="dataSource"></property>
-    </bean>
 
     <!--配置声明式事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
@@ -29,7 +25,12 @@
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
-    <bean id="userService1" class="com.gsonkeno.spring.jdbc.transaction.UserServiceImpl1">
+    <bean id="userService" class="com.gson.springjdbc.UserServiceImpl">
+        <!--向属性dataSource注入数据源-->
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <bean id="userService1" class="com.gson.springjdbc.transaction.UserServiceImpl1">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 </beans>

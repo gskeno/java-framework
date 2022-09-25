@@ -1,4 +1,4 @@
-package com.gsonkeno.dsaa.sort;
+package com.gson.algo.sort;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +13,7 @@ import java.util.Scanner;
  * 然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列
  * Created by gaosong on 2017-07-08.
  */
-public class QuickSort {
+public class QuickSort1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         List<Float> nums = new ArrayList<>();

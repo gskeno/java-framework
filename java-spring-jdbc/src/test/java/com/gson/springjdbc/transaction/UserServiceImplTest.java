@@ -1,7 +1,6 @@
-package com.gsonkeno.spring.jdbc.transaction;
+package com.gson.springjdbc.transaction;
 
-import com.gsonkeno.spring.jdbc.User;
-import org.junit.Before;
+import com.gson.springjdbc.User;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.singleton;
+package com.gson.design_pattern.singleton;
 
 /**
  * 双重加锁机制创建单例

@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.chainresponsibilty;
+package com.gson.design_pattern.chainresponsibilty;
 
 /**
  * Created by gaosong on 2018-01-16

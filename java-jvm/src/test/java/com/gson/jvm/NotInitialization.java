@@ -1,6 +1,4 @@
-package com.gsonkeno.jdk.training.jvm;
-
-import org.junit.Test;
+package com.gson.jvm;
 
 /**
  * 被动引用

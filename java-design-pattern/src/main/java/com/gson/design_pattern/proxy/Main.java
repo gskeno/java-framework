@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.proxy;
+package com.gson.design_pattern.proxy;
 
 
 import net.sf.cglib.proxy.Enhancer;

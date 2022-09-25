@@ -1,4 +1,4 @@
-package com.gsonkeno.dsaa.algorithms;
+package com.gson.algo.sort;
 
 import java.util.Arrays;
 

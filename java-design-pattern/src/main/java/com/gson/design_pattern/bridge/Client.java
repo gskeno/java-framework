@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.bridge;
+package com.gson.design_pattern.bridge;
 
 /**
  * 桥梁模式

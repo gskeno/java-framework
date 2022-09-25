@@ -1,4 +1,4 @@
-package com.gsonkeno.jdk.training.concurrent.executor;
+package com.gson.thread.executor;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;

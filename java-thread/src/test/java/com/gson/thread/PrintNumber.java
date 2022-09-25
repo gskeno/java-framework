@@ -1,4 +1,4 @@
-package com.gsonkeno.jdk.training.concurrent;
+package com.gson.thread;
 
 /**
  * 两个线程一个打印奇数，一个打印偶数，直至打印到100，程序结束。

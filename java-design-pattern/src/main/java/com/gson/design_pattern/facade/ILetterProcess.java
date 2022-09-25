@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.facade;
+package com.gson.design_pattern.facade;
 
 /**
  * 写信过程

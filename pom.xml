@@ -48,6 +48,8 @@
         <module>java-maven-shade-plugin</module>
         <module>java-jvm</module>
         <module>java-effective-java</module>
+        <module>java-spring-jdbc</module>
+        <module>java-design-pattern</module>
     </modules>
 
     <name>java-framework</name>

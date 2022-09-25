@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.command;
+package com.gson.design_pattern.command;
 
 /**
  * 负责人

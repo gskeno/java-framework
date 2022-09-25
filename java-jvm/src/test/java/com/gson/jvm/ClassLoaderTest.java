@@ -1,6 +1,4 @@
-package com.gsonkeno.jdk.training.jvm;
-
-import org.junit.Test;
+package com.gson.jvm;
 
 /**
  * Created by gaosong on 2017-12-29

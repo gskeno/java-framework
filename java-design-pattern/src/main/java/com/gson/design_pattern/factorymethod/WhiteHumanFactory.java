@@ -1,4 +1,4 @@
-package com.gsonkeno.pattern.factorymethod;
+package com.gson.design_pattern.factorymethod;
 
 /**
  * Created by gaosong on 2018-01-18

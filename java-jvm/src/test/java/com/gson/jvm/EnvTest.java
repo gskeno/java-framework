@@ -1,8 +1,7 @@
-package com.gsonkeno.jdk.training.jvm;
+package com.gson.jvm;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.Map;
 import java.util.Properties;
 

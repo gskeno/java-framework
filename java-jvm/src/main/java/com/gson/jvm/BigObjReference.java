@@ -1,4 +1,4 @@
-package com.gsonkeno.jdk.training.jvm;
+package com.gson.jvm;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;

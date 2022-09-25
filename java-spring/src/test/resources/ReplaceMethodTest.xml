@@ -5,9 +5,10 @@
 
     <!-- 动态地改变原有方法changeMe的逻辑，使用 testMethodReplacer来替代
          替代类需要实现MethodReplacer接口的reimplement方法-->
-    <bean id="testChangeMethod" class="com.gsonkeno.spring.bean.replace_method.TestChangeMethod">
+    <bean id="testChangeMethod" class="com.gson.spring.method_replace.TestChangeMethod">
         <replaced-method name="changeMe" replacer="testMethodReplacer"></replaced-method>
+        <replaced-method name="getCount" replacer="testMethodReplacer"></replaced-method>
     </bean>
 
-    <bean id="testMethodReplacer" class="com.gsonkeno.spring.bean.replace_method.TestMethodReplacer"></bean>
+    <bean id="testMethodReplacer" class="com.gson.spring.method_replace.TestMethodReplacer"></bean>
 </beans>
