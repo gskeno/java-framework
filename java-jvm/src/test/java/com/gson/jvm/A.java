@@ -11,6 +11,7 @@ public  class A {
 
     public  void sayHi(){
         System.out.println("this is A " + Thread.currentThread().getContextClassLoader());
-
     }
+
+
 }
