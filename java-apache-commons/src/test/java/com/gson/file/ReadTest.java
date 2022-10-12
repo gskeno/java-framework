@@ -87,4 +87,36 @@ public class ReadTest {
     public void testHash(){
         System.out.println(Math.abs("3542775664".hashCode() % 1024) / 64);
     }
+
+    private String inFile = "in.txt";
+    private String inFile1 =  System.getProperty("user.home") + "/工作/listPointParam_.txt";
+    private String inFile2 =  System.getProperty("user.home") + "/工作/ultraman/summary.txt";
+    private String outFile2 =  System.getProperty("user.home") + "/工作/ultraman/out_summary.txt";
+
+    private String inFile3 =  System.getProperty("user.home") + "/工作/ultraman/summary.txt";
+    private String outFile3 =  System.getProperty("user.home") + "/工作/ultraman/out_summary.txt";
+
+    @Test
+    public void processInFile() throws IOException {
+        FileReader reader = new FileReader(inFile2);
+        List<String> lines = IOUtils.readLines(reader);
+        IOUtils.closeQuietly(reader);
+
+        int error = 0;
+        List<String> rows = new ArrayList<>();
+        for(String line : lines){
+            try {
+                String newLine = line.replace("\\", "");
+                JSON.parseArray(newLine);
+                rows.add(newLine);
+            }catch (Exception e){
+                error++;
+                System.out.println(line);
+            }
+        }
+        FileWriter fileWriter = new FileWriter(new File(outFile2));
+        IOUtils.writeLines(rows, null, fileWriter);
+        IOUtils.closeQuietly(fileWriter);
+        System.out.println("error lines total =" + error);
+    }
 }

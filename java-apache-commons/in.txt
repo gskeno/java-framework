@@ -1,0 +1,1 @@
+[{\"currentPage\":1,\"operateTypes\":[1,2,6,4],\"pageSize\":20,\"pointStatus\":1,\"site\":\"taobao\",\"siteSeller\":{\"sellerId\":\"2207725823745\",\"site\":\"taobao\"},\"userId\":\"2208525648409\"}]
