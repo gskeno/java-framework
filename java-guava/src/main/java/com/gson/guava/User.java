@@ -1,6 +1,10 @@
 package com.gson.guava;
 
 public class User {
+
+    static {
+        System.out.println("i am user");
+    }
     private String site;
 
     private String name;
