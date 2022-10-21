@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.gson.guava.User;
+import org.junit.Assert;
 import org.junit.Test;
 
 import javax.annotation.Nullable;
@@ -22,9 +23,11 @@ public class OrderTest {
         List<User> userList = Lists.newArrayList(
                 new User("site1", "name1"),
                 new User("site3", "name3"),
+                new User("site4", "name3"),
                 new User("site2", "name2"),
                 null);
         List<User> users = userOrdering.sortedCopy(userList);
-        System.out.println(users);
+        // 因为name有重复元素，故不严格有序
+        Assert.assertFalse(userOrdering.isStrictlyOrdered(users));
     }
 }
