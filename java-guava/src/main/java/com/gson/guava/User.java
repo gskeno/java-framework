@@ -1,10 +1,19 @@
 package com.gson.guava;
 
-public class User {
+public class User implements Comparable<User> {
 
     static {
         System.out.println("i am user");
     }
+
+    public User() {
+    }
+
+    public User(String site, String name) {
+        this.site = site;
+        this.name = name;
+    }
+
     private String site;
 
     private String name;
@@ -31,5 +40,10 @@ public class User {
                 "site='" + site + '\'' +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return name.compareTo(o.name);
     }
 }
