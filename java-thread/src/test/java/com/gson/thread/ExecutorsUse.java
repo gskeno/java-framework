@@ -1,7 +1,4 @@
 package com.gson.thread;
-
-
-
 import org.junit.Test;
 
 import java.util.concurrent.ExecutorService;

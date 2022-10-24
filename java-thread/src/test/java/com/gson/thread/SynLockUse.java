@@ -1,7 +1,5 @@
 package com.gson.thread;
 
-import org.junit.Test;
-
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

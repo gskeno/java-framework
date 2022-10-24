@@ -1,4 +1,6 @@
-package com.gson.thread.lock;
+package com.gson.thread;
+
+import com.gson.thread.lock.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;

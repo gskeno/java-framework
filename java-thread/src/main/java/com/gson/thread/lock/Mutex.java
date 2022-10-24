@@ -1,6 +1,6 @@
 package com.gson.thread.lock;
 
-import com.gsonkeno.jdk.training.concurrent.SleepUtil;
+import com.gson.thread.SleepUtil;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
