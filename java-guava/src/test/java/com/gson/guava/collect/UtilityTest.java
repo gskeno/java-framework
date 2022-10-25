@@ -52,6 +52,27 @@ public class UtilityTest {
          *  4 => {"zero", "four", "five", "nine"}
          *  5 => {"three", "seven", "eight"}
          */
+        Map<String, Integer> map = ImmutableMap.of("a", 1, "b", 1, "c", 2);
+        // SetMultimap 不会存储重复的key-value
+        SetMultimap<String, Integer> setMultimap = Multimaps.forMap(map);
+        HashMultimap<Integer, String> hashMultimap = Multimaps.invertFrom(setMultimap, HashMultimap.create());
+        System.out.println(hashMultimap);
+    }
 
+    @Test
+    public void testSetMultiMap(){
+        SetMultimap<String, Integer> setMultimap = MultimapBuilder.SetMultimapBuilder.hashKeys().hashSetValues().build();
+        setMultimap.put("A", 1);
+        setMultimap.put("A", 1);
+        setMultimap.put("B", 1);
+        // {A=[1], B=[1]}
+        System.out.println(setMultimap);
+
+        ListMultimap<String, Integer> listMultimap = MultimapBuilder.SetMultimapBuilder.hashKeys().arrayListValues().build();
+        listMultimap.put("A", 1);
+        listMultimap.put("A", 1);
+        listMultimap.put("B", 1);
+        // {A=[1, 1], B=[1]}
+        System.out.println(listMultimap);
     }
 }
