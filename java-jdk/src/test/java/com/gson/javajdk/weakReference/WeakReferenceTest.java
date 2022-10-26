@@ -19,12 +19,14 @@ public class WeakReferenceTest {
     @Test
     public void testWeakReferenceNoQueue(){
         Object obj = new Object();
-        // 创建弱引用对象时没有设置相关联队列，所以当弱引用失效时，wf.isEnqueued永远为false
+        // 创建弱引用对象时没有设置相关联队列，所以弱引用 被回收前后，弱引用 壳 一直不在队列中
         WeakReference<Object> wf = new WeakReference<Object>(obj);
         System.out.println(wf.isEnqueued());
+        System.out.println("before gc: wf.get " + wf.get());
         obj = null;
         System.gc();
         System.out.println(wf.isEnqueued());
+        System.out.println("after gc: wf.get " + wf.get());
     }
 
     @Test
