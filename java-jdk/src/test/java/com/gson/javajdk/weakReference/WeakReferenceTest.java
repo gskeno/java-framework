@@ -1,6 +1,7 @@
 package com.gson.javajdk.weakReference;
 
 import com.gson.javajdk.BigObject;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.lang.ref.Reference;
@@ -15,38 +16,50 @@ import java.util.WeakHashMap;
  * @date 2022/4/11
  */
 public class WeakReferenceTest {
-
+    /**
+     * gc 后
+     * 弱引用对象指向的业务对象被回收,
+     * reference.get返回空
+     */
     @Test
-    public void testWeakReferenceNoQueue(){
-        Object obj = new Object();
-        // 创建弱引用对象时没有设置相关联队列，所以弱引用 被回收前后，弱引用 壳 一直不在队列中
-        WeakReference<Object> wf = new WeakReference<Object>(obj);
-        System.out.println(wf.isEnqueued());
-        System.out.println("before gc: wf.get " + wf.get());
-        obj = null;
+    public void testWeakOnGC(){
+        WeakReference<Object> weakReference = new WeakReference<>(new Object(), null);
+        Assert.assertNotNull(weakReference.get());
         System.gc();
-        System.out.println(wf.isEnqueued());
-        System.out.println("after gc: wf.get " + wf.get());
+        Assert.assertNull(weakReference.get());
     }
 
     @Test
-    public void testWeakReferenceWithQueue() throws InterruptedException {
-        BigObject obj = new BigObject("m1");
-        // 创建弱引用对象时没有设置相关联队列，所以当弱引用失效时，wf.isEnqueued永远为false
+    public void testWeakWithEnqueue() throws InterruptedException {
         ReferenceQueue<Object> queue = new ReferenceQueue<>();
-        WeakReference<Object> wf = new WeakReference<Object>(obj, queue);
-        System.out.println("未gc前弱引用包裹的对象是 " + wf.get());
-        System.out.println("未gc前弱引用是否入队列 " + wf.isEnqueued());
-        obj = null;
-        System.gc();
-        // Thread.sleep(2000);
-        System.out.println("gc后弱引用包裹的对象是 " + wf.get());
+        WeakReference<Object> weakReference = new WeakReference<>(new Object(), queue);
+        Assert.assertFalse(weakReference.isEnqueued());
 
-        Thread.sleep(2000);
-        System.out.println("gc后弱引用是否入队列 " + wf.isEnqueued());
-        Reference<?> poll = queue.poll();
-        System.out.println("移除队列中的弱引用包裹器是 " + poll);
-        System.out.println("移除队列中的弱引用包裹器包裹的真实对象是 " + poll.get());
+        // 显式 将虚引用 Reference 放置到引用队列中去，成功返回true
+        Assert.assertTrue(weakReference.enqueue());
+        // 验证虚引用 Reference 已经放置到引用队列中
+        Assert.assertTrue(weakReference.isEnqueued());
+        // 验证引用队列中的元素 正好是 刚创建的虚拟引用  weakReference
+        Reference<?> referenceInQueue = queue.poll();
+        Assert.assertEquals(weakReference, referenceInQueue);
+        // 因为没有gc，所以业务对象未被回收
+        Assert.assertNotNull(weakReference.get());
+
+        WeakReference<Object> implicitWeakReference = new WeakReference<>(new Object(), queue);
+        Assert.assertFalse(implicitWeakReference.isEnqueued());
+        // 因为gc， 虚引用 implicitWeakReference 被 隐式 放置到引用队列中
+        System.gc();
+        // 不可省略，因为gc需要时间
+        Thread.sleep(1000);
+        // 验证虚引用 implicitWeakReference 被隐式放置到引用队列中
+        Assert.assertTrue(implicitWeakReference.isEnqueued());
+        Reference<?> implicitReferenceInQueue = queue.poll();
+        // 验证引用队列中的元素 正好是 刚创建的虚拟引用  weakReference
+        Assert.assertEquals(implicitReferenceInQueue, implicitWeakReference);
+        // 因为gc，业务对象被回收
+        Assert.assertNull(implicitReferenceInQueue.get());
+
+        Assert.assertNull(queue.poll());
     }
 
     /**

@@ -185,26 +185,37 @@ public class CacheTest {
     @Test
     public void testWeakKeys2() throws ExecutionException, InterruptedException {
 
-        Cache cache = CacheBuilder.newBuilder()
+        LoadingCache<Double, String> cache = CacheBuilder.newBuilder()
+                .maximumSize(1)
                 .weakKeys().removalListener(new RemovalListener<Double, String>() {
                     @Override
                     public void onRemoval(RemovalNotification<Double, String> notification) {
-                        System.out.println(notification.getKey() + " evicted");
+                        System.out.println("key " + notification.getKey()
+                                + ", value " + notification.getValue()
+                                + " evicted");
                     }
-                }).build();
-        cache.put(Math.random(), "a");
+                }).build(new CacheLoader<Double, String>() {
+                    @Override
+                    public String load(Double key) throws Exception {
+                        return key.toString();
+                    }
+                });
+        cache.get(Math.random());
+        System.out.println("cache size :" + cache.size());
         System.out.println("cache: " + cache.asMap());
         System.gc();
+        System.out.println("cache size :" + cache.size());
         System.out.println("cache: " + cache.asMap());
-
-        {
-            Double r = Math.random();
-            cache.put(r, "a");
-            r = null;
-        }
-        System.out.println("cache: " + cache.asMap());
-        System.gc();
-        System.out.println("cache: " + cache.asMap());
+        cache.get(Math.random());
+//
+//        {
+//            Double r = Math.random();
+//            cache.put(r, "a");
+//            r = null;
+//        }
+//        System.out.println("cache: " + cache.asMap());
+//        System.gc();
+//        System.out.println("cache: " + cache.asMap());
 
     }
 
