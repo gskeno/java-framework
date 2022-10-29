@@ -2,9 +2,9 @@ package com.gson.guava;
 
 public class User implements Comparable<User> {
 
-    static {
-        System.out.println("i am user");
-    }
+//    static {
+//        System.out.println("i am user");
+//    }
 
     public User() {
     }

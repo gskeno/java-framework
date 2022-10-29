@@ -27,6 +27,12 @@ public class WeakReferenceTest {
         Assert.assertNotNull(weakReference.get());
         System.gc();
         Assert.assertNull(weakReference.get());
+
+        Object o = new Object();
+        WeakReference<Object> weakReference1 = new WeakReference<>(o, null);
+        Assert.assertNotNull(weakReference1.get());
+        System.gc();
+        Assert.assertNotNull(weakReference1.get());
     }
 
     @Test
@@ -64,7 +70,7 @@ public class WeakReferenceTest {
 
     /**
      * WeakHashMap内部的Entry继承WeakReference，实现了Map.Entry,
-     * 键为弱建，当只有WeakHashMap引用key，key不再被其他对象引用时，
+     * 当只有WeakHashMap引用key，key不再被其他对象引用时，
      * gc回收时会回收该key。
      */
     @Test
@@ -76,14 +82,17 @@ public class WeakReferenceTest {
         String value2 = "峨眉创始人";
         whm.put(key1, value1);
         whm.put(key2, value2);
-        System.out.println(whm.size());
+        Assert.assertEquals(whm.size() , 2);
+        // key1 不再被强引用
         key1 = null;
+        // gc后，相应的entry也会从map中移除
         System.gc();
-        System.out.println("gc后立即取size=" + whm.size());
+        // gc后，如果还未操作该map，则size依然为2
+        // 操作map后，会根据引用队列识别出已被GC的entry，从而将entry移除掉
+        Assert.assertEquals(whm.size(), 2);
         Set<Map.Entry<String, String>> entries = whm.entrySet();
-        for(Map.Entry<String,String> entry : entries){
-            System.out.println("遍历到元素 " + entry.getKey() + ":" + entry.getValue());
-        }
-        System.out.println("gc后遍历后取size=" + whm.size());
+        // 遍历过程中会触发 移除无效的entry(key不再被强引用)
+        entries.stream().forEach(entry->{});
+        Assert.assertEquals(whm.size(), 1);
     }
 }

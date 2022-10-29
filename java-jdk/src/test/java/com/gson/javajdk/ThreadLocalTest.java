@@ -29,4 +29,23 @@ public class ThreadLocalTest {
         Long beginTime = beginTimeTL.get();
         Assert.assertNull(beginTime);
     }
+
+    @Test
+    public void testRemove() throws InterruptedException {
+        ThreadLocal<String> threadLocal = new ThreadLocal<>();
+        String s = new String("gs");
+        threadLocal.set(s);
+        System.out.println(threadLocal.get());
+        threadLocal.remove();
+        System.out.println(threadLocal.get());
+        System.gc();
+        Thread.sleep(2000);
+        System.out.println("after gc");
+        System.out.println(threadLocal.get());
+        System.out.println(s);
+    }
+
+    @Test
+    public void testThreadLocal() throws InterruptedException {
+    }
 }

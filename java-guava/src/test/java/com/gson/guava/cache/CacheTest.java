@@ -3,8 +3,10 @@ package com.gson.guava.cache;
 import com.google.common.cache.*;
 import com.google.common.reflect.Reflection;
 import com.gson.guava.User;
+import org.junit.Assert;
 import org.junit.Test;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -156,10 +158,31 @@ public class CacheTest {
         }
     }
 
+    /**
+     * 基于 弱引用key 逐出
+     */
+    @Test
+    public void testWeakReferenceBaseEviction() throws InterruptedException {
+        Cache<String, String> cache = CacheBuilder.newBuilder().weakKeys().removalListener(
+                new RemovalListener<String, String>() {
+                    @Override
+                    public void onRemoval(RemovalNotification<String, String> notification) {
+                        // 如果value是大对象，要主动将其失效掉
+                        System.out.println(notification.getKey() + ":" + notification.getValue()
+                                + " is " + notification.wasEvicted());
+                    }
+                }).build();
+
+        cache.put(UUID.randomUUID().toString(), UUID.randomUUID().toString());
+        System.out.println(cache.asMap());
+        System.gc();
+        // 得到 {}
+        System.out.println(cache.asMap());
+    }
+
+
     @Test
     public void testWeakKeys() throws ExecutionException, InterruptedException {
-        Reflection.initialize(User.class);
-
         LoadingCache<User, String> cache = CacheBuilder.newBuilder()
                 .weakKeys()
                 .removalListener(new RemovalListener<User, String>() {
@@ -168,6 +191,10 @@ public class CacheTest {
                         User key = notification.getKey();
                         boolean evicted = notification.wasEvicted();
                         System.out.println(key + " is evicted: " + evicted);
+                        StackTraceElement stack[] = Thread.currentThread().getStackTrace();
+                        for(int i=0;i<stack.length;i++){
+                            System.out.println(stack[i].getClassName()+ "#"+stack[i].getMethodName() );
+                        }
                     }
                 })
                 .build(new CacheLoader<User, String>() {
@@ -177,9 +204,53 @@ public class CacheTest {
                     }
                 });
         cache.get(new User(UUID.randomUUID().toString(), UUID.randomUUID().toString()));
-        System.out.println(cache.asMap());
+        System.out.println("size=" + cache.size() + ", map=" + cache.asMap());
         System.gc();
-        System.out.println(cache.asMap());
+        Thread.sleep(1000);
+
+        // 执行size方法时，还没有清除无效的 键值对。在遍历时，对于只有弱引用的key，该entry会被移除掉
+        System.out.println("size=" +cache.size() + ", map=" + cache.asMap());
+        System.out.println("size=" +cache.size() + ", map=" + cache.asMap());
+
+        cache.get(new User(UUID.randomUUID().toString(), UUID.randomUUID().toString()));
+        Thread.sleep(2000);
+    }
+
+    @Test
+    public void testWeakKeys1() throws ExecutionException, InterruptedException {
+
+        LoadingCache<String, String> cache = CacheBuilder.newBuilder()
+                .weakKeys()
+                .removalListener(new RemovalListener<String, String>() {
+                    @Override
+                    public void onRemoval(RemovalNotification<String, String> notification) {
+                        String key = notification.getKey();
+                        boolean evicted = notification.wasEvicted();
+                        System.out.println("key:" + key + ", value=" + notification.getValue() +  " is evicted: " + evicted);
+                        StackTraceElement stack[] = Thread.currentThread().getStackTrace();
+                        for(int i=0;i<stack.length;i++){
+                            System.out.println(stack[i].getClassName()+ "#"+stack[i].getMethodName() );
+                        }
+                    }
+                })
+                .build(new CacheLoader<String, String>() {
+                    @Override
+                    public String load(String key) throws Exception {
+                        return  key + "_value";
+                    }
+                });
+        cache.get(UUID.randomUUID().toString());
+        System.out.println("size=" + cache.size() + ", map=" + cache.asMap());
+        System.gc();
+        Thread.sleep(1000);
+
+        // 执行size方法时，还没有清除无效的 键值对。在遍历时，对于只有弱引用的key，该entry会被移除掉
+        System.out.println("size=" +cache.size() + ", map=" + cache.asMap());
+        System.out.println("size=" +cache.size() + ", map=" + cache.asMap());
+
+        Thread.sleep(2000);
+        cache.get( UUID.randomUUID().toString());
+
     }
 
     @Test
@@ -207,15 +278,6 @@ public class CacheTest {
         System.out.println("cache size :" + cache.size());
         System.out.println("cache: " + cache.asMap());
         cache.get(Math.random());
-//
-//        {
-//            Double r = Math.random();
-//            cache.put(r, "a");
-//            r = null;
-//        }
-//        System.out.println("cache: " + cache.asMap());
-//        System.gc();
-//        System.out.println("cache: " + cache.asMap());
 
     }
 
@@ -285,4 +347,40 @@ public class CacheTest {
         System.out.println("cache: " + cache.asMap());
     }
 
+    @Test
+    public void testStatistics() throws ExecutionException {
+        LoadingCache<String, String> cache = CacheBuilder.newBuilder().maximumSize(3).recordStats().build(new CacheLoader<String, String>() {
+            @Override
+            public String load(String key) throws Exception {
+                return key;
+            }
+        });
+        cache.get("A");
+        CacheStats stats = cache.stats();
+        // 不命中共1次
+        Assert.assertEquals(stats.missCount(), 1);
+        // 加载1次
+        Assert.assertEquals(stats.loadSuccessCount(), 1);
+
+        cache.get("A");
+        // 命中1次
+        Assert.assertEquals(cache.stats().hitCount(), 1);
+        cache.get("A");
+        // 命中2次
+        Assert.assertEquals(cache.stats().hitCount(), 2);
+
+        cache.get("B");
+        cache.get("C");
+        // 不命中共3次
+        Assert.assertEquals(cache.stats().missCount(), 3);
+        // 加载共3次
+        Assert.assertEquals(cache.stats().loadSuccessCount(), 3);
+
+        // 共逐出1次
+        cache.get("D");
+        Assert.assertEquals(cache.stats().evictionCount(), 1);
+        cache.get("E");
+        // 共逐出2次
+        Assert.assertEquals(cache.stats().evictionCount(), 2);
+    }
 }
