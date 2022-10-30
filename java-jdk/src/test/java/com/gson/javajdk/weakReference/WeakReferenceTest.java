@@ -16,6 +16,15 @@ import java.util.WeakHashMap;
  * @date 2022/4/11
  */
 public class WeakReferenceTest {
+
+    @Test
+    public void testQueue(){
+        ReferenceQueue<Object> queue = new ReferenceQueue<>();
+        WeakReference<Object> weakReference = new WeakReference<>(new Object(), queue);
+        System.out.println(weakReference.get());
+        System.gc();
+        System.out.println(weakReference.get());
+    }
     /**
      * gc 后
      * 弱引用对象指向的业务对象被回收,
