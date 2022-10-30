@@ -192,5 +192,15 @@ public class MathTest {
         System.out.println((double) Math.round(1.74444 * 10 )/10);
     }
 
+    @Test
+    public void test异或(){
+        // [A,Z] == [65, 90]
+        // [a,z] == [97,122]
+        // 65 = 0100 0001
+        // 97 = 0110 0001
+        char c = 'a';
+        System.out.println((int)c);
+    }
+
 
 }
