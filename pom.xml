@@ -51,6 +51,7 @@
         <module>java-spring-jdbc</module>
         <module>java-design-pattern</module>
         <module>java-annotation</module>
+        <module>java-powermock</module>
     </modules>
 
     <name>java-framework</name>
