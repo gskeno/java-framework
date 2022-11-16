@@ -52,6 +52,7 @@
         <module>java-design-pattern</module>
         <module>java-annotation</module>
         <module>java-powermock</module>
+        <module>java-mockito</module>
     </modules>
 
     <name>java-framework</name>
@@ -70,11 +71,6 @@
         <junit.version>4.12</junit.version>
         <lucene.version>8.0.0</lucene.version>
     </properties>
-
-    <dependencies>
-
-
-    </dependencies>
 
     <dependencyManagement>
         <dependencies>
