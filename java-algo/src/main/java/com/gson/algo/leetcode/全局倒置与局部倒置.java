@@ -32,24 +32,27 @@ package com.gson.algo.leetcode;
 public class 全局倒置与局部倒置 {
 
     /**
-     * 找到每一个局部倒置nums[i-1]>nums[i]，如果存在 j < i-1 且 nums[j] > nums[i]，则返回false
+     * 维护后缀最小值
+     *
+     * 局部倒置 一定是 全局倒置，因此找到一个全局倒置不是局部倒置，则返回false；否则，返回true。
+     *
+     * 找到一个全局倒置(非局部倒置)等价于 对于 i < j, 找到nums[i] > nums[j]，且j != i+1。
+     * 容易二次遍历解决问题。但时间复杂度高，需要优化。
+     *
+     * 如果nums[i] > min{nums[i+2], nums[i+3], nums[n-1]}，则返回false。否则返回true。
+     * 维护一个倒序最小值minSuffix即可
      *
      * @param nums
      * @return
      */
     public boolean isIdealPermutation(int[] nums) {
-        // 遍历nums过程中记录最小的数值
-        int min = nums[0];
         int n = nums.length;
-        for (int i = 1; i < n; i++) {
-            if (nums[i] > nums[i-1]){
-                continue;
-            }
-
-            if (min != nums[i-1] && min > nums[i]){
+        int minSuffix = nums[n-1];
+        for (int i = n-3; i >= 0 ; i--) {
+            if (nums[i] > minSuffix){
                 return false;
             }
-            min = Math.min(min, nums[i]);
+            minSuffix = Math.min(minSuffix, nums[i+1]);
         }
         return true;
     }
@@ -57,6 +60,10 @@ public class 全局倒置与局部倒置 {
     public static void main(String[] args) {
         全局倒置与局部倒置 solution = new 全局倒置与局部倒置();
         System.out.println(solution.isIdealPermutation(new int[]{1,0,2}));
+        System.out.println(solution.isIdealPermutation(new int[]{0,2,1}));
         System.out.println(solution.isIdealPermutation(new int[]{1,2,0}));
+        System.out.println(solution.isIdealPermutation(new int[]{2,0,1}));
+        System.out.println(solution.isIdealPermutation(new int[]{2,1,0}));
+        System.out.println(solution.isIdealPermutation(new int[]{0,2,3,1}));
     }
 }
