@@ -43,8 +43,34 @@ public class 搜索旋转排序数组 {
         return -1;
     }
 
+    public int search1(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right){
+            int mid = left + (right - left)/2;
+            if (nums[mid] == target){
+                return mid;
+            }
+            if (nums[mid] < nums[right]){
+                if (nums[mid] < target && target <= nums[right]){
+                    left = mid + 1;
+                }else {
+                    right = mid - 1;
+                }
+            }else {
+                if (nums[mid] > target && nums[left] <= target){
+                    right = mid - 1;
+                }else {
+                    left = mid + 1;
+                }
+            }
+        }
+        return nums[left] == target ? left : -1;
+    }
+
     public static void main(String[] args) {
         搜索旋转排序数组 solution = new 搜索旋转排序数组();
         System.out.println(solution.search(new int[]{4,5,6,7,0,1,2},0 ));
+        System.out.println(solution.search1(new int[]{4,5,6,7,0,1,2},0 ));
     }
 }
