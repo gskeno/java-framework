@@ -29,7 +29,6 @@ public class 第N位数字 {
         int left = 1;
         // 最多9位数
         int right = 9;
-        // 最经典的二分法
         while (left < right){
             int mid = (left + right)/2;
             // mid位数的整数序列 需要的总位数
@@ -51,7 +50,9 @@ public class 第N位数字 {
         int mod = (n-totalDigitsOfX) % x;
         int num = (int)Math.pow(10, x-1) + idx;
         if (mod == 0){
-            return (num - 1)%((int)Math.pow(10, x-1));
+            int ans = num - 1;
+            String ansStr = String.valueOf(ans);
+            return Integer.valueOf(ansStr.substring(ansStr.length()-1));
         }
         return Integer.valueOf(String.valueOf(num).substring(mod-1, mod));
     }
@@ -78,21 +79,24 @@ public class 第N位数字 {
 
     public static void main(String[] args) {
         第N位数字 solution = new 第N位数字();
-        System.out.println(solution.getTotalDigits(9));
+        //System.out.println(solution.getTotalDigits(9));
 
-        int ans = solution.findNthDigit(11);
+        int ans = 0;
+        ans = solution.findNthDigit(3);
         System.out.println(ans);
-        ans = solution.findNthDigit(12);
-        System.out.println(ans);
-        ans = solution.findNthDigit(13);
-        System.out.println(ans);
-        ans = solution.findNthDigit(14);
-        System.out.println(ans);
-        ans = solution.findNthDigit(15);
-        System.out.println(ans);
-        ans = solution.findNthDigit(16);
-        System.out.println(ans);
-        ans = solution.findNthDigit(17 );
-        System.out.println(ans);
+//        solution.findNthDigit(11);
+//        System.out.println(ans);
+//        ans = solution.findNthDigit(12);
+//        System.out.println(ans);
+//        ans = solution.findNthDigit(13);
+//        System.out.println(ans);
+//        ans = solution.findNthDigit(14);
+//        System.out.println(ans);
+//        ans = solution.findNthDigit(15);
+//        System.out.println(ans);
+//        ans = solution.findNthDigit(16);
+//        System.out.println(ans);
+//        ans = solution.findNthDigit(17 );
+//        System.out.println(ans);
     }
 }
