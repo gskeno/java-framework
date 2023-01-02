@@ -9,6 +9,19 @@ import java.util.List;
  */
 public class 按位或最大的最小子数组长度 {
 
+    public int[] smallestSubarrays2(int[] nums){
+        int n = nums.length;
+        int[] ans = new int[n];
+        for(int i = 0; i < n; i++){
+            ans[i] = 1;
+            for(int j = i-1; j >=0 && (nums[j] |nums[i]) != nums[j]; j--){
+                nums[j] |= nums[i];
+                ans[j] = i -j + 1;
+            }
+        }
+        return ans;
+    }
+
     public int[] smallestSubarrays(int[] nums) {
         int n = nums.length;
         int[] ans = new int[n];
@@ -33,8 +46,9 @@ public class 按位或最大的最小子数组长度 {
     public static void main(String[] args) {
         按位或最大的最小子数组长度 solution = new 按位或最大的最小子数组长度();
         int[] ans;
-        ans = solution.smallestSubarrays(new int[]{2,3,1});
+        // ans = solution.smallestSubarrays(new int[]{2,3,1});
         // ans = solution.smallestSubarrays(new int[]{1,0,2,1,3});
+         ans = solution.smallestSubarrays(new int[]{8, 1});
         System.out.println(Arrays.toString(ans));
 
     }
