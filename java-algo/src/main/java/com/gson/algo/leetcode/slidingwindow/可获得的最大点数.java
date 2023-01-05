@@ -61,7 +61,7 @@ public class 可获得的最大点数 {
         // 窗口[left, right]的大小始终保持为 n- k
         int size = n - k; // >=0
         int left = 0;
-        int right = n - k - 1;
+        int right = size - 1;
         int sum = Arrays.stream(cardPoints).sum();
 
         if (size == 0){
@@ -74,10 +74,30 @@ public class 可获得的最大点数 {
         }
         ans = Math.max(ans, sum - region);
         while (++right < n){
-            ans = Math.max(ans, sum - region);
             region -= cardPoints[left];
+            region += cardPoints[right];
+            ans = Math.max(ans, sum - region);
             left++;
         }
         return ans;
+    }
+
+    public static void main(String[] args) {
+        可获得的最大点数 solution = new 可获得的最大点数();
+        int ans = 0;
+        ans = solution.maxScore(new int[]{1, 2, 3, 4, 5, 6, 1}, 3);
+        System.out.println(ans);
+
+        ans = solution.maxScore(new int[]{2,2,2}, 2);
+        System.out.println(ans);
+
+        ans = solution.maxScore(new int[]{9,7,7,9,7,7,9}, 7);
+        System.out.println(ans);
+
+        ans = solution.maxScore(new int[]{1,1000,1}, 1);
+        System.out.println(ans);
+
+        ans = solution.maxScore(new int[]{1,79,80,1,1,1,200,1}, 3);
+        System.out.println(ans);
     }
 }
