@@ -589,7 +589,7 @@ left 和最大的 right，分别满足 sum[left] - sum[i] >= sum[i]
 
 # 最短路
 - [网络延迟时间](https://leetcode.cn/problems/network-delay-time/)
-  [语雀](https://www.yuque.com/gaoshangao/pcff9w/liln3i#X3iO0)
+- [语雀](https://www.yuque.com/gaoshangao/pcff9w/liln3i#X3iO0)
 
 - [K 站中转内最便宜的航班](https://leetcode.cn/problems/cheapest-flights-within-k-stops/)
 
