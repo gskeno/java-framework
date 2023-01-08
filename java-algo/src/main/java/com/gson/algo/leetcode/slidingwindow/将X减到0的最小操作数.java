@@ -46,6 +46,9 @@ public class 将X减到0的最小操作数 {
     public int minOperations(int[] nums, int x) {
         int n = nums.length;
         int target = Arrays.stream(nums).sum() - x;
+        if (target < 0){
+            return  - 1;
+        }
         int left = 0;
         int right = 0;
         int region = 0;
