@@ -24,4 +24,17 @@ public class 最大子数组和_53 {
         }
         return ans;
     }
+
+    public int maxSubArray1(int[] nums) {
+        // 以当前元素为结束元素的子数组最大和
+        int maxEndingHere = nums[0];
+        // 目前遇到的子数组的最大和
+        int maxSoFar = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            int num = nums[i];
+            maxEndingHere = Math.max(num, num + maxEndingHere);
+            maxSoFar = Math.max(maxSoFar, maxEndingHere);
+        }
+        return maxSoFar;
+    }
 }
