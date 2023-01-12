@@ -1,3 +1,5 @@
+模块太多，为了避免内存加载全部module，占用太多内存，可在父pom.xml文件中移除暂时不关心的子module节省内存占用空间。
+
 ## java-junit
 - @RunWith(Parameterized.class) 可以构造任意组单元测试输入数据，以成员变量的方式，使同一个
 测试案例可以根据不同的输入参数，执行多次。
