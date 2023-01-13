@@ -26,12 +26,12 @@
         <module>java-logback</module>
 <!--        <module>java-serialize</module>-->
         <module>java-slf4j</module>
-        <module>java-commons-digester</module>
+<!--        <module>java-commons-digester</module>-->
 <!--        <module>java-guava-retry</module>-->
 <!--        <module>java-guava</module>-->
         <module>java-jdk</module>
         <module>java-algo</module>
-        <module>java-lucene</module>
+<!--        <module>java-lucene</module>-->
 <!--        <module>java-roaring-bitmap</module>-->
         <module>java-diagram</module>
 <!--        <module>java-interview</module>-->
@@ -46,10 +46,10 @@
         <module>java-jmockit</module>
 <!--        <module>java-paranamer</module>-->
 <!--        <module>java-maven-shade-plugin</module>-->
-        <module>java-jvm</module>
+<!--        <module>java-jvm</module>-->
 <!--        <module>java-effective-java</module>-->
 <!--        <module>java-spring-jdbc</module>-->
-        <module>java-design-pattern</module>
+<!--        <module>java-design-pattern</module>-->
 <!--        <module>java-annotation</module>-->
         <module>java-powermock</module>
         <module>java-mockito</module>

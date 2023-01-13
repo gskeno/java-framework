@@ -33,4 +33,12 @@ public class Doctor {
         this.specialty = specialty;
     }
 
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", specialty='" + specialty + '\'' +
+                '}';
+    }
 }
