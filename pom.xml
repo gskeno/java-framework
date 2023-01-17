@@ -23,9 +23,9 @@
 <!--        <module>java-springaop</module>-->
 <!--        <module>java-spring-inner</module>-->
 <!--        <module>java-mybatis</module>-->
-        <module>java-logback</module>
+<!--        <module>java-logback</module>-->
 <!--        <module>java-serialize</module>-->
-        <module>java-slf4j</module>
+<!--        <module>java-slf4j</module>-->
 <!--        <module>java-commons-digester</module>-->
 <!--        <module>java-guava-retry</module>-->
 <!--        <module>java-guava</module>-->
