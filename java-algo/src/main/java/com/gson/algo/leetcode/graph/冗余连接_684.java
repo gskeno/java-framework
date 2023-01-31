@@ -87,7 +87,7 @@ public class 冗余连接_684 {
     }
 
     public static void main(String[] args) {
-        test2();
+        test1();
     }
 
     public static void test1(){
