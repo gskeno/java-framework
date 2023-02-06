@@ -11,6 +11,16 @@ public class UnionFind {
     private int[] parents;
 
     /**
+     * 以索引为根节点的连通分图节点个数
+     */
+    private int[] size;
+
+    /**
+     * 连通分量个数
+     */
+    private int setCount;
+
+    /**
      * n个节点，节点编号0至(n-1)
      * @param n
      */
@@ -19,6 +29,12 @@ public class UnionFind {
         // 初始时，每个节点的父节点都是自身
         for (int i = 0; i < n; i++) {
             parents[i] = i;
+        }
+        this.setCount = n;
+        size = new int[n];
+        // 初始时，每个节点都是一个连通图，图内节点个数为都是1
+        for (int i = 0; i < n; i++) {
+            size[i] = 1;
         }
     }
 
@@ -57,27 +73,27 @@ public class UnionFind {
         }
         int parentX = find(x);
         int parentY = find(y);
-        // 两个节点的根节点相连
-        parents[parentX] = parentY;
-    }
 
-    public boolean hasCycle(int[][] edges){
-        for(int[] edge : edges){
-            int from = edge[0];
-            int to = edge[1];
-            if (connected(from, to)){
-                return true;
-            }
 
-            union(from, to);
+        int sizeX = size[parentX];
+        int sizeY = size[parentY];
+        // 尝试将小树挂载到大树上
+        if (sizeX < sizeY){
+            size[parentY] += sizeX;
+            parents[parentX] = parentY;
+        }else {
+            size[parentX] += sizeY;
+            parents[parentY] = parentX;
         }
-
-        return false;
+        // 每次连接，都会时连通分量个数--
+        this.setCount--;
     }
 
-    public static void main(String[] args) {
-        UnionFind unionFind = new UnionFind(3);
-        boolean hasCycle = unionFind.hasCycle(new int[][]{{0, 1}, {1, 2}, {0, 2}});
-        System.out.println(hasCycle);
+    /**
+     * 连通分量个数
+     * @return
+     */
+    public int getSetCount() {
+        return setCount;
     }
 }
