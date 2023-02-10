@@ -2,10 +2,7 @@ package com.gson.algo.leetcode.monotonicstack;
 
 import com.gson.algo.leetcode.hot100.完全平方数_279;
 
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * https://leetcode.cn/problems/maximum-width-ramp/
@@ -62,13 +59,56 @@ public class 最大宽度坡 {
         return ans;
     }
 
+    /**
+     * 提示1: 考虑可能的坡的起点，如果 i <j， 且nums[i] >= nums[j]，
+     *        则j肯定不是一个可选起点，因为i比j更有资格当起点。
+     *        可以使用一个栈保存可选的起点下标。
+     *        遍历nums，如果栈为空或者栈顶元素下标代表的坡高 > 当前下标i代表的坡高，
+     *        则i是一个可选的起点，可以入栈。
+     *
+     * 提示2: 倒序遍历数组nums，对于下标j，如果nums[j] >= nums[stack.peek],
+     *       则j - stack.peek是一个可选答案，且令stack出栈
+     * @param nums
+     * @return
+     */
+    public int maxWidthRamp1(int[] nums) {
+        int n = nums.length;
+        int ans = 0;
+        Stack<Integer> stack = new Stack<>();
+        // stack保存可选的起点下标，是一个严格单调递减栈
+        for (int i = 0; i < n; i++) {
+            if (stack.isEmpty() || nums[stack.peek()] > nums[i]){
+                stack.push(i);
+            }
+        }
+
+        // 倒序遍历nums，对于下标j，作为上坡终点下标，如果nums[j] >= nums[stack.peek]，则 j - peek + 1是一个可选答案。
+        // 且stack出栈，因为以peek为起点，不会有比j更大的终点，自然也不会有宽的坡
+        for (int j = n-1; j >=0 ; j--) {
+            while (!stack.isEmpty() && nums[j] >= nums[stack.peek()]){
+                Integer i = stack.pop();
+                ans = Math.max(ans, j - i );
+            }
+            if (stack.isEmpty()){
+                break;
+            }
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
         最大宽度坡 solution = new 最大宽度坡();
         int ans = 0;
         ans = solution.maxWidthRamp(new int[]{6,0,8,2,1,5});
         System.out.println(ans);
 
+        ans = solution.maxWidthRamp1(new int[]{6,0,8,2,1,5});
+        System.out.println(ans);
+
         ans = solution.maxWidthRamp(new int[]{9,8,1,0,1,9,4,0,4,1});
+        System.out.println(ans);
+
+        ans = solution.maxWidthRamp1(new int[]{9,8,1,0,1,9,4,0,4,1});
         System.out.println(ans);
     }
 }
