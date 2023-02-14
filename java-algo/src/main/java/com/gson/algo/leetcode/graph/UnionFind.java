@@ -11,7 +11,7 @@ public class UnionFind {
     private int[] parents;
 
     /**
-     * 以索引为根节点的连通分图节点个数
+     * 以索引为根节点的连通分图内节点个数
      */
     private int[] size;
 
