@@ -44,13 +44,35 @@ public class 求一个字符串的最大公共前后缀II {
         return next;
     }
 
+    public int[] getNext2(String s){
+        int length = s.length();
+        int[] next = new int[length];
+        next[0] = 0;
+        int pos = 0;
+        for (int i = 1; i < length;) {
+            if (s.charAt(pos) == s.charAt(i)){
+                pos++;
+                next[i] = pos;
+                i++;
+            }else if (pos != 0){
+                pos = next[pos - 1];
+            }
+            // pos == 0
+            else {
+                next[i] = 0;
+                i++;
+            }
+        }
+        return next;
+    }
+
     public static void main(String[] args) {
         求一个字符串的最大公共前后缀II solution = new 求一个字符串的最大公共前后缀II();
         int[] next;
         next = solution.getNext("abababca");
         System.out.println(Arrays.toString(next));
         System.out.println("----" + Arrays.toString(solution.getNext1("abababca")));
-
+        System.out.println("----" + Arrays.toString(solution.getNext2("abababca")));
         next = solution.getNext("aabaaf");
         System.out.println(Arrays.toString(next));
     }
