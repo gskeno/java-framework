@@ -73,6 +73,7 @@ public class 求一个字符串的最大公共前后缀II {
         System.out.println(Arrays.toString(next));
         System.out.println("----" + Arrays.toString(solution.getNext1("abababca")));
         System.out.println("----" + Arrays.toString(solution.getNext2("abababca")));
+        System.out.println("----" + Arrays.toString(solution.getNext2("issip")));
         next = solution.getNext("aabaaf");
         System.out.println(Arrays.toString(next));
     }
