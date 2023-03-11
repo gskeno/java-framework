@@ -1,6 +1,8 @@
 package com.gson.algo.leetcode.str;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * https://leetcode.cn/problems/delete-columns-to-make-sorted-ii/
@@ -21,7 +23,7 @@ public class 删列造序II {
      * 提示1: 方向思考，尽量保留更多的列，保证有序。对于非删不可的列才考虑删除
      *        当前列绝对有序，则可以保留；
      *        当前列不绝对有序时，需要与前一列拼接起来，来判断当前列是否可以保留，比如ac,db。
-     *        虽然第而列c>b，不有序；但是与前一列拼接起来,ac < db，就有序了
+     *        虽然第二列c>b，不有序；但是与前一列拼接起来,ac < db，就有序了
      * @param strs
      * @return
      */
@@ -69,5 +71,40 @@ public class 删列造序II {
         ans = solution.minDeletionSize(new String[]{"ca","bb","ac"});
         System.out.println(ans);
 
+//        System.out.println(solution.minDeletionSize1(new String[]{"xc", "yb", "za"}) == 0);
+//         System.out.println(solution.minDeletionSize1(new String[]{"ca", "bb", "ac"}) == 1);
+        System.out.println(solution.minDeletionSize1(new String[]{"zyx", "wvu", "tsr"}) == 3);
+//        System.out.println(solution.minDeletionSize1(new String[]{"xga","xfb","yfa"}) == 1);
+//        System.out.println(solution.minDeletionSize1(new String[]{"ax","ay","ba","bb"}) == 0);
+//        System.out.println(solution.minDeletionSize1(new String[]{"vdy","vei","zvc","zld"}) == 0);
+
+    }
+
+    /**
+     * 割点
+     * @param strs
+     * @return
+     */
+    public int minDeletionSize1(String[] strs) {
+        int lines = strs.length;
+        int columns = strs[0].length();
+        int ans = 0;
+        // 割点， cuts[i]=true，表示第i行严格大于第i+1行
+        boolean[] cuts = new boolean[lines];
+        search : for (int i = 0; i < columns; i++) {
+            for (int j = 0; j < lines - 1; j++) {
+                if (!cuts[j] && strs[j].charAt(i) > strs[j+1].charAt(i)){
+                    ans++;
+                    continue search;
+                }
+            }
+
+            for (int j = 0; j < lines - 1; j++) {
+                if (strs[j].charAt(i) < strs[j+1].charAt(i)){
+                    cuts[j] = true;
+                }
+            }
+        }
+        return ans;
     }
 }
