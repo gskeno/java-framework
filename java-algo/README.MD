@@ -384,9 +384,6 @@ public int shoppingOffers(List<Integer> price, List<List<Integer>> special, List
     }
 ```
 
-- [自行车炫技赛场](https://leetcode.cn/problems/kplEvH/)
-> 分析:三维数组，递归 + 记忆化搜索
-
 # 动态规划
 
 ## 最大子数组和

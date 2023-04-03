@@ -2,7 +2,10 @@ package com.gson.interview.concurrentprogrammingart.chapter9;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
-import java.util.Date;
+import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.concurrent.*;
 
 /**
@@ -11,8 +14,7 @@ import java.util.concurrent.*;
  * @since 2019-03-30
  */
 public class ThreadPoolExecitorUse {
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchFieldException {
         ArrayBlockingQueue<Runnable> abq = new ArrayBlockingQueue<Runnable>(5);
         //线程工厂，这里使用guava提供的builder创建，每次创建一个线程，线程名中的序号加1
         ThreadFactory factory = new ThreadFactoryBuilder().setNameFormat("XX-task-%d").build();
@@ -45,36 +47,50 @@ public class ThreadPoolExecitorUse {
 
 
         ThreadPoolExecutor pool = new ThreadPoolExecutor(2,5,
-                5, TimeUnit.SECONDS,abq,factory,handler);
-
-        Runnable job = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    System.out.println(Thread.currentThread().getName() + "进入任务");
-                    Thread.sleep(20*1000);
-                    System.out.println(Thread.currentThread().getName() + "结束任务");
-                    System.out.println("time:" +new Date());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
+                5, TimeUnit.SECONDS,abq,factory, handler);
+        Field workers = getField("workers");
         try {
-            System.out.println("time:" +new Date());
-            for (int i = 0; i < 10; i++) {
-                pool.execute(job);
+            System.out.println("time:" + getNow());
+            int jobNo = 0;
+            while (jobNo < 11){
+                pool.execute(new Job(jobNo++, 3000));
+                Thread.sleep(100);
+                System.out.println("fieldWorkers :" +  ((HashSet)(workers.get(pool))).size() );
             }
+            System.out.println("activeCount " + pool.getActiveCount());
 
-            //因为任务队列的长度为5，所以前5个任务跑完需要20s，后5个任务跑完需要20s，总共需要40s
+            //因为任务队列的长度为5，所以前5个任务跑完需要3s，后5个任务跑完需要3s，总共需要6s
             //5s内没有任务，所以活着的5个worker转化为2个(核心线程数)
             //再等5s，提交下面这个任务时，可以debug观察到只有两个worker了
-            Thread.sleep(50*1000);
-            pool.execute(job);
+            Thread.sleep(16*1000);
+            System.out.println("activeCount " + pool.getActiveCount());
+            System.out.println("fieldWorkers :" +  ((HashSet)(workers.get(pool))).size() );
+
+            pool.execute(new Job(jobNo++, 3000));
+            Thread.sleep(1 * 1000);
+            System.out.println("activeCount " + pool.getActiveCount());
+            System.out.println("fieldWorkers :" +  ((HashSet)(workers.get(pool))).size() );
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
+    public static Field getField(String fieldName) throws NoSuchFieldException {
+        Field field = ThreadPoolExecutor.class.getDeclaredField(fieldName);
+        field.setAccessible(true);
+        return field;
+    }
+
+    public static String getNow(){
+        LocalDateTime ldtt=LocalDateTime.now();
+        DateTimeFormatter format=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String str=ldtt.format(format);
+        return str;
+    }
+
+
 }

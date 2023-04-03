@@ -34,7 +34,7 @@
 <!--        <module>java-lucene</module>-->
 <!--        <module>java-roaring-bitmap</module>-->
         <module>java-diagram</module>
-<!--        <module>java-interview</module>-->
+        <module>java-interview</module>
 <!--        <module>java-thread</module>-->
 <!--        <module>java-spi-apple-interface</module>-->
 <!--        <module>java-spi-apple-juice</module>-->

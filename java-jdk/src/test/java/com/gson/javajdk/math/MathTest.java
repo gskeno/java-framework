@@ -1,5 +1,6 @@
 package com.gson.javajdk.math;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class MathTest {
@@ -200,6 +201,13 @@ public class MathTest {
         // 97 = 0110 0001
         char c = 'a';
         System.out.println((int)c);
+    }
+
+    @Test
+    public void test8(){
+        double a = 3.14158274686846868136864d;
+        double b = 3.14158274686846868136865d;
+        Assert.assertTrue(a == b);
     }
 
 
