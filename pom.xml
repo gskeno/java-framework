@@ -43,7 +43,7 @@
 <!--        <module>java-apache-commons</module>-->
 <!--        <module>java-springboot</module>-->
 <!--        <module>java-pico-container</module>-->
-        <module>java-jmockit</module>
+<!--        <module>java-jmockit</module>-->
 <!--        <module>java-paranamer</module>-->
 <!--        <module>java-maven-shade-plugin</module>-->
 <!--        <module>java-jvm</module>-->
@@ -51,8 +51,8 @@
 <!--        <module>java-spring-jdbc</module>-->
 <!--        <module>java-design-pattern</module>-->
 <!--        <module>java-annotation</module>-->
-        <module>java-powermock</module>
-        <module>java-mockito</module>
+<!--        <module>java-powermock</module>-->
+<!--        <module>java-mockito</module>-->
         <module>java-map-struct</module>
     </modules>
 
