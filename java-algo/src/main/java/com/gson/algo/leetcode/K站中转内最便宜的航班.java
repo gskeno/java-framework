@@ -42,7 +42,7 @@ public class K站中转内最便宜的航班 {
                 // 节点j出发的相邻边
                 List<int[]> neighbors = table[j];
                 for(int[] neighbor : neighbors){
-                    if (dist[j] + neighbor[1] < dist[neighbor[0]]){
+                    if (clone[j] + neighbor[1] < dist[neighbor[0]]){
                         dist[neighbor[0]] = clone[j] + neighbor[1];
                     }
                 }

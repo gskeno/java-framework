@@ -17,7 +17,7 @@ public class 可能的二分法 {
 
     // 节点key着的色value
     Map<Integer, Integer> colorMap = new HashMap<>();
-    // 一个人不喜欢的所有人
+    // 与某人互斥的所有人
     Map<Integer, Set<Integer>> dislikesMap = new HashMap<>();
 
     /**
@@ -32,8 +32,8 @@ public class 可能的二分法 {
             dislikesMap.computeIfAbsent(dislike[1], (key)->new HashSet<>()).add(dislike[0]);
         }
         // 对n个人进行着色。
-        // 着色策略: 如果A没有着色，将其着红色(值为0)，所有A不喜欢的人和不喜欢A的人 （记为B) 都着黑色, 不喜欢B和B不喜欢的
-        // 人(记为C)再着红色,如果C中已经有人着过色且不是红色，则发生冲突。
+        // 着色策略: 如果A没有着色，将其着红色(值为0)，所有与A互斥的人(记为B) 都着黑色, 所有与B互斥的人(记为C)再着红色,
+        // 如果C中已经有人着过色且不是红色，则发生冲突。
         for (int i = 0; i < n; i++) {
             // 如果节点还没着色，则尝试着红色，如果着色失败，则发生冲突
             if (!colorMap.containsKey(i) && !setColor(i, 0)){

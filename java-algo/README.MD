@@ -4,7 +4,7 @@
 <br>&nbsp; &nbsp; &nbsp; &nbsp; [☑️] [最长数对链](#最长数对链)
 
 [递归](#递归)
-<br>&nbsp; &nbsp; &nbsp; &nbsp;  [二叉树的最近公共祖先](#二叉树的最近公共祖先)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; [☑️] [二叉树的最近公共祖先](#二叉树的最近公共祖先)
 
 
 
@@ -104,9 +104,9 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
 ## 可能的二分法
 > [可能的二分法](https://leetcode.cn/problems/possible-bipartition/)
-图论与深度优先搜索的结合,本质是一个深度优先搜索题目，没有充分的图论只是也能解决，不过一定的图论只是对于解题思路理解很有帮助。
+图论与深度优先搜索的结合,本质是一个深度优先搜索题目，没有充分的图论知识也能解决，不过一定的图论知识对于解题思路理解很有帮助。
 ```java
-// 节点key着的色value
+    // 节点key着的色value
     Map<Integer, Integer> colorMap = new HashMap<>();
     // 一个人不喜欢的所有人
     Map<Integer, Set<Integer>> dislikesMap = new HashMap<>();
@@ -183,7 +183,7 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
 > 3. dp[left][right]表示expression[left]到expression[right]组成的子表达式subExpression的所有可能的运算结果。
 > 则subExpression的左右边界是数字，内部夹杂着数字和运算符。以其中任意一个运算符作为分割点，则
-> 分割点左部分表达式的运算结果集合 _**组合上**_ 右部分表达式的元素结果集合。这个组合的意思就是`_**加，减，乘**_`操作
+> 分割点左部分表达式的运算结果集合 **组合上** 右部分表达式的元素结果集合。这个组合的意思就是 `加`，`减`，`乘` 操作
 
 > 4. 类似的题目还有 [面试题 08.14. 布尔运算](https://leetcode.cn/problems/boolean-evaluation-lcci/)
 
@@ -604,4 +604,4 @@ left 和最大的 right，分别满足 sum[left] - sum[i] >= sum[i]
 
 # 图论
 
-## 无向图是否存在环
+## 无向图是否存在环 
