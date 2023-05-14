@@ -12,7 +12,7 @@
 <!--        <module>java-junit</module>-->
 <!--        <module>java-spring</module>-->
 <!--        <module>java-generic</module>-->
-<!--        <module>java-jackson</module>-->
+        <module>java-jackson</module>
 <!--        <module>java-lang</module>-->
 <!--        <module>java-reflections</module>-->
         <module>java-8</module>
