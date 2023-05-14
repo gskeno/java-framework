@@ -60,4 +60,22 @@ public class BitTests {
         int numberOfLeadingZeros = Integer.numberOfLeadingZeros(0b11111111_11111111);
         System.out.println(numberOfLeadingZeros);
     }
+
+    @Test
+    public void testLeftShift(){
+        int a = 0b10000000_00000000_00000000_00001111;
+        // 负数
+        Assert.assertTrue(a < 0);
+        // 正数
+        Assert.assertTrue(a << 1 > 0);
+    }
+
+    @Test
+    public void testLeftShift1(){
+        int a = 0x80FFFFFF;
+        System.out.println(a);
+        System.out.println(a << 1);
+        System.out.println(-8 >> 1);
+        System.out.println(-8 >>> 1);
+    }
 }

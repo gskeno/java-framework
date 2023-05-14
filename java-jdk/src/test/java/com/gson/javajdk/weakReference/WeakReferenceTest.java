@@ -1,6 +1,5 @@
 package com.gson.javajdk.weakReference;
 
-import com.gson.javajdk.BigObject;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,10 +19,11 @@ public class WeakReferenceTest {
     @Test
     public void testQueue(){
         ReferenceQueue<Object> queue = new ReferenceQueue<>();
-        WeakReference<Object> weakReference = new WeakReference<>(new Object(), queue);
-        System.out.println(weakReference.get());
+        WeakReference<Object> weakReference = new WeakReference<>(new String("adhiyi"), queue);
+        Assert.assertNotNull(weakReference.get());
+        // gc后弱引用 引用的对象被回收
         System.gc();
-        System.out.println(weakReference.get());
+        Assert.assertNull(weakReference.get());
     }
     /**
      * gc 后
@@ -54,7 +54,7 @@ public class WeakReferenceTest {
         Assert.assertTrue(weakReference.enqueue());
         // 验证虚引用 Reference 已经放置到引用队列中
         Assert.assertTrue(weakReference.isEnqueued());
-        // 验证引用队列中的元素 正好是 刚创建的虚拟引用  weakReference
+        // 验证引用队列中的元素 正好是 刚创建的虚引用  weakReference
         Reference<?> referenceInQueue = queue.poll();
         Assert.assertEquals(weakReference, referenceInQueue);
         // 因为没有gc，所以业务对象未被回收
@@ -69,7 +69,7 @@ public class WeakReferenceTest {
         // 验证虚引用 implicitWeakReference 被隐式放置到引用队列中
         Assert.assertTrue(implicitWeakReference.isEnqueued());
         Reference<?> implicitReferenceInQueue = queue.poll();
-        // 验证引用队列中的元素 正好是 刚创建的虚拟引用  weakReference
+        // 验证引用队列中的元素 正好是 刚创建的虚引用  weakReference
         Assert.assertEquals(implicitReferenceInQueue, implicitWeakReference);
         // 因为gc，业务对象被回收
         Assert.assertNull(implicitReferenceInQueue.get());

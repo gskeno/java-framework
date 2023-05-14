@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * 快排
  *
- * 数组int[] A中每次随机挑选一个元素b，将比b小的元素放到b的左侧形成序列C，比b大的元素放到b的右侧形成序列D。
+ * 数组int[] A中每次随机挑选一个元素b，将 <b 的元素放到b的左侧形成序列C，>=b 的元素放到b的右侧形成序列D。
  * 对C，D分别进行上述操作，直至序列中只有一个元素。
  */
 public class QuickSort {
@@ -47,11 +47,12 @@ public class QuickSort {
         for (; quickPointer < end; quickPointer++) {
             if (nums[quickPointer] < nums[end]){
                 slowPointer ++;
+                // 执行swap前,slowPointer指向已经遍历的数组元素中第一个>=标准值的元素值，quickPointer指向的数组元素值 < 标准值
                 swap(nums, slowPointer, quickPointer);
-                // 执行swap后, slowPoint永远 指向 数组中已经遍历的数组元素中最后一个小于nums[end]的数
+                // 执行swap后, slowPointer永远 指向 数组中已经遍历的数组元素中最后一个小于nums[end]的数
             }
         }
-        // ++ 后, slowPointer指向已经遍历的数组元素中第一个大于nums[end]的数
+        // ++ 后, slowPointer指向已经遍历的数组元素中第一个>= nums[end]的数
         slowPointer++;
         // swap后, nums[slowPointer]左边的数都小于当前值，右边的数都大于当前值
         swap(nums, slowPointer, quickPointer);
@@ -75,7 +76,12 @@ public class QuickSort {
 
     public static void main(String[] args) {
         QuickSort quickSort = new QuickSort();
-        int[] arr = {4,1,5,3,6,2,7,8};
+        int[] arr ;
+//        arr = new int[]{4,1,5,3,6,2,7,8};
+//        quickSort.sortArray(arr);
+//        System.out.println(Arrays.toString(arr));
+
+        arr = new int[]{4,1,5,5,3,6,2,5, 7,8};
         quickSort.sortArray(arr);
         System.out.println(Arrays.toString(arr));
     }

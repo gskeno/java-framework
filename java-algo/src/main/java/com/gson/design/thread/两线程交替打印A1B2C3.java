@@ -19,9 +19,9 @@ public class 两线程交替打印A1B2C3 {
     }};
 
     public static void main(String[] args) {
-        //solution1();
-        //solution2();
-        solution3();
+        solution1();
+//        solution2();
+//        solution3();
     }
 
     private static  Long count = 0L;
@@ -47,6 +47,7 @@ public class 两线程交替打印A1B2C3 {
                             else if (mod == 5){
                                 System.out.print('3');
                             }
+                            Thread.sleep(1000);
                             count++;
                             o.notify();
                         } catch (InterruptedException e) {
@@ -73,6 +74,7 @@ public class 两线程交替打印A1B2C3 {
                                 System.out.print('C');
                             }
                             count++;
+                            Thread.sleep(1000);
                             o.wait();
                         } catch (Exception e) {
                             throw new RuntimeException(e);
