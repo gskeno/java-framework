@@ -56,6 +56,7 @@
         <module>java-map-struct</module>
         <module>java-mysql</module>
         <module>java-hook</module>
+        <module>java-nio</module>
     </modules>
 
     <name>java-framework</name>
