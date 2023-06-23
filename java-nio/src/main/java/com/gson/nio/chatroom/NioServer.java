@@ -102,6 +102,10 @@ public class NioServer {
                     System.out.println("获取到绑定值" + attachment);
                     readHandler(selectionKey, selector);
                 }
+
+                if (selectionKey.isWritable()){
+                    System.out.println("可写事件");
+                }
             }
         }
     }

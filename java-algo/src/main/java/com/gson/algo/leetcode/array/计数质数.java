@@ -38,6 +38,14 @@ public class 计数质数 {
         return ans;
     }
 
+    public boolean isPrime3(int x){
+        for (int i = 2; i < x; i++) {
+            if (x % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
     /**
      * x是否是质数
      * @param x
@@ -54,16 +62,13 @@ public class 计数质数 {
 
     public int countPrimes2(int n) {
         int ans = 0;
-        // i为合数，表示为nums[i] = 1;
-        // i为质数，表示为nums[i] = 0;
         // 初始时， 认为都是质数，遍历过程中将N * i修改为合数
         int[] nums = new int[n];
-
         for (int i = 2; i < n; i++) {
             if (nums[i] == 0){
                 ans++;
                 for (int k = 2; k * i < n; k++) {
-                    nums[k*i] = 1;
+                    nums[k * i] = 1;
                 }
             }
         }

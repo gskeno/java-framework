@@ -9,13 +9,14 @@ import java.util.concurrent.ForkJoinTask;
 public class ForkJoinTest {
     @Test
     public void testForkJoin() throws ExecutionException, InterruptedException {
-        ForkJoinPool pool = new ForkJoinPool();
-        ForkJoinTask<Long> result = pool.submit(new CountTask(0, 101L, 1));
-        while (true){
-
-        }
-//        Long sum = result.get();
-//        System.out.println(sum);
+        ForkJoinPool pool = new ForkJoinPool(2);
+        long begin = 1;
+        long end = 4;
+        CountTask task = new CountTask(begin, end);
+        long start  = System.currentTimeMillis();
+        ForkJoinTask<Long> longForkJoinTask = pool.submit(task);
+        Long res = longForkJoinTask.get();
+        System.out.println("begin " + begin + " end " + end + " result " + res + " use time " + (System.currentTimeMillis() - start) / 1000 + "s");
     }
 
     @Test

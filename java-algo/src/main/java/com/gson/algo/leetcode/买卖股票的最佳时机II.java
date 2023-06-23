@@ -1,7 +1,5 @@
 package com.gson.algo.leetcode;
 
-import com.sun.tools.javac.code.Attribute;
-
 /**
  * https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/
  */

@@ -1,0 +1,17 @@
+出：ForkJoinPool-1-worker-4:java.lang.Thread$getStackTrace$Thread.java$1559
+出：ForkJoinPool-1-worker-4:com.gson.javajdk.concurrent.CountTask$printCurrentStack$CountTask.java$74
+出：ForkJoinPool-1-worker-4:com.gson.javajdk.concurrent.CountTask$compute$CountTask.java$21
+出：ForkJoinPool-1-worker-4:com.gson.javajdk.concurrent.CountTask$compute$CountTask.java$8
+出：ForkJoinPool-1-worker-4:java.util.concurrent.RecursiveTask$exec$RecursiveTask.java$94
+出：ForkJoinPool-1-worker-4:java.util.concurrent.ForkJoinTask$doExec$ForkJoinTask.java$289
+出：ForkJoinPool-1-worker-4:java.util.concurrent.ForkJoinPool$WorkQueue$tryRemoveAndExec$ForkJoinPool.java$1107
+出：ForkJoinPool-1-worker-4:java.util.concurrent.ForkJoinPool$awaitJoin$ForkJoinPool.java$2046
+出：ForkJoinPool-1-worker-4:java.util.concurrent.ForkJoinTask$doJoin$ForkJoinTask.java$390
+出：ForkJoinPool-1-worker-4:java.util.concurrent.ForkJoinTask$join$ForkJoinTask.java$719
+出：ForkJoinPool-1-worker-4:com.gson.javajdk.concurrent.CountTask$compute$CountTask.java$41
+出：ForkJoinPool-1-worker-4:com.gson.javajdk.concurrent.CountTask$compute$CountTask.java$8
+出：ForkJoinPool-1-worker-4:java.util.concurrent.RecursiveTask$exec$RecursiveTask.java$94
+出：ForkJoinPool-1-worker-4:java.util.concurrent.ForkJoinTask$doExec$ForkJoinTask.java$289
+出：ForkJoinPool-1-worker-4:java.util.concurrent.ForkJoinPool$WorkQueue$runTask$ForkJoinPool.java$1056
+出：ForkJoinPool-1-worker-4:java.util.concurrent.ForkJoinPool$runWorker$ForkJoinPool.java$1692
+出：ForkJoinPool-1-worker-4:java.util.concurrent.ForkJoinWorkerThread$run$ForkJoinWorkerThread.java$157
