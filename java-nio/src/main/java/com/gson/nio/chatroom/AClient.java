@@ -1,5 +1,7 @@
 package com.gson.nio.chatroom;
 
+import com.gson.nio.NioClient;
+
 import java.io.IOException;
 
 public class AClient {

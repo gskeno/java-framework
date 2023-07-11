@@ -1,4 +1,6 @@
-package com.gson.nio.chatroom;
+package com.gson.nio;
+
+import com.gson.nio.chatroom.NioClientHandler;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -49,7 +51,7 @@ public class NioClient {
     }
 
     public static void main(String[] args) throws IOException {
-//        new NioClient().start();
+        new NioClient().start("clientX");
     }
 
 }
