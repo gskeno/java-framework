@@ -80,4 +80,7 @@ public class SubSet {
         List<List<Integer>> lists = SubSet.subsets2(new int[]{0, 1, 2,3});
         System.out.println(lists);
     }
+
+
+
 }
