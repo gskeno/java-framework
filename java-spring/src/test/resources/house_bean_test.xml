@@ -3,12 +3,5 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
-    <bean id="basketBall" class="com.gson.spring.olympic.BasketBall">
-    </bean>
-
-    <bean id="chair" class="com.gson.spring.bean.Chair">
-    </bean>
     <bean class="com.gson.spring.bean.House" init-method="init"/>
-    <import resource="house_bean_test.xml"/>
 </beans>

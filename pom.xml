@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
 <!--        <module>java-junit</module>-->
-<!--        <module>java-spring</module>-->
+        <module>java-spring</module>
 <!--        <module>java-generic</module>-->
         <module>java-jackson</module>
 <!--        <module>java-lang</module>-->
@@ -21,7 +21,7 @@
 <!--        <module>java-log4j</module>-->
 <!--        <module>java-fastjson</module>-->
 <!--        <module>java-springaop</module>-->
-<!--        <module>java-spring-inner</module>-->
+        <module>java-spring-inner</module>
 <!--        <module>java-mybatis</module>-->
 <!--        <module>java-logback</module>-->
 <!--        <module>java-serialize</module>-->
@@ -41,7 +41,7 @@
 <!--        <module>java-spi-apple-sauce</module>-->
 <!--        <module>java-spi-apple-test</module>-->
 <!--        <module>java-apache-commons</module>-->
-<!--        <module>java-springboot</module>-->
+            <module>java-springboot</module>
 <!--        <module>java-pico-container</module>-->
 <!--        <module>java-jmockit</module>-->
 <!--        <module>java-paranamer</module>-->
