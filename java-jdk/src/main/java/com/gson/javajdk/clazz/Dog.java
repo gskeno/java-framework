@@ -22,6 +22,10 @@ public class Dog extends Animal {
         return dogName;
     }
 
+    public void setDogName(String dogName) {
+        this.dogName = dogName;
+    }
+
     @Override
     public String toString() {
         return super.toString() + "Dog{" +
