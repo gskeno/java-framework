@@ -58,6 +58,7 @@
         <module>java-hook</module>
         <module>java-nio</module>
         <module>java-arthas</module>
+        <module>java-ttl</module>
     </modules>
 
     <name>java-framework</name>
