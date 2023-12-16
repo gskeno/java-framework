@@ -35,3 +35,10 @@
 
 # 反射
 - [TypeToken,Invokable,Reflection.newProxy,ClassPath](https://github.com/google/guava/wiki/ReflectionExplained)
+
+# 缓存
+- [cache.getIfPresent](src/test/java/com/gson/guava/cache/CacheTest.java)
+  <br>缓存中没有关联值，不会加载，返回null(不管执行几次)。
+- [cache.get](src/test/java/com/gson/guava/cache/CacheTest.java)
+  <br>get方法会声明异常，第一次get如果cache中没有值，会加载，第二次直接返回缓存值。
+

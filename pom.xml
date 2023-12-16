@@ -28,7 +28,7 @@
 <!--        <module>java-slf4j</module>-->
 <!--        <module>java-commons-digester</module>-->
 <!--        <module>java-guava-retry</module>-->
-<!--        <module>java-guava</module>-->
+        <module>java-guava</module>
         <module>java-jdk</module>
         <module>java-algo</module>
 <!--        <module>java-lucene</module>-->
