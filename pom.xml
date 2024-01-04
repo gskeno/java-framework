@@ -9,50 +9,50 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-<!--        <module>java-junit</module>-->
-<!--        <module>java-spring</module>-->
-<!--        <module>java-generic</module>-->
+        <module>java-junit</module>
+        <module>java-spring</module>
+        <module>java-generic</module>
         <module>java-jackson</module>
-<!--        <module>java-lang</module>-->
-<!--        <module>java-reflections</module>-->
+        <module>java-lang</module>
+        <module>java-reflections</module>
         <module>java-8</module>
-<!--        <module>java-maven</module>-->
-<!--        <module>java-springmvcweb</module>-->
-<!--        <module>java-log4j</module>-->
-<!--        <module>java-fastjson</module>-->
-<!--        <module>java-springaop</module>-->
-<!--        <module>java-spring-inner</module>-->
-<!--        <module>java-mybatis</module>-->
-<!--        <module>java-logback</module>-->
-<!--        <module>java-serialize</module>-->
-<!--        <module>java-slf4j</module>-->
-<!--        <module>java-commons-digester</module>-->
-<!--        <module>java-guava-retry</module>-->
-<!--        <module>java-guava</module>-->
+        <module>java-maven</module>
+        <module>java-springmvcweb</module>
+        <module>java-log4j</module>
+        <module>java-fastjson</module>
+        <module>java-springaop</module>
+        <module>java-spring-inner</module>
+        <module>java-mybatis</module>
+        <module>java-logback</module>
+        <module>java-serialize</module>
+        <module>java-slf4j</module>
+        <module>java-commons-digester</module>
+        <module>java-guava-retry</module>
+        <module>java-guava</module>
         <module>java-jdk</module>
         <module>java-algo</module>
 <!--        <module>java-lucene</module>-->
 <!--        <module>java-roaring-bitmap</module>-->
         <module>java-diagram</module>
         <module>java-interview</module>
-<!--        <module>java-thread</module>-->
-<!--        <module>java-spi-apple-interface</module>-->
-<!--        <module>java-spi-apple-juice</module>-->
-<!--        <module>java-spi-apple-sauce</module>-->
-<!--        <module>java-spi-apple-test</module>-->
-<!--        <module>java-apache-commons</module>-->
-<!--        <module>java-springboot</module>-->
-<!--        <module>java-pico-container</module>-->
-<!--        <module>java-jmockit</module>-->
-<!--        <module>java-paranamer</module>-->
-<!--        <module>java-maven-shade-plugin</module>-->
-<!--        <module>java-jvm</module>-->
-<!--        <module>java-effective-java</module>-->
-<!--        <module>java-spring-jdbc</module>-->
-<!--        <module>java-design-pattern</module>-->
-<!--        <module>java-annotation</module>-->
-<!--        <module>java-powermock</module>-->
-<!--        <module>java-mockito</module>-->
+        <module>java-thread</module>
+        <module>java-spi-apple-interface</module>
+        <module>java-spi-apple-juice</module>
+        <module>java-spi-apple-sauce</module>
+        <module>java-spi-apple-test</module>
+        <module>java-apache-commons</module>
+        <module>java-springboot</module>
+        <module>java-pico-container</module>
+        <module>java-jmockit</module>
+        <module>java-paranamer</module>
+        <module>java-maven-shade-plugin</module>
+        <module>java-jvm</module>
+        <module>java-effective-java</module>
+        <module>java-spring-jdbc</module>
+        <module>java-design-pattern</module>
+        <module>java-annotation</module>
+        <module>java-powermock</module>
+        <module>java-mockito</module>
         <module>java-map-struct</module>
         <module>java-mysql</module>
         <module>java-hook</module>
