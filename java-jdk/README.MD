@@ -1,4 +1,8 @@
 
+
+# jdk使用介绍
+- [jdk动态代理](src/main/java/com/gson/javajdk/proxyjdk/Main.java)
+
 ## 正则表达式回溯导致CPU偏高
 - https://www.cnblogs.com/lbxob-tom/p/9334361.html
 - https://www.cnblogs.com/study-everyday/p/7426862.html

@@ -1,4 +1,4 @@
-package com.gson.interview.proxyjdk;
+package com.gson.javajdk.proxyjdk;
 
 import java.lang.reflect.Proxy;
 
@@ -12,6 +12,8 @@ public class Main {
                 Main.class.getClassLoader(),
                 new Class[]{TicketCenter.class},
                 new ProxyTicketCenter(new RealTicketCenter()));
+        // com.sun.proxy.$Proxy0
+        // 规范名称
         System.out.println(ticketCenter.getClass().getCanonicalName());
         ticketCenter.buyTicket(10);
     }

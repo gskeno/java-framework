@@ -1,4 +1,4 @@
-package com.gson.interview.proxyjdk;
+package com.gson.javajdk.proxyjdk;
 
 public class RealTicketCenter implements TicketCenter {
 

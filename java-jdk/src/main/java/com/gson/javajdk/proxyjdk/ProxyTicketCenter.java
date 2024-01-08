@@ -1,4 +1,4 @@
-package com.gson.interview.proxyjdk;
+package com.gson.javajdk.proxyjdk;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -15,6 +15,14 @@ public class ProxyTicketCenter implements InvocationHandler {
         this.realTicketCenter = realTicketCenter;
     }
 
+    /**
+     *
+     * @param proxy 真正的代理类$Proxy0, extends Proxy implements TicketCenter
+     * @param method 代理的方法
+     * @param args 执行方法时的参数
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
