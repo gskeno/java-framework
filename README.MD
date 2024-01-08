@@ -38,3 +38,6 @@ java.lang包中的关键类、关键方法使用
 
 ## java-springaop
 - [入口](java-springaop)
+
+## java-ttl
+- Alibaba提出的父子线程在池化背景下上下文有效传递的技术方案

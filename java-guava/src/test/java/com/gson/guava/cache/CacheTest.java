@@ -18,12 +18,42 @@ import java.util.zip.DeflaterOutputStream;
 
 public class CacheTest {
 
+    @Test
+    public void testGet() throws ExecutionException {
+        LoadingCache<String, User> loadingCache = CacheBuilder.newBuilder()
+                .maximumSize(1000)
+                .build(
+                        new CacheLoader<String, User>() {
+                            public User load(String key) {
+                                System.out.println("build cache:" + key);
+                                return new User(null, key);
+                            }
+                        });
+        loadingCache.get("A");
+        loadingCache.get("A");
+    }
 
+    @Test
+    public void testGetIfPresent(){
+        LoadingCache<String, User> loadingCache = CacheBuilder.newBuilder()
+                .maximumSize(1000)
+                .build(
+                        new CacheLoader<String, User>() {
+                            public User load(String key) {
+                                System.out.println("build cache:" + key);
+                                return new User(null, key);
+                            }
+                        });
+        loadingCache.getIfPresent("A");
+        loadingCache.getIfPresent("A");
+        loadingCache.getIfPresent("A");
+    }
     /**
      * 加载缓存策略之一 CacheLoader
      */
     @Test
     public void testCacheLoader() {
+        // 使类强制初始化,静态代码块会被执行
         Reflection.initialize(User.class);
 
         LoadingCache<String, User> loadingCache = CacheBuilder.newBuilder()

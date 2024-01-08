@@ -10,4 +10,8 @@ public class House {
     public Chair getChair() {
         return chair;
     }
+
+    public void init(){
+        System.out.println("House init");
+    }
 }
