@@ -1,6 +1,7 @@
 package com.gson.design_pattern.proxy;
 
 
+import net.sf.cglib.core.DebuggingClassWriter;
 import net.sf.cglib.proxy.Enhancer;
 
 import java.lang.reflect.Proxy;
@@ -20,6 +21,7 @@ public class Main {
         System.out.println(jdkProxy.request());
 
         //cglib生成动态代理
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "./");
         Enhancer enhancer = new Enhancer();
         enhancer.setCallback(new CgLibDBQueryInterceptor()); //指定切入器,一个实现MethodInterceptor接口的类
         enhancer.setInterfaces(new Class[]{IDBQuery.class}); //指定实现的接口
