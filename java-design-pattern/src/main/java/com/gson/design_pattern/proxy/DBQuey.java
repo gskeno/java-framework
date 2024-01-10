@@ -8,6 +8,7 @@ public class DBQuey implements IDBQuery {
         try {
             //初始化DBQuery实例耗时较久
             Thread.sleep(2*1000);
+            System.out.println("睡眠2s");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
