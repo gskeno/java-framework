@@ -34,7 +34,8 @@ public class Main {
         // enhancer.setSuperclass(DBQuey.class);
 
         //生成代理类的实例(没有接口限制，此处只不过恰好是接口而已,如果是普通类，则代理类实质上是普通类的子类)
-        IDBQuery cglibProxy = (IDBQuery) enhancer.create(); //生成代理类实例
+        //生成代理类实例，范式使用
+        IDBQuery cglibProxy = (IDBQuery) enhancer.create();
         System.out.println("代理类类名 :" +cglibProxy.getClass().getName());
         System.out.println(cglibProxy.request());
     }
