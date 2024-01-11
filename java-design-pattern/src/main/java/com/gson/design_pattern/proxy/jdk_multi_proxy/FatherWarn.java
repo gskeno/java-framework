@@ -4,7 +4,9 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 public class FatherWarn implements InvocationHandler {
-
+    /**
+     * 这里使用Object类，是否更通用呢
+     */
     private final Travel travel;
 
     public FatherWarn(Travel travel){
