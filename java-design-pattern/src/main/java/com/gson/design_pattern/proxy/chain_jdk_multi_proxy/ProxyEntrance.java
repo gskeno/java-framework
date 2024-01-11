@@ -16,11 +16,17 @@ public class ProxyEntrance implements InvocationHandler {
         interceptors.add(interceptor);
     }
 
+    /**
+     *
+     * @param target 被代理对象，也即目标对象
+     */
     public ProxyEntrance(Object target){
         this.target = target;
     }
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args){
+        // invocation是第一个信息很丰富的调用链的包装者，
+        // 内部包含了一个拦截器链，在每个拦截器中用户可以做自己想做的事情，同时推动进入链条的下一个节点
         MultiProxyInvocation invocation = new MultiProxyInvocation();
         invocation.setInterceptors(interceptors);
         invocation.setOriginalCall(()->{

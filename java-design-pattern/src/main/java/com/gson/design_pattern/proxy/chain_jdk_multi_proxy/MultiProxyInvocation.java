@@ -25,6 +25,7 @@ public class MultiProxyInvocation implements Invocation{
             return originalCall.get();
         }
         Interceptor interceptor = interceptors.get(index++);
+        // interceptor的invoke调用，又会反过来调用invocation.forward，同时invocation中的链条节点也向前走了一步
         return interceptor.invoke(this);
     }
 }

@@ -10,10 +10,14 @@ public class ChainJdkMultiProxyMain {
         // 被代理类，原始类，代理目标类
         SwimStudy target = new SwimStudy();
         ProxyEntrance proxyEntrance = new ProxyEntrance(target);
-        // 最外层教练，教蛙泳
+
+        // 高级教练，教自由泳
+        proxyEntrance.addInterceptor(new SeniorCoach());
+        // 中级教练，教蛙泳
         proxyEntrance.addInterceptor(new IntermediateCoach());
-        // 内层教练，教狗刨
+        // 初级教练，教狗刨
         proxyEntrance.addInterceptor(new JuniorCoach());
+
         // 动态生成的本地代码类
         Study study = (Study)Proxy.newProxyInstance(ChainJdkMultiProxyMain.class.getClassLoader(), new Class[]{Study.class}, proxyEntrance);
         study.learn();
