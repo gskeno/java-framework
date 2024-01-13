@@ -48,13 +48,6 @@ class TreeFactory implements FactoryBean<Tree>
 
 ```
 
-- 4.使用Autowired注解需要注意的事项
-
-```
-如果bean都是用xml定义的，在一个bean类中使用@Autowired注解时，需要在xml中配置
-<context:annotation-config/>才能使之生效
-
-```
 
 - 5.使用Lookup标签寻找目标类注入
 - 6.使用replaced-method标签替换方法实现
