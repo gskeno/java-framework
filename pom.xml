@@ -14,7 +14,6 @@
         <module>java-jackson</module>
         <module>java-lang</module>
         <module>java-reflections</module>
-        <module>java-8</module>
         <module>java-maven</module>
         <module>java-springmvcweb</module>
         <module>java-log4j</module>
