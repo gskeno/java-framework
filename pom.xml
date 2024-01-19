@@ -48,7 +48,6 @@
         <module>java-effective-java</module>
         <module>java-spring-jdbc</module>
         <module>java-design-pattern</module>
-        <module>java-annotation</module>
         <module>java-powermock</module>
         <module>java-mockito</module>
         <module>java-map-struct</module>
