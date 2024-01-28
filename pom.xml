@@ -17,7 +17,6 @@
         <module>java-maven</module>
         <module>java-springmvcweb</module>
         <module>java-log4j</module>
-        <module>java-fastjson</module>
         <module>java-springaop</module>
         <module>java-spring-inner</module>
         <module>java-mybatis</module>
