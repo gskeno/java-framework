@@ -10,7 +10,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>java-junit</module>
-        <module>java-generic</module>
         <module>java-jackson</module>
         <module>java-lang</module>
         <module>java-reflections</module>
@@ -48,7 +47,6 @@
         <module>java-mockito</module>
         <module>java-map-struct</module>
         <module>java-mysql</module>
-        <module>java-hook</module>
         <module>java-nio</module>
         <module>java-arthas</module>
         <module>java-ttl</module>
