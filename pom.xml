@@ -24,7 +24,6 @@
         <module>java-logback</module>
         <module>java-serialize</module>
         <module>java-slf4j</module>
-        <module>java-commons-digester</module>
         <module>java-guava-retry</module>
         <module>java-guava</module>
         <module>java-jdk</module>
@@ -41,7 +40,6 @@
         <module>java-springboot</module>
         <module>java-pico-container</module>
         <module>java-jmockit</module>
-        <module>java-paranamer</module>
         <module>java-maven-shade-plugin</module>
         <module>java-jvm</module>
         <module>java-effective-java</module>
@@ -86,12 +84,6 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>30.0-jre</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-digester3</artifactId>
-                <version>3.2</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
