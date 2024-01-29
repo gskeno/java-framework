@@ -14,13 +14,15 @@ public class GsonTest {
     public void test(){
         Gson gson = new Gson();
         String json = "[{\"id\":1, \"name\":\"gs\", \"address\":{\"city\":\"河南\", \"cityCode\":\"HN\"}}]";
-        // 通过创建的匿名子类，可以获取负类 List<Person>上的范型类，就是Person类
-        TypeToken<List<Person>> typeToken = new TypeToken<List<Person>>() {};
+        // 通过创建的匿名子类，可以获取父类 List<Person>上的范型类，就是Person类
+        TypeToken<List<Person>> typeToken = new TypeToken<List<Person>>() {
+
+        };
         /**
          * @see sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl
          */
         Type type = typeToken.getType();
-        // 会转化为指定范型Person
+        // 会转化为指定泛型Person
         List<Person> people = gson.fromJson(json, type);
         System.out.println(people);
 
