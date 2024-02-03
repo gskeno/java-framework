@@ -33,6 +33,12 @@
       <artifactId>jol-core</artifactId>
       <version>0.8</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>5.1.7.RELEASE</version>
+    </dependency>
   </dependencies>
 
   <build>
