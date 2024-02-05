@@ -1,6 +1,7 @@
 package com.gson.javajdk.lock;
 
 import com.gson.javajdk.DateUtil;
+import com.gson.javajdk.PrintUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
@@ -18,13 +19,15 @@ public class AQSConditionTest {
             public void run() {
                 lock.lock();
                 try {
-                    System.out.println(Thread.currentThread().getName() + "获取到锁," + DateUtil.getTime());
+                    System.out.println(Thread.currentThread().getName() + "获取到锁,开始睡眠2s," + DateUtil.getTime());
                     Thread.sleep(2000);
-                    System.out.println(Thread.currentThread().getName() + "用2s执行完一半任务,休息一下" + DateUtil.getTime());
+                    System.out.println(Thread.currentThread().getName() + "睡眠2s结束，开始await," + DateUtil.getTime());
                     condition.await();
-                    System.out.println(Thread.currentThread().getName() + "继续执行完剩余一半任务" + DateUtil.getTime());
+                    System.out.println(Thread.currentThread().getName() + "从await返回，继续睡眠2s," + DateUtil.getTime());
+                    Thread.sleep(2000);
+                    System.out.println(Thread.currentThread().getName() + "继续睡眠2s结束,释放锁" + DateUtil.getTime());
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 } finally {
                     lock.unlock();
                 }
@@ -38,12 +41,15 @@ public class AQSConditionTest {
             public void run() {
                 lock.lock();
                 try {
-                    System.out.println(Thread.currentThread().getName() + "获取到锁," + DateUtil.getTime());
+                    System.out.println("---" + Thread.currentThread().getName() + "获取到锁,开始睡眠6s," + DateUtil.getTime());
                     Thread.sleep(6000);
-                    System.out.println(Thread.currentThread().getName() + "用6s执行完所有,休息" + DateUtil.getTime());
+                    System.out.println("---" + Thread.currentThread().getName() + "睡眠6结束,开始signal," + DateUtil.getTime());
                     condition.signal();
+                    System.out.println("---" + Thread.currentThread().getName() + "signal结束,再睡眠2s," + DateUtil.getTime());
+                    Thread.sleep(2000);
+                    System.out.println("---" + Thread.currentThread().getName() + "再睡眠2s结束，释放锁，" + DateUtil.getTime());
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 } finally {
                     lock.unlock();
                 }
@@ -52,35 +58,7 @@ public class AQSConditionTest {
         threadB.start();
         while (true){
             Thread.sleep(1000);
-            print(condition);
-        }
-    }
-
-    public static void print(Condition condition){
-        Field firstWaiterField = ReflectionUtils.findField(AbstractQueuedSynchronizer.ConditionObject.class, "firstWaiter");
-        ReflectionUtils.makeAccessible(firstWaiterField);
-        Object firstWaiter = ReflectionUtils.getField(firstWaiterField, condition);
-        String firstWaiterInfo = getNodeInfo(firstWaiter);
-        System.out.println(firstWaiterInfo + "," + DateUtil.getTime());
-    }
-
-    public static String getNodeInfo(Object node){
-        if (node == null){
-            return null;
-        }
-        Field threadField = ReflectionUtils.findField(node.getClass(), "thread");
-        ReflectionUtils.makeAccessible(threadField);
-        Thread threadObj = (Thread)ReflectionUtils.getField(threadField, node);
-        String threadName = threadObj != null ? threadObj.getName() : null;
-
-        Field waitStatusField = ReflectionUtils.findField(node.getClass(), "waitStatus");
-        ReflectionUtils.makeAccessible(waitStatusField);
-        Object waitStatus = ReflectionUtils.getField(waitStatusField, node);
-
-        Field nextField = ReflectionUtils.findField(node.getClass(), "next");
-        ReflectionUtils.makeAccessible(nextField);
-        Object next = ReflectionUtils.getField(nextField, node);
-        String nextNodeInfo = getNodeInfo(next);
-        return "[hasCode=" + node.hashCode() + ",threadName=" + threadName + ",waitStatus=" + waitStatus + ",nextNode=" + nextNodeInfo + "]";
+            PrintUtils.printAqs(lock);
+            PrintUtils.print(condition);        }
     }
 }
