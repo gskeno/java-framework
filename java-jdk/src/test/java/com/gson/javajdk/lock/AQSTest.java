@@ -59,35 +59,38 @@ public class AQSTest {
             }
         }, "thread-A").start();
 
-        new Thread(new Runnable() {
+        Thread threadB = new Thread(new Runnable() {
             @Override
             public void run() {
-                reentrantLock.lock();
-                System.out.println(Thread.currentThread().getName() + "获取到锁");
                 try {
+                    reentrantLock.lockInterruptibly();
+                    System.out.println(Thread.currentThread().getName() + "获取到锁");
                     Thread.sleep(1000 * 4);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
                 System.out.println(Thread.currentThread().getName() + "执行完任务");
                 reentrantLock.unlock();
             }
-        },"thread-B").start();
-        Thread thread = new Thread(new Runnable() {
+        }, "thread-B");
+        threadB.start();
+
+        Thread threadC = new Thread(new Runnable() {
             @Override
             public void run() {
-                reentrantLock.lock();
-                System.out.println(Thread.currentThread().getName() + "获取到锁");
                 try {
+                    reentrantLock.lockInterruptibly();
+                    System.out.println(Thread.currentThread().getName() + "获取到锁");
                     Thread.sleep(1000 * 6);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
                 System.out.println(Thread.currentThread().getName() + "执行完任务");
                 reentrantLock.unlock();
             }
         }, "thread-C");
-        thread.start();
+        threadC.start();
+        boolean interrupt = false;
         while (true){
             Field syncField = ReflectionUtils.findField(ReentrantLock.class, "sync");
             ReflectionUtils.makeAccessible(syncField);
@@ -97,6 +100,10 @@ public class AQSTest {
             ReflectionUtils.makeAccessible(headField);
             Object headNode = ReflectionUtils.getField(headField, fairSync);
             printNode(headNode);
+            if (!interrupt){
+                threadB.interrupt();
+                interrupt = true;
+            }
             Thread.sleep(1000);
         }
 
