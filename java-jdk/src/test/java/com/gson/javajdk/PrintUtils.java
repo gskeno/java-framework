@@ -17,12 +17,19 @@ public class PrintUtils {
         Field headField = ReflectionUtils.findField(fairSync.getClass(), "head");
         ReflectionUtils.makeAccessible(headField);
         Object headNode = ReflectionUtils.getField(headField, fairSync);
-        String nodeInfo = getNodeInfo(headNode);
+        String headNodeInfo = getNodeInfo(headNode);
+
+        Field tailField = ReflectionUtils.findField(fairSync.getClass(), "tail");
+        ReflectionUtils.makeAccessible(tailField);
+        Object tailNode = ReflectionUtils.getField(tailField, fairSync);
+        String tailInfo = getNodeInfo(tailNode);
+
+
 
         Field exclusiveOwnerThreadField = ReflectionUtils.findField(AbstractOwnableSynchronizer.class, "exclusiveOwnerThread");
         ReflectionUtils.makeAccessible(exclusiveOwnerThreadField);
         Object exclusiveOwnerThread = ReflectionUtils.getField(exclusiveOwnerThreadField, fairSync);
-        System.out.println("AQS:" + nodeInfo + ",exclusiveOwnerThread=" + (exclusiveOwnerThread == null ? null : ((Thread)exclusiveOwnerThread).getName()));
+        System.out.println(Thread.currentThread().getName() + " AQS:headNodeInfo->" + headNodeInfo +  ",exclusiveOwnerThread->" + (exclusiveOwnerThread == null ? null : ((Thread)exclusiveOwnerThread).getName()) + ",tailInfo->" + tailInfo);
     }
 
     public static void print(Condition condition){
@@ -30,7 +37,14 @@ public class PrintUtils {
         ReflectionUtils.makeAccessible(firstWaiterField);
         Object firstWaiter = ReflectionUtils.getField(firstWaiterField, condition);
         String firstWaiterInfo = getNodeInfo(firstWaiter);
-        System.out.println("WaitingQueue:" + firstWaiterInfo + "," + DateUtil.getTime());
+
+        Field lastWaiterField = ReflectionUtils.findField(AbstractQueuedSynchronizer.ConditionObject.class, "lastWaiter");
+        ReflectionUtils.makeAccessible(lastWaiterField);
+        Object lastWaiter = ReflectionUtils.getField(lastWaiterField, condition);
+        String lastWaiterInfo = getNodeInfo(lastWaiter);
+
+
+        System.out.println(Thread.currentThread().getName() + " WaitingQueue:" + firstWaiterInfo + ", lastWaiterInfo:" + lastWaiterInfo + "," + DateUtil.getTime());
     }
 
     public static String getNodeInfo(Object node){

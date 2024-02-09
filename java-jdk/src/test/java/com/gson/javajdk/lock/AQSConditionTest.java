@@ -22,6 +22,7 @@ public class AQSConditionTest {
                     System.out.println(Thread.currentThread().getName() + "获取到锁,开始睡眠2s," + DateUtil.getTime());
                     Thread.sleep(2000);
                     System.out.println(Thread.currentThread().getName() + "睡眠2s结束，开始await," + DateUtil.getTime());
+                    PrintUtils.printAqs(lock);
                     condition.await();
                     System.out.println(Thread.currentThread().getName() + "从await返回，继续睡眠2s," + DateUtil.getTime());
                     Thread.sleep(2000);

@@ -28,15 +28,22 @@ public class AQSCondition2Test {
             public void run() {
                 lock.lock();
                 try {
-                    System.out.println(Thread.currentThread().getName() + "获取到锁,开始休息2s," + DateUtil.getTime());
+                    System.out.println(Thread.currentThread().getName() + ",获取到锁,开始休息2s," + DateUtil.getTime());
                     Thread.sleep(2000);
-                    System.out.println(Thread.currentThread().getName() + "用2s执行完一半任务,await休息一下," + DateUtil.getTime());
+                    System.out.println(Thread.currentThread().getName() + ",用2s执行完一半任务,开始await休息一下," + DateUtil.getTime());
                     condition.await();
-                    System.out.println(Thread.currentThread().getName() + "从await返回,开始释放锁," + DateUtil.getTime());
+                    System.out.println(Thread.currentThread().getName() + ",从await返回,开始释放锁," + DateUtil.getTime());
+                    PrintUtils.printAqs(lock);
+                    PrintUtils.print(condition);
+                    boolean interrupted = Thread.currentThread().isInterrupted();
+                    System.out.println("是否中断过:" + interrupted);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
                     lock.unlock();
+                    System.out.println("  " + Thread.currentThread().getName() + ",释放锁完毕," + DateUtil.getTime());
+                    PrintUtils.printAqs(lock);
+                    PrintUtils.print(condition);
                 }
 
             }
@@ -48,16 +55,26 @@ public class AQSCondition2Test {
             public void run() {
                 lock.lock();
                 try {
-                    System.out.println("  " + Thread.currentThread().getName() + "获取到锁,开始休息6s" + DateUtil.getTime());
+                    System.out.println("  " + Thread.currentThread().getName() + ",获取到锁,开始休息6s" + DateUtil.getTime());
                     Thread.sleep(6 * 1000);
-                    System.out.println("  " + Thread.currentThread().getName() + "signal一下,然后休息3s," + DateUtil.getTime());
+                    System.out.println("  " + Thread.currentThread().getName() + ",signal一下," + DateUtil.getTime());
+                    PrintUtils.printAqs(lock);
+                    PrintUtils.print(condition);
                     condition.signal();
+                    PrintUtils.printAqs(lock);
+                    PrintUtils.print(condition);
+                    System.out.println("  " + Thread.currentThread().getName() + ",signal后，开始睡眠3s," + DateUtil.getTime());
                     Thread.sleep(3 * 1000);
-                    System.out.println("  " + Thread.currentThread().getName() + "休息3s完毕，开始释放锁," + DateUtil.getTime());
+                    System.out.println("  " + Thread.currentThread().getName() + ",睡眠3s完毕，开始释放锁," + DateUtil.getTime());
+                    PrintUtils.printAqs(lock);
+                    PrintUtils.print(condition);
                 } catch (Exception e) {
 
                 } finally {
                     lock.unlock();
+                    System.out.println("  " + Thread.currentThread().getName() + ",释放锁完毕," + DateUtil.getTime());
+                    PrintUtils.printAqs(lock);
+                    PrintUtils.print(condition);
                 }
             }
         }, "threadB");
@@ -71,17 +88,8 @@ public class AQSCondition2Test {
                 System.out.println("threadA发生中断,发生在threadB-signal之后" + DateUtil.getTime());
             }
             PrintUtils.printAqs(lock);
-            print(condition);
+            PrintUtils.print(condition);
         }
     }
-
-    public static void print(Condition condition){
-        Field firstWaiterField = ReflectionUtils.findField(AbstractQueuedSynchronizer.ConditionObject.class, "firstWaiter");
-        ReflectionUtils.makeAccessible(firstWaiterField);
-        Object firstWaiter = ReflectionUtils.getField(firstWaiterField, condition);
-        String firstWaiterInfo = PrintUtils.getNodeInfo(firstWaiter);
-        System.out.println("WaitingQueue:" + firstWaiterInfo + "," + DateUtil.getTime());
-    }
-
 
 }
