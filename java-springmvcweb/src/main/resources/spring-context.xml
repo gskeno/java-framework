@@ -7,4 +7,6 @@
 
     <context:annotation-config/>
     <import resource="classpath:inner-parent.xml"/>
+
+    <bean class="com.gsonkeno.springmvcweb.controller.SimpleService"></bean>
 </beans>

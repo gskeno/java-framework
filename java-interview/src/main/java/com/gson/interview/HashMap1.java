@@ -31,15 +31,17 @@ public class HashMap1 {
 class HashMapThread extends Thread
 {
     private static AtomicInteger ai = new AtomicInteger(0);
-    private static Map<Integer, Integer> map = new HashMap<Integer, Integer>(1);
+    public static Map<Integer, Integer> map = new HashMap<Integer, Integer>(1);
 
     @Override
     public void run()
     {
-        while (ai.get() < 100000)
+        while (ai.get() < 1000000)
         {
             map.put(ai.get(), ai.get());
             ai.incrementAndGet();
+           //System.out.println(Thread.currentThread().getName() + " size: " + HashMapThread.map.size());
+
         }
         System.out.println(Thread.currentThread().getName() + "执行结束完");
     }
