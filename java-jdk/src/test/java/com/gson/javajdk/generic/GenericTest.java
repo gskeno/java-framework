@@ -25,6 +25,5 @@ public class GenericTest {
         Type stringType = ((ParameterizedType) mapType).getActualTypeArguments()[0];
         // class java.lang.Object
         Type objectType = ((ParameterizedType) mapType).getActualTypeArguments()[1];
-
     }
 }
