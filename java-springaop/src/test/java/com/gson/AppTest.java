@@ -17,6 +17,7 @@ public class AppTest
     public void test(){
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("springaop.xml");
         LogService bean = context.getBean(LogService.class);
+        System.out.println(bean.getClass());
         bean.getA();
     }
 
