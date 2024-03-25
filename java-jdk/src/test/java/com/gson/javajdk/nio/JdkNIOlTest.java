@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.*;
 import java.util.Arrays;
@@ -244,5 +245,12 @@ public class JdkNIOlTest {
             }
         }
 
+    }
+
+    @Test
+    public void test(){
+        ByteBuffer byteBuffer = ByteBuffer.allocate(4);
+        ByteOrder order = byteBuffer.order();
+        System.out.println(order);
     }
 }
