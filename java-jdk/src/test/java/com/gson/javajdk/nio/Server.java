@@ -5,6 +5,10 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+/**
+ * https://blog.51cto.com/u_16175454/7442234
+ * 大端序，小端序
+ */
 public class Server {
     public static void main(String[] args) {
         try {
