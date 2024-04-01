@@ -67,12 +67,12 @@ public class CountTask extends RecursiveTask<Long> {
 //        }
 //        PrintUtils.printForkJoinState(pool, this);
 
-        Long v1 = task1.join();
+        Long v1 = task2.join();
         //System.out.println(Thread.currentThread() + " after task " + task1 + " join, poolState");
         //PrintUtils.printForkJoinState(pool, this);
 
         //System.out.println(Thread.currentThread() + "---task1JoinFinish " + begin + "," + end + " , " + DateUtil.getTime());
-        Long v2 = task2.join();
+        Long v2 = task1.join();
         //System.out.println(Thread.currentThread() + " after task " + task2 + " join, poolState");
         //PrintUtils.printForkJoinState(pool, this);
 

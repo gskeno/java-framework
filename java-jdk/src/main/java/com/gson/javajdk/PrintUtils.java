@@ -66,6 +66,7 @@ public class PrintUtils {
                 sb.append("queue[" + i + "]: null").append("\n");
             }
         }
+        sb.append("currentTask:" + countTask + "\n");
         sb.append("------" + Thread.currentThread() + "----end--------\n");
         System.out.println(sb);
     }
