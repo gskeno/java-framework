@@ -1,6 +1,7 @@
 package com.gson.javajdk.concurrent;
 
 import com.gson.javajdk.DateUtil;
+import com.gson.javajdk.SourceInnerUtils;
 
 import java.util.Map;
 import java.util.concurrent.ForkJoinPool;
@@ -37,10 +38,7 @@ public class CountTask extends RecursiveTask<Long> {
     // 求[begin, end]的所有元素和
     @Override
     protected Long compute() {
-        //if (Thread.currentThread().getName().equals("ForkJoinPool-1-worker-2")){
-        // printCurrentStack();
-        //System.out.println(getJavaStackTrace());
-        //}
+        SourceInnerUtils.printForkJoinState(forkJoinPool, this);
         //当begin与end相邻时，任务已经足够小，直接返回
         if (end - begin <= 1) {
             System.out.println(Thread.currentThread() + "---start " + begin + "," + end + " , " + DateUtil.getTime());
