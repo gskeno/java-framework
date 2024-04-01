@@ -12,7 +12,7 @@ public class ForkJoinTest {
         ForkJoinPool pool = new ForkJoinPool(2);
         long begin = 1;
         long end = 4;
-        CountTask task = new CountTask(begin, end);
+        CountTask task = new CountTask(begin, end, pool);
         long start  = System.currentTimeMillis();
         ForkJoinTask<Long> longForkJoinTask = pool.submit(task);
         Long res = longForkJoinTask.get();

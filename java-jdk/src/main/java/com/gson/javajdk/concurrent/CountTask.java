@@ -1,17 +1,27 @@
 package com.gson.javajdk.concurrent;
 
 import com.gson.javajdk.DateUtil;
+import com.gson.javajdk.PrintUtils;
 
 import java.util.Map;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 public class CountTask extends RecursiveTask<Long> {
+
+    @Override
+    public String toString() {
+        return "CountTask{begin=" + begin + ", end=" + end + "} ";
+    }
+
+    private  ForkJoinPool pool;
     long begin;
     long end;
 
-    public CountTask(long begin, long end) {
+    public CountTask(long begin, long end, ForkJoinPool pool) {
         this.begin = begin;
         this.end = end;
+        this.pool = pool;
     }
 
     public long getBegin() {
@@ -25,6 +35,7 @@ public class CountTask extends RecursiveTask<Long> {
     // 求[begin, end]的所有元素和
     @Override
     protected Long compute() {
+        PrintUtils.printForkJoinState(pool, this);
         //if (Thread.currentThread().getName().equals("ForkJoinPool-1-worker-2")){
         // printCurrentStack();
         //System.out.println(getJavaStackTrace());
@@ -42,8 +53,8 @@ public class CountTask extends RecursiveTask<Long> {
         // 继续拆分任务
         System.out.println(Thread.currentThread() + "---start " + begin + "," + end + " , " + DateUtil.getTime());
         long mid = begin + (end - begin) / 2;
-        CountTask task1 = new CountTask(begin, mid);
-        CountTask task2 = new CountTask(mid + 1, end);
+        CountTask task1 = new CountTask(begin, mid, pool);
+        CountTask task2 = new CountTask(mid + 1, end, pool);
         task1.fork();
         task2.fork();
 
