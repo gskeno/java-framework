@@ -9,9 +9,9 @@ import java.util.concurrent.ForkJoinTask;
 public class ForkJoinTest {
     @Test
     public void testForkJoin() throws ExecutionException, InterruptedException {
-        ForkJoinPool pool = new ForkJoinPool(2);
+        ForkJoinPool pool = new ForkJoinPool(3);
         long begin = 1;
-        long end = 4;
+        long end = 16;
         CountTask task = new CountTask(begin, end, pool);
         long start  = System.currentTimeMillis();
         ForkJoinTask<Long> longForkJoinTask = pool.submit(task);

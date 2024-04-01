@@ -57,15 +57,17 @@ public class PrintUtils {
                 owners[i] = owner;
             }
         }
-        System.out.println("------begin------");
+        StringBuilder sb = new StringBuilder();
+        sb.append("------" + Thread.currentThread() + "---begin------").append("\n");
         for (int i = 0; i < len; i++) {
             if (workQueues[i] != null){
-                System.out.println("queue[" + i + "]: base=" + bases[i] + ",top=" + tops[i] + ",owner=" + owners[i] + ",currentJoinTask=" + currentJoins[i] + ",currentStealTask=" + currentSteals[i]);
+                sb.append("queue[" + i + "]: base=" + bases[i] + ",top=" + tops[i] + ",owner=" + owners[i] + ",currentJoinTask=" + currentJoins[i] + ",currentStealTask=" + currentSteals[i]).append("\n");
             }else {
-                System.out.println("queue[" + i + "]: null");
+                sb.append("queue[" + i + "]: null").append("\n");
             }
         }
-        System.out.println("------end--------");
+        sb.append("------" + Thread.currentThread() + "----end--------\n");
+        System.out.println(sb);
     }
     public static void printAqs(ReentrantLock reentrantLock){
         Field syncField = ReflectionUtils.findField(ReentrantLock.class, "sync");
