@@ -3,6 +3,7 @@ package com.gson.javajdk;
 import com.gson.javajdk.concurrent.CountTask;
 import org.springframework.util.ReflectionUtils;
 
+import javax.jws.Oneway;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.concurrent.ForkJoinPool;
@@ -21,7 +22,8 @@ public class SourceInnerUtils {
         int[] tops = new int[len];
         int[] bases = new int[len];
         ForkJoinWorkerThread[] owners = new ForkJoinWorkerThread[len];
-
+        // array属性是一个数组
+        Object[] arrays = new Object[len];
         for(int i = 0; i < len; i++) {
             workQueues[i] = Array.get(workQueuesObj, i);
             if (workQueues[i] != null){
@@ -49,13 +51,31 @@ public class SourceInnerUtils {
                 ReflectionUtils.makeAccessible(ownerField);
                 ForkJoinWorkerThread owner = (ForkJoinWorkerThread)ReflectionUtils.getField(ownerField, workQueues[i]);
                 owners[i] = owner;
+
+                Field arrayField = ReflectionUtils.findField(workQueues[i].getClass(), "array");
+                ReflectionUtils.makeAccessible(arrayField);
+                Object array = ReflectionUtils.getField(arrayField, workQueues[i]);
+                arrays[i] = array;
             }
         }
         StringBuilder sb = new StringBuilder();
         sb.append(Thread.currentThread() + "---begin------").append("\n");
         for (int i = 0; i < len; i++) {
             if (workQueues[i] != null){
-                sb.append("queue[" + i + "]: base=" + bases[i] + ",top=" + tops[i] + ",owner=" + owners[i] + ",currentJoinTask=" + currentJoins[i] + ",currentStealTask=" + currentSteals[i]).append("\n");
+
+                sb.append("queue[" + i + "]: base=" + bases[i] + ",top=" + tops[i] + ",owner=" + owners[i] + ",currentJoinTask=" + currentJoins[i] + ",currentStealTask=" + currentSteals[i]);
+                if (arrays[i] != null){
+                    int length = Array.getLength(arrays[i]);
+                    for (int j = 0; j < length; j++) {
+                        Object o = Array.get(arrays[i], j);
+                        if (o == null){
+                            break;
+                        }else {
+                            sb.append(o);
+                        }
+                    }
+                }
+                sb.append("\n");
             }else {
                 sb.append("queue[" + i + "]: null").append("\n");
             }
