@@ -35,7 +35,7 @@ public class CountTask extends RecursiveTask<Long> {
     // 求[begin, end]的所有元素和
     @Override
     protected Long compute() {
-         PrintUtils.printForkJoinState(pool, this);
+         //PrintUtils.printForkJoinState(pool, this);
         //if (Thread.currentThread().getName().equals("ForkJoinPool-1-worker-2")){
         // printCurrentStack();
         //System.out.println(getJavaStackTrace());
@@ -44,7 +44,7 @@ public class CountTask extends RecursiveTask<Long> {
         if (end - begin <= 1) {
             System.out.println(Thread.currentThread() + "---start " + begin + "," + end + " , " + DateUtil.getTime());
             try {
-                Thread.sleep(3000);
+                Thread.sleep(120000);
             } catch (Exception e) {
             }
             System.out.println(Thread.currentThread() + "---finish " + begin + "," + end + " , " + DateUtil.getTime());
@@ -56,9 +56,12 @@ public class CountTask extends RecursiveTask<Long> {
         CountTask task1 = new CountTask(begin, mid, pool);
         CountTask task2 = new CountTask(mid + 1, end, pool);
         task1.fork();
+        System.out.println(Thread.currentThread() + "-----------------------fork " + task1.begin + "," + task1.end + " , " + DateUtil.getTime());
         //System.out.println(Thread.currentThread() + " after task " + task1 + " fork, poolState");
         //PrintUtils.printForkJoinState(pool, this);
         task2.fork();
+        System.out.println(Thread.currentThread() + "-----------------------fork " + task2.begin + "," + task2.end + " , " + DateUtil.getTime());
+
         //System.out.println(Thread.currentThread() + " after task " + task2 + " fork, poolState");
 //        try {
 //            Thread.sleep(100);
@@ -67,12 +70,12 @@ public class CountTask extends RecursiveTask<Long> {
 //        }
 //        PrintUtils.printForkJoinState(pool, this);
 
-        Long v1 = task2.join();
+        Long v1 = task1.join();
         //System.out.println(Thread.currentThread() + " after task " + task1 + " join, poolState");
         //PrintUtils.printForkJoinState(pool, this);
 
         //System.out.println(Thread.currentThread() + "---task1JoinFinish " + begin + "," + end + " , " + DateUtil.getTime());
-        Long v2 = task1.join();
+        Long v2 = task2.join();
         //System.out.println(Thread.currentThread() + " after task " + task2 + " join, poolState");
         //PrintUtils.printForkJoinState(pool, this);
 
@@ -80,6 +83,7 @@ public class CountTask extends RecursiveTask<Long> {
 
         //invokeAll(task1, task2);
         System.out.println(Thread.currentThread() + "---finish " + begin + "," + end + " , " + DateUtil.getTime());
+        String javaStackTrace = getJavaStackTrace();
 
         return v1 + v2;
     }
