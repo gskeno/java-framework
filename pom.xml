@@ -48,6 +48,7 @@
         <module>java-mysql</module>
         <module>java-arthas</module>
         <module>java-ttl</module>
+        <module>java-sentinel</module>
     </modules>
 
     <name>java-framework</name>
