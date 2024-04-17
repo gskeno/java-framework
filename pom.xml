@@ -49,6 +49,7 @@
         <module>java-arthas</module>
         <module>java-ttl</module>
         <module>java-sentinel</module>
+        <module>java-expression-engine</module>
     </modules>
 
     <name>java-framework</name>
