@@ -3,7 +3,9 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class MapStructTest {
     @Test
@@ -27,5 +29,24 @@ public class MapStructTest {
         doctorDto.setEndTime(LocalDateTime.now());
         Doctor doc = DoctorMapper.INSTANCE.toDoc(doctorDto);
         System.out.println(doc);
+    }
+
+    @Test
+    public void testPerson(){
+        Person person = new Person();
+        person.setId("1");
+        person.setName("gs");
+
+        Person person2 = new Person();
+        person2.setId("2");
+        person2.setName("hj");
+        List<Person> personList = new ArrayList<>();
+        personList.add(person2);
+        person.setChildren(personList);
+
+        PersonDTO dto = PersonMapper.INSTANCE.toDto(person);
+        System.out.println(dto);
+
+
     }
 }
