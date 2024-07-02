@@ -1,44 +1,32 @@
 package com.gson.mapstruct;
 
+import lombok.Data;
+
+import java.math.BigDecimal;
+
+@Data
 public class Doctor {
-    private int id;
+    private Integer id;
     private String name;
+
+    private String age;
 
     /**
      * 专业
      */
     private String specialty;
 
-    public int getId() {
-        return id;
-    }
+    private String money;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    private BigDecimal salary;
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String startTime;
 
-    public String getSpecialty() {
-        return specialty;
-    }
+    private String endTime;
 
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
-    }
+    private Long timeStamp;
 
-    @Override
-    public String toString() {
-        return "Doctor{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", specialty='" + specialty + '\'' +
-                '}';
-    }
+
+
 }
