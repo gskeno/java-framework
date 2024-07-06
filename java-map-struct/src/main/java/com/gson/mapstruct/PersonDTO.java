@@ -9,4 +9,5 @@ public class PersonDTO {
     private String id;
     private String name;
     private List<Person> children;
+    private List<Integer> status;
 }

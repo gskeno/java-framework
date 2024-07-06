@@ -36,6 +36,7 @@ public class MapStructTest {
         Person person = new Person();
         person.setId("1");
         person.setName("gs");
+        person.setStatus(3);
 
         Person person2 = new Person();
         person2.setId("2");
