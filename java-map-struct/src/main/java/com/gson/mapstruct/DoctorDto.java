@@ -1,31 +1,27 @@
 package com.gson.mapstruct;
 
+import lombok.Data;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Date;
+
+@Data
 public class DoctorDto {
 
-    private int id;
+    private String id;
     private String name;
 
-    public int getId() {
-        return id;
-    }
+    private Integer age;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    private BigDecimal money;
 
-    public String getName() {
-        return name;
-    }
+    private String salary;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    private Date startTime;
 
-    @Override
-    public String toString() {
-        return "DoctorDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
+    private LocalDateTime endTime;
+
+    private Date timeStamp;
+
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.roaringbitmap.RoaringBitmap;
 
 import java.nio.ByteBuffer;
+import java.util.Random;
 
 public class BaseTest {
     @Test
@@ -57,5 +58,38 @@ public class BaseTest {
 
         roaringBitmap.add(20);
         System.out.println(roaringBitmap.getSizeInBytes());
+    }
+
+    @Test
+    public void testMember(){
+        // 最大商家标250万
+        int biggestMerchantTag = 2500000;
+        int testTimes = 1000;
+        long totalBytes = 0;
+        for (int i = 0; i < testTimes; i++) {
+            RoaringBitmap bitmap = new RoaringBitmap();
+            Random random = new Random();
+            for (int j = 0; j < 150; j++) {
+                bitmap.add(random.nextInt(biggestMerchantTag));
+            }
+            bitmap.runOptimize();
+            int bytesSize = bitmap.serializedSizeInBytes();
+            ByteBuffer byteBuffer = ByteBuffer.allocate(bytesSize);
+            bitmap.serialize(byteBuffer);
+            byte[] array = byteBuffer.array();
+            int len = array.length;
+            // System.out.println( bytesSize + ":" + len);
+            totalBytes += bytesSize;
+        }
+        // 统计发现，入会10个商家大概需要99个字节
+        // 15个商家，需要138个字节
+        // 20个商家，需要174个字节
+        // 50个商家，需要332个字节
+        // 80个商家，需要437个字节
+        // 90个商家，需要466个字节
+        // 150个商家，需要610个字节
+
+        System.out.println(totalBytes);
+        System.out.println(totalBytes / testTimes);
     }
 }
