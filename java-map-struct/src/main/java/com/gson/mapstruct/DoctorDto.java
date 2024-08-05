@@ -24,4 +24,6 @@ public class DoctorDto {
 
     private Date timeStamp;
 
+    private Date timeStampDate;
+
 }

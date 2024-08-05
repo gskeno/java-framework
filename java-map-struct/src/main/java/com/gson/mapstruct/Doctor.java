@@ -27,6 +27,8 @@ public class Doctor {
 
     private Long timeStamp;
 
+    private Long timeStampLong;
+
 
 
 }

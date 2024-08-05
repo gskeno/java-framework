@@ -19,4 +19,9 @@ public interface DoctorMapper {
     @Mapping(source = "endTime", target = "endTime", dateFormat = "yyyy-MM-dd HH:mm:ss")
     @Mapping(target = "timeStamp", ignore = true)
     Doctor toDoc(DoctorDto doctorDto);
+
+
+    @Mapping(target = "timeStamp", expression = "java(new java.util.Date())")
+    @Mapping(target = "timeStampDate", expression = "java(new java.util.Date(doctor.getTimeStampLong()))")
+    DoctorDto toDto1(Doctor doctor);
 }
