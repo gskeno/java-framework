@@ -1,4 +1,3 @@
-#?????
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -6,20 +5,17 @@ spring:
     password: 12345678
     username: root
     hikari:
-      #????????
       auto-commit: true
-      #???????
       maximum-pool-size: 10
       minimum-idle: 10
-      #??????????
       connection-test-query: select 1
-      #??????
       connection-timeout: 20000
-      #????
 
 mybatis-plus:
   configuration:
-    #??????????
     map-underscore-to-camel-case: true
-    #??????
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+logging:
+  level:
+    com.gsonkeno.javamybatisplus.mapper: debug
