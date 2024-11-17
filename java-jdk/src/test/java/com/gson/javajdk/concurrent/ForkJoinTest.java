@@ -1,5 +1,6 @@
 package com.gson.javajdk.concurrent;
 
+import com.gson.javajdk.SourceInnerUtils;
 import org.junit.Test;
 
 import java.util.concurrent.ExecutionException;
@@ -7,15 +8,28 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 
 public class ForkJoinTest {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        ForkJoinPool pool = new ForkJoinPool(4);
+        long begin = 1;
+        long end = 8;
+        CountTask task = new CountTask(begin, end, pool);
+        long start  = System.currentTimeMillis();
+        ForkJoinTask<Long> longForkJoinTask = pool.submit(task);
+        Long res = longForkJoinTask.get();
+
+       // Long res = pool.invoke(task);
+        System.out.println("begin " + begin + " end " + end + " result " + res + " use time " + (System.currentTimeMillis() - start) / 1000 + "s");
+    }
     @Test
     public void testForkJoin() throws ExecutionException, InterruptedException {
         ForkJoinPool pool = new ForkJoinPool(2);
         long begin = 1;
         long end = 4;
-        CountTask task = new CountTask(begin, end);
+        CountTask task = new CountTask(begin, end, pool);
         long start  = System.currentTimeMillis();
-        ForkJoinTask<Long> longForkJoinTask = pool.submit(task);
-        Long res = longForkJoinTask.get();
+//        ForkJoinTask<Long> longForkJoinTask = pool.submit(task);
+//        Long res = longForkJoinTask.get();
+        Long res = pool.invoke(task);
         System.out.println("begin " + begin + " end " + end + " result " + res + " use time " + (System.currentTimeMillis() - start) / 1000 + "s");
     }
 

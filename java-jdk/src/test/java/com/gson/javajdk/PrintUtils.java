@@ -1,14 +1,24 @@
 package com.gson.javajdk;
 
+import com.gson.javajdk.concurrent.CountTask;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.locks.AbstractOwnableSynchronizer;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class PrintUtils {
+
+//    public static Object[] getForkJoinPoolInfo(ForkJoinPool pool, CountTask countTask){
+//        Field workQueues = ReflectionUtils.findField(ForkJoinPool.class, "workQueues");
+//        ReflectionUtils.makeAccessible(workQueues);
+//        Object[] value = Object[]ReflectionUtils.getField(workQueues, pool);
+//
+//
+//    }
     public static void printAqs(ReentrantLock reentrantLock){
         Field syncField = ReflectionUtils.findField(ReentrantLock.class, "sync");
         ReflectionUtils.makeAccessible(syncField);

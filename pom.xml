@@ -46,9 +46,10 @@
         <module>java-mockito</module>
         <module>java-map-struct</module>
         <module>java-mysql</module>
-        <module>java-nio</module>
         <module>java-arthas</module>
         <module>java-ttl</module>
+        <module>java-sentinel</module>
+        <module>java-expression-engine</module>
     </modules>
 
     <name>java-framework</name>

@@ -3,7 +3,6 @@ package com.gson.guava.collect;
 import com.google.common.collect.*;
 import org.junit.Assert;
 import org.junit.Test;
-import sun.jvm.hotspot.runtime.Flags;
 
 import java.util.List;
 

@@ -1,17 +1,30 @@
 package com.gson.javajdk.concurrent;
 
 import com.gson.javajdk.DateUtil;
+import com.gson.javajdk.SourceInnerUtils;
 
 import java.util.Map;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 public class CountTask extends RecursiveTask<Long> {
+    private final ForkJoinPool forkJoinPool;
+
+    @Override
+    public String toString() {
+        return "CountTask{" +
+                "begin=" + begin +
+                ", end=" + end +
+                '}';
+    }
+
     long begin;
     long end;
 
-    public CountTask(long begin, long end) {
+    public CountTask(long begin, long end, ForkJoinPool forkJoinPool) {
         this.begin = begin;
         this.end = end;
+        this.forkJoinPool = forkJoinPool;
     }
 
     public long getBegin() {
@@ -25,15 +38,12 @@ public class CountTask extends RecursiveTask<Long> {
     // 求[begin, end]的所有元素和
     @Override
     protected Long compute() {
-        //if (Thread.currentThread().getName().equals("ForkJoinPool-1-worker-2")){
-        // printCurrentStack();
-        //System.out.println(getJavaStackTrace());
-        //}
+        SourceInnerUtils.printForkJoinState(forkJoinPool, this);
         //当begin与end相邻时，任务已经足够小，直接返回
         if (end - begin <= 1) {
             System.out.println(Thread.currentThread() + "---start " + begin + "," + end + " , " + DateUtil.getTime());
             try {
-                Thread.sleep(60000);
+                Thread.sleep(2000);
             } catch (Exception e) {
             }
             System.out.println(Thread.currentThread() + "---finish " + begin + "," + end + " , " + DateUtil.getTime());
@@ -42,14 +52,14 @@ public class CountTask extends RecursiveTask<Long> {
         // 继续拆分任务
         System.out.println(Thread.currentThread() + "---start " + begin + "," + end + " , " + DateUtil.getTime());
         long mid = begin + (end - begin) / 2;
-        CountTask task1 = new CountTask(begin, mid);
-        CountTask task2 = new CountTask(mid + 1, end);
+        CountTask task1 = new CountTask(begin, mid, forkJoinPool);
+        CountTask task2 = new CountTask(mid + 1, end, forkJoinPool);
         task1.fork();
         task2.fork();
 
-        Long v1 = task1.join();
+        Long v1 = task2.join();
         //System.out.println(Thread.currentThread() + "---task1JoinFinish " + begin + "," + end + " , " + DateUtil.getTime());
-        Long v2 = task2.join();
+        Long v2 = task1.join();
         //System.out.println(Thread.currentThread() + "---task2JoinFinish " + begin + "," + end + " , " + DateUtil.getTime());
 
         //invokeAll(task1, task2);

@@ -41,6 +41,8 @@
 ## premature promotion(过早提升)
 
 
+# 代码CASE
 
+- [安全点](src/test/java/com/gson/jvm/safepoint/SafePointTest.java)
 
 
