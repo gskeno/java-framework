@@ -40,6 +40,17 @@ public class IndexWriterTest {
     }
 
     @Test
+    public void simpleTest() throws URISyntaxException, IOException {
+        IndexWriter writer = getIndexWriter();
+        Document doc = new Document(); //构建索引文档
+        doc.add(new StringField("name", "Donald Trump", Field.Store.YES));
+        doc.add(new StringField("history", "America president", Field.Store.YES));
+        writer.addDocument(doc);
+        writer.commit();
+        writer.close();
+    }
+
+    @Test
     public void testCreateIndex() throws URISyntaxException, IOException {
         String indexDirStr = Paths.get(this.getClass().getResource("").toURI()) + "/indexPosition";
         System.out.println(indexDirStr);
